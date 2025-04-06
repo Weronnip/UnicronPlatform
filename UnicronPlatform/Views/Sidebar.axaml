@@ -1,0 +1,37 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             x:Class="UnicronPlatform.Views.Sidebar">
+    <StackPanel Background="#2D2D30" Width="200" VerticalAlignment="Stretch">
+        <TextBlock Text="Меню" FontSize="20" Margin="10" Foreground="White"/>
+        <Button Margin="10" Padding="10" Background="Transparent" Foreground="White">
+            <StackPanel Orientation="Horizontal" Spacing="5">
+                <PathIcon Data="{StaticResource home_regular}" Foreground="White" />
+                <TextBlock Text="Главная" VerticalAlignment="Center" Foreground="White"/>
+            </StackPanel>
+        </Button>
+        <Button Margin="10" Padding="10" Background="Transparent" Foreground="White">
+            <StackPanel Orientation="Horizontal" Spacing="5">
+                <PathIcon Data="{StaticResource notebook_regular}" Foreground="White" />
+                <TextBlock Text="Курсы" VerticalAlignment="Center" Foreground="White"/>
+            </StackPanel>
+        </Button>
+        <Button Margin="10" Padding="10" Background="Transparent" Foreground="White">
+            <StackPanel Orientation="Horizontal" Spacing="5">
+                <PathIcon Data="{StaticResource data_histogram_regular}" Foreground="White" />
+                <TextBlock Text="Мой прогресс" VerticalAlignment="Center" Foreground="White"/>
+            </StackPanel>
+        </Button>
+        <Button Margin="10" Padding="10" Background="Transparent" Foreground="White">
+            <StackPanel Orientation="Horizontal" Spacing="5">
+                <PathIcon Data="{StaticResource settings_regular}" Foreground="White" />
+                <TextBlock Text="Настройки" VerticalAlignment="Center" Foreground="White"/>
+            </StackPanel>
+        </Button>
+        <Button Margin="10" Padding="10" Background="Transparent" Foreground="White">
+            <StackPanel Orientation="Horizontal" Spacing="5">
+                <PathIcon Data="{StaticResource chevron_left_regular}" Foreground="White" />
+                <TextBlock Text="Выход" VerticalAlignment="Center" Foreground="White"/>
+            </StackPanel>
+        </Button>
+    </StackPanel>
+</UserControl>

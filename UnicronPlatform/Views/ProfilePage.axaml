@@ -3,35 +3,74 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:vm="clr-namespace:UnicronPlatform.ViewModels"
+        xmlns:views="clr-namespace:UnicronPlatform.Views"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:DataType="vm:ProfilePageViewModel"
         x:Class="UnicronPlatform.Views.ProfilePage"
-        Title="ProfilePage">
-        <Grid>
-                <ExperimentalAcrylicBorder IsHitTestVisible="False">
-                        <ExperimentalAcrylicBorder.Material>
-                                <ExperimentalAcrylicMaterial
-                                        BackgroundSource="Digger"
-                                        TintColor="Black"
-                                        TintOpacity="1"
-                                        MaterialOpacity="0.65"/>
-                        </ExperimentalAcrylicBorder.Material>
-                </ExperimentalAcrylicBorder>
+        Title="Unicron Platform"
+        WindowState="Maximized">
 
-                <StackPanel HorizontalAlignment="Center" Margin="0 50 150 0">
-                        <TextBlock Text="Профиль" 
-                                   FontSize="24" 
-                                   Foreground="White" 
-                                   HorizontalAlignment="Left"/>
-                        
-                        <Panel>
-                                <Image Width="100" Height="100" Source="{Binding avatar}"/>
-                                
-                                <TextBlock Text="{Binding full_name}" Foreground="#d8ffbf"/>
-                                <TextBlock Text="{Binding email}" Foreground="#d8ffbf"/>
-                                <TextBlock Text="{Binding phone}" Foreground="#d8ffbf"/>
-                        </Panel>
-                </StackPanel>
-        </Grid>
+    <Window.Styles>
+        <Style Selector="TextBlock">
+            <Setter Property="FontFamily" Value="Segoe UI"/>
+            <Setter Property="Foreground" Value="#d8ffbf"/>
+        </Style>
+    </Window.Styles>
 
+    <Grid>
+        <ExperimentalAcrylicBorder Grid.Column="1" IsHitTestVisible="False">
+            <ExperimentalAcrylicBorder.Material>
+                <ExperimentalAcrylicMaterial
+                    BackgroundSource="Digger"
+                    TintColor="Black"
+                    TintOpacity="1"
+                    MaterialOpacity="0.6"/>
+            </ExperimentalAcrylicBorder.Material>
+        </ExperimentalAcrylicBorder>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <views:Sidebar Grid.Column="0" Margin="0"/>
+
+        <StackPanel Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Top"
+                    PointerPressed="DragPanel_PointerPressed" Margin="20">
+            
+            <TextBlock Text="Профиль" 
+                       FontSize="18" 
+                       FontWeight="Bold"
+                       Foreground="White" 
+                       HorizontalAlignment="Left" 
+                       Margin="0 5"/>
+
+            <Panel Margin="20">
+                <Border Width="150" Height="150"
+                        CornerRadius="100"
+                        Margin="0 0 370 40"
+                        ClipToBounds="True">
+                    <Image Width="150" Height="150" 
+                           Source="../Assets/Pixelated Cyber Workspace.jpeg" 
+                           Stretch="UniformToFill"/>
+                </Border>
+
+                <TextBlock Text="Алексей Куриганов" 
+                           Margin="0 20"
+                           FontSize="22"
+                           FontWeight="SemiBold"
+                           HorizontalAlignment="Center"/>
+    
+                <TextBlock Text="demo1fort@gmail.com" 
+                           Margin="0 50" 
+                           FontSize="18" 
+                           HorizontalAlignment="Center"/>
+    
+                <TextBlock Text="79969351076" 
+                           Margin="0 80" 
+                           FontSize="18" 
+                           HorizontalAlignment="Center"/>
+            </Panel>
+        </StackPanel>
+    </Grid>
 </Window>

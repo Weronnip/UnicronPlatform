@@ -4,6 +4,8 @@ using System.Windows.Input;
 using ReactiveUI;
 using UnicronPlatform.Data;
 using System.Linq;
+using Avalonia.Controls;
+using Avalonia.Controls.ApplicationLifetimes;
 using UnicronPlatform.Models;
 using UnicronPlatform.Views;
 
@@ -43,11 +45,22 @@ namespace UnicronPlatform.ViewModels
             if (user != null)
             {
                 Console.WriteLine($"Успешный вход: {user.first_name} {user.last_name}");
-                var profile_page = new ProfilePage
+
+                if (Avalonia.Application.Current.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
                 {
-                    DataContext = new ProfilePageViewModel(null, user)
-                };
-                profile_page.Show();
+                    var profilePage = new ProfilePage
+                    {
+                        DataContext = new ProfilePageViewModel(null, user)
+                    };
+                    profilePage.WindowState = WindowState.Maximized;
+                    profilePage.Show();
+
+                    foreach (var window in desktop.Windows.ToList())
+                    {
+                        if (window != profilePage)
+                            window.Close();
+                    }
+                }
             }
             else
             {

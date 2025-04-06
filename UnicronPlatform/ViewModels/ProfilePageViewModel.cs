@@ -8,9 +8,8 @@ namespace UnicronPlatform.ViewModels
     {
         public string UrlPathSegment => "profile";
         public IScreen HostScreen { get; set; }
-        
-        private Users _user;
 
+        private Users _user;
         public Users user
         {
             get => _user;
@@ -19,16 +18,21 @@ namespace UnicronPlatform.ViewModels
 
         public ProfilePageViewModel(IScreen hostScreen, Users users)
         {
-            HostScreen = hostScreen ?? throw new ArgumentException(nameof(hostScreen));
-            _user = users; 
-
-            HostScreen.Router.Navigate.Execute(this);
+            HostScreen = hostScreen ?? new DummyScreen();
+            _user = users ?? throw new ArgumentNullException(nameof(users));
         }
 
-        public string avatar => string.IsNullOrEmpty(user.avatar) ? "../Assets/avatar.png" : user.avatar;
-        
-        public string full_name => user.first_name + " " + user.last_name;
+        public string avatar => string.IsNullOrEmpty(user.avatar)
+            ? "avares://UnicronPlatform/Assets/avatar.png"
+            : user.avatar;
+
+        public string full_name => $"{user.first_name} {user.last_name}";
         public string email => user.email;
         public string phone => user.phone;
+    }
+
+    public class DummyScreen : IScreen
+    {
+        public RoutingState Router { get; } = new RoutingState();
     }
 }
