@@ -1,0 +1,84 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:vm="clr-namespace:UnicronPlatform.ViewModels"
+        mc:Ignorable="d"
+        x:Class="UnicronPlatform.Views.Login"
+        x:DataType="vm:LoginUserViewModel"
+        Width="400" Height="350"
+        TransparencyLevelHint="AcrylicBlur"
+        ExtendClientAreaToDecorationsHint="True"
+        Background="Transparent"
+        Title="Login">
+        <Grid>
+            <ExperimentalAcrylicBorder IsHitTestVisible="False">
+                <ExperimentalAcrylicBorder.Material>
+                    <ExperimentalAcrylicMaterial
+                        BackgroundSource="Digger"
+                        TintColor="Black"
+                        TintOpacity="1"
+                        MaterialOpacity="0.65"/>
+                </ExperimentalAcrylicBorder.Material>
+            </ExperimentalAcrylicBorder>
+
+            <StackPanel Margin="20">
+                <TextBlock Margin="0 15"
+                           HorizontalAlignment="Center"
+                           Text="Log In"
+                           FontSize="18"
+                           FontWeight="Bold"
+                           Foreground="#d8ffbf"/>
+
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Grid.Row="0" Grid.Column="0" 
+                               Text="Email:" Margin="5" 
+                               VerticalAlignment="Center" 
+                               Foreground="White"/>
+                    <TextBox Grid.Row="0" Grid.Column="1" Name="EmailTextBox" 
+                             Text="{Binding email}"
+                             Margin="5" Width="200" Watermark="Enter email"/>
+                    
+                    <TextBlock Grid.Row="1" Grid.Column="0" 
+                               Text="Password:" Margin="5" 
+                               VerticalAlignment="Center" Foreground="White"/>
+                    <TextBox Grid.Row="1" Grid.Column="1" 
+                             Name="PasswordTextBox" Margin="5" 
+                             Text="{Binding password}"
+                             Width="200" Watermark="Enter password" PasswordChar="*"/>
+
+                    <Button Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"
+                            Content="Login"
+                            Margin="30"
+                            Padding="100 10"
+                            Foreground="#575757"
+                            Background="#d8ffbf"
+                            CornerRadius="8"
+                            BorderBrush="Transparent"
+                            HorizontalAlignment="Center"
+                            />
+
+                    <Button Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2"
+                            Content="No account? Register"
+                            Margin="5"
+                            Command="{Binding LoginCommand}"
+                            Padding="10,5"
+                            Foreground="LightBlue"
+                            Background="Transparent"
+                            BorderBrush="Transparent"
+                            HorizontalAlignment="Center"/>
+                </Grid>
+            </StackPanel>
+        </Grid>
+</Window>
