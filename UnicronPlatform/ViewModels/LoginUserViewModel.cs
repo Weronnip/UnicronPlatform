@@ -5,6 +5,8 @@ using ReactiveUI;
 using UnicronPlatform.Data;
 using System.Linq;
 using UnicronPlatform.Models;
+using UnicronPlatform.Views;
+
 namespace UnicronPlatform.ViewModels
 {
     public class LoginUserViewModel : ViewModelBase
@@ -41,6 +43,11 @@ namespace UnicronPlatform.ViewModels
             if (user != null)
             {
                 Console.WriteLine($"Успешный вход: {user.first_name} {user.last_name}");
+                var profile_page = new ProfilePage
+                {
+                    DataContext = new ProfilePageViewModel(null, user)
+                };
+                profile_page.Show();
             }
             else
             {

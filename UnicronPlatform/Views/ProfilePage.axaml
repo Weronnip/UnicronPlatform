@@ -1,0 +1,37 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:vm="clr-namespace:UnicronPlatform.ViewModels"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:DataType="vm:ProfilePageViewModel"
+        x:Class="UnicronPlatform.Views.ProfilePage"
+        Title="ProfilePage">
+        <Grid>
+                <ExperimentalAcrylicBorder IsHitTestVisible="False">
+                        <ExperimentalAcrylicBorder.Material>
+                                <ExperimentalAcrylicMaterial
+                                        BackgroundSource="Digger"
+                                        TintColor="Black"
+                                        TintOpacity="1"
+                                        MaterialOpacity="0.65"/>
+                        </ExperimentalAcrylicBorder.Material>
+                </ExperimentalAcrylicBorder>
+
+                <StackPanel HorizontalAlignment="Center" Margin="0 50 150 0">
+                        <TextBlock Text="Профиль" 
+                                   FontSize="24" 
+                                   Foreground="White" 
+                                   HorizontalAlignment="Left"/>
+                        
+                        <Panel>
+                                <Image Width="100" Height="100" Source="{Binding avatar}"/>
+                                
+                                <TextBlock Text="{Binding full_name}" Foreground="#d8ffbf"/>
+                                <TextBlock Text="{Binding email}" Foreground="#d8ffbf"/>
+                                <TextBlock Text="{Binding phone}" Foreground="#d8ffbf"/>
+                        </Panel>
+                </StackPanel>
+        </Grid>
+
+</Window>

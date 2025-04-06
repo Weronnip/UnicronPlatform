@@ -7,6 +7,7 @@
         <entry key="UnicronPlatform/Styles.axaml" value="UnicronPlatform/UnicronPlatform.csproj" />
         <entry key="UnicronPlatform/Views/Login.axaml" value="UnicronPlatform/UnicronPlatform.csproj" />
         <entry key="UnicronPlatform/Views/MainWindow.axaml" value="UnicronPlatform/UnicronPlatform.csproj" />
+        <entry key="UnicronPlatform/Views/ProfilePage.axaml" value="UnicronPlatform/UnicronPlatform.csproj" />
         <entry key="UnicronPlatform/Views/Registration.axaml" value="UnicronPlatform/UnicronPlatform.csproj" />
       </map>
     </option>

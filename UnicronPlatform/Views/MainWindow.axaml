@@ -25,7 +25,7 @@
                     BackgroundSource="Digger"
                     TintColor="Black"
                     TintOpacity="1"
-                    MaterialOpacity="0.65" />
+                    MaterialOpacity="0.20" />
             </ExperimentalAcrylicBorder.Material>
         </ExperimentalAcrylicBorder>
 
@@ -39,7 +39,7 @@
                        Foreground="White"
                        HorizontalAlignment="Center"/>
 
-            <TextBlock Text="Welcome digital platforms studying!"
+            <TextBlock Text="Добро пожаловать на цифровую обучающую платформу!"
                        FontSize="16"
                        Foreground="#FFCFCFCF"
                        HorizontalAlignment="Center"/>
@@ -57,7 +57,7 @@
                     <StackPanel Orientation="Horizontal" Spacing="10">
                         <PathIcon Data="{StaticResource person_add_regular}"
                                   Width="16" Height="16" Foreground="White"/>
-                        <TextBlock Text="Sign up"/>
+                        <TextBlock Text="Регистрация"/>
                     </StackPanel>
                 </Button>
 
@@ -70,7 +70,7 @@
                     <StackPanel Orientation="Horizontal" Spacing="10">
                         <PathIcon Data="{StaticResource person_regular}"
                                   Width="16" Height="16" Foreground="White"/>
-                        <TextBlock Text="Login"/>
+                        <TextBlock Text="Войти"/>
                     </StackPanel>
                 </Button>
             </StackPanel>

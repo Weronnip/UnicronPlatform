@@ -10,7 +10,7 @@
         TransparencyLevelHint="AcrylicBlur"
         ExtendClientAreaToDecorationsHint="True"
         Background="Transparent"
-        Title="Login">
+        Title="Unicron Platform">
         <Grid>
             <ExperimentalAcrylicBorder IsHitTestVisible="False">
                 <ExperimentalAcrylicBorder.Material>
@@ -25,7 +25,7 @@
             <StackPanel Margin="20">
                 <TextBlock Margin="0 15"
                            HorizontalAlignment="Center"
-                           Text="Log In"
+                           Text="Вход в аккаунт"
                            FontSize="18"
                            FontWeight="Bold"
                            Foreground="#d8ffbf"/>
@@ -43,20 +43,20 @@
                     </Grid.ColumnDefinitions>
 
                     <TextBlock Grid.Row="0" Grid.Column="0" 
-                               Text="Email:" Margin="5" 
+                               Text="Почта:" Margin="5" 
                                VerticalAlignment="Center" 
                                Foreground="White"/>
                     <TextBox Grid.Row="0" Grid.Column="1" Name="EmailTextBox" 
-                             Text="{Binding email}"
-                             Margin="5" Width="200" Watermark="Enter email"/>
+                             Text="{Binding email, Mode=TwoWay}"
+                             Margin="5" Width="200" Watermark="Введите почту"/>
                     
                     <TextBlock Grid.Row="1" Grid.Column="0" 
-                               Text="Password:" Margin="5" 
+                               Text="Пароль:" Margin="5" 
                                VerticalAlignment="Center" Foreground="White"/>
                     <TextBox Grid.Row="1" Grid.Column="1" 
                              Name="PasswordTextBox" Margin="5" 
-                             Text="{Binding password}"
-                             Width="200" Watermark="Enter password" PasswordChar="*"/>
+                             Text="{Binding password, Mode=TwoWay}"
+                             Width="200" Watermark="Введите пароль" PasswordChar="*"/>
 
                     <Button Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"
                             Content="Login"
@@ -65,6 +65,7 @@
                             Foreground="#575757"
                             Background="#d8ffbf"
                             CornerRadius="8"
+                            Command="{Binding LoginCommand}"
                             BorderBrush="Transparent"
                             HorizontalAlignment="Center"
                             />
@@ -72,7 +73,6 @@
                     <Button Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2"
                             Content="No account? Register"
                             Margin="5"
-                            Command="{Binding LoginCommand}"
                             Padding="10,5"
                             Foreground="LightBlue"
                             Background="Transparent"

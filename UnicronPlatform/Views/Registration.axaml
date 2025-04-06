@@ -9,7 +9,7 @@
         Width="400" Height="350"
         TransparencyLevelHint="AcrylicBlur"
         ExtendClientAreaToDecorationsHint="True"
-        Title="Registration">
+        Title="Unicron Platform">
   <Grid>
     <ExperimentalAcrylicBorder IsHitTestVisible="False">
       <ExperimentalAcrylicBorder.Material>
@@ -22,7 +22,7 @@
     </ExperimentalAcrylicBorder>
     <StackPanel Margin="20">
       <TextBlock Margin="0 15" HorizontalAlignment="Center"
-                 Text="Create new account"
+                 Text="Создание нового аккаунта"
                  FontSize="18" Foreground="#d8ffbf"/>
       <Grid>
         <Grid.RowDefinitions>
@@ -39,39 +39,39 @@
         </Grid.ColumnDefinitions>
 
         <TextBlock Grid.Row="0" Grid.Column="0" 
-                   Text="First name:" Margin="5" 
+                   Text="Имя:" Margin="5" 
                    Foreground="White" 
                    VerticalAlignment="Center"/>
         <TextBox Grid.Row="0" Grid.Column="1" 
                  Margin="5" Text="{Binding first_name, Mode=TwoWay}" />
 
         <TextBlock Grid.Row="1" Grid.Column="0" 
-                   Text="Last name:" Margin="5"
+                   Text="Фамилия:" Margin="5"
                    Foreground="White" VerticalAlignment="Center"/>
         <TextBox Grid.Row="1" Grid.Column="1" 
                  Margin="5" Text="{Binding last_name, Mode=TwoWay}" />
 
         <TextBlock Grid.Row="2" Grid.Column="0" 
-                   Text="Email:" Margin="5"
+                   Text="Почта:" Margin="5"
                    Foreground="White" VerticalAlignment="Center"/>
         <TextBox Grid.Row="2" Grid.Column="1" 
                  Margin="5" Text="{Binding email, Mode=TwoWay}" />
 
         <TextBlock Grid.Row="3" Grid.Column="0" 
-                   Text="Password:" Margin="5"
+                   Text="Пароль:" Margin="5"
                    Foreground="White" VerticalAlignment="Center"/>
         <TextBox Grid.Row="3" Grid.Column="1" 
                  Margin="5" PasswordChar="*"
                  Text="{Binding password, Mode=TwoWay}" />
 
         <TextBlock Grid.Row="4" Grid.Column="0" 
-                   Text="Phone:" Margin="5" 
+                   Text="Телефон:" Margin="5" 
                    Foreground="White" VerticalAlignment="Center"/>
         <TextBox Grid.Row="4" Grid.Column="1" 
                  Margin="5" Text="{Binding phone, Mode=TwoWay}" />
 
         <Button Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" 
-                Content="Sign up" 
+                Content="Создать акканут" 
                 Margin="10" 
                 Padding="100 10"
                 Foreground="#575757"
