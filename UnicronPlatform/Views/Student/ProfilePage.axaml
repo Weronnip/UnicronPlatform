@@ -4,7 +4,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:vm="clr-namespace:UnicronPlatform.ViewModels"
         xmlns:views="clr-namespace:UnicronPlatform.Views"
-        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        mc:Ignorable="d" d:DesignWidth="1440" d:DesignHeight="784"
         x:DataType="vm:ProfilePageViewModel"
         x:Class="UnicronPlatform.Views.ProfilePage"
         Title="Unicron Platform"
@@ -35,41 +35,44 @@
 
         <views:Sidebar Grid.Column="0" Margin="0"/>
 
-        <StackPanel Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Top"
-                    PointerPressed="DragPanel_PointerPressed" Margin="20">
+        <StackPanel Grid.Column="1" 
+                    HorizontalAlignment="Center" 
+                    VerticalAlignment="Top"
+                    Margin="0  20  700 0">
             
-            <TextBlock Text="Профиль" 
-                       FontSize="18" 
+            <TextBlock Text="Ваш профиль" 
+                       FontSize="32" 
                        FontWeight="Bold"
-                       Foreground="White" 
-                       HorizontalAlignment="Left" 
-                       Margin="0 5"/>
-
-            <Panel Margin="20">
+                       Foreground="White"/>
+            <Panel Margin="0 40 ">
                 <Border Width="150" Height="150"
                         CornerRadius="100"
-                        Margin="0 0 370 40"
+                        Margin="0 0 320 40"
                         ClipToBounds="True">
                     <Image Width="150" Height="150" 
-                           Source="../Assets/Pixelated Cyber Workspace.jpeg" 
+                           Source="../Assets/default_avatart.jpg" 
                            Stretch="UniformToFill"/>
                 </Border>
 
-                <TextBlock Text="Алексей Куриганов" 
+                <TextBlock Text="{Binding full_name}" 
                            Margin="0 20"
-                           FontSize="22"
+                           FontSize="28"
                            FontWeight="SemiBold"
                            HorizontalAlignment="Center"/>
     
-                <TextBlock Text="demo1fort@gmail.com" 
-                           Margin="0 50" 
-                           FontSize="18" 
-                           HorizontalAlignment="Center"/>
+                <TextBlock Margin="100 70 0 0"
+                           FontSize="20" 
+                           HorizontalAlignment="Center">
+                    <Run Text="Почта: "/>
+                    <Run Text="{Binding email}"/>
+                </TextBlock>
     
-                <TextBlock Text="79969351076" 
-                           Margin="0 80" 
-                           FontSize="18" 
-                           HorizontalAlignment="Center"/>
+                <TextBlock Margin="140 100 0 0"
+                           FontSize="20" 
+                           HorizontalAlignment="Center">
+                    <Run Text="Телефон: "/>
+                    <Run Text="{Binding phone}"/>
+                </TextBlock>
             </Panel>
         </StackPanel>
     </Grid>

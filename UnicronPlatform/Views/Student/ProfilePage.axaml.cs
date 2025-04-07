@@ -11,12 +11,4 @@ public partial class ProfilePage : Window
     {
         InitializeComponent();
     }
-
-    private void DragPanel_PointerPressed(object? sender, PointerPressedEventArgs e)
-    {
-        if (e.GetCurrentPoint(this).Properties.IsLeftButtonPressed)
-        {
-            BeginMoveDrag(e);
-        }
-    }
 }
