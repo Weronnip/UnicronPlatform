@@ -1,3 +1,4 @@
+using System;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Input;
@@ -13,8 +14,7 @@ public partial class HomePage : Window
 {
     private readonly AppDbContext _dbContext;
     private readonly Users _currentUser;
-    public RoutingState Router { get; } = new();
-    
+    public RoutingState Router { get; } = new RoutingState();
 
     public HomePage(AppDbContext dbContext, Users currentUser)
     {
@@ -23,11 +23,12 @@ public partial class HomePage : Window
         _dbContext = dbContext;
         _currentUser = currentUser;
 
-        var profileView = new ProfilePage
-        {
-            DataContext = new ProfilePageViewModel(new ProfilePageViewModel.DummyScreen(), _currentUser, _dbContext)
-        };
+        // Создаём ViewModel для HomePage
+        var homePageViewModel = new HomePageViewModel(_dbContext, currentUser);
+        DataContext = homePageViewModel;
 
-        this.Content = profileView;
+        // Стартуем с ProfilePage
+        var profileViewModel = new ProfilePageViewModel(homePageViewModel, _currentUser, _dbContext);
+        Router.Navigate.Execute(profileViewModel).Subscribe();
     }
 }

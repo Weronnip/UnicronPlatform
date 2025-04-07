@@ -35,7 +35,7 @@ namespace UnicronPlatform.ViewModels
             _user = users ?? throw new ArgumentNullException(nameof(users));
 
             LoadRoleNameAsync(dbContext);
-
+            
             GoToSettings = ReactiveCommand.CreateFromTask(async () =>
             {
                 var settingVM = new SettingsPageViewModel(HostScreen, _user);

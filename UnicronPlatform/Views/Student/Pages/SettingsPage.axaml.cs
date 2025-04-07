@@ -12,6 +12,7 @@ public partial class SettingsPage : ReactiveUserControl<SettingsPageViewModel>
     public SettingsPage()
     {
         InitializeComponent();
+        this.DataContext = ViewModel;
         this.WhenActivated(disposables => { });
 
     }
