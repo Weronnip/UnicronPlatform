@@ -50,7 +50,7 @@ namespace UnicronPlatform.ViewModels
                 {
                     var profilePage = new ProfilePage
                     {
-                        DataContext = new ProfilePageViewModel(null, user)
+                        DataContext = new ProfilePageViewModel(null, user, _dbContext)
                     };
                     profilePage.WindowState = WindowState.Maximized;
                     profilePage.Show();

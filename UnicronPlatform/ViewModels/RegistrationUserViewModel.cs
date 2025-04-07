@@ -65,6 +65,7 @@ namespace UnicronPlatform.ViewModels
                     email = email,
                     phone = phone,
                     role_id = 1,
+                    avatar = "../Assets/default_avatar.png",
                     password = password,
                     created_at = DateTime.Now,
                     updated_at = DateTime.Now

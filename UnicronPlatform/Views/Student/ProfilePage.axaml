@@ -9,7 +9,7 @@
         x:Class="UnicronPlatform.Views.ProfilePage"
         Title="Unicron Platform"
         WindowState="Maximized">
-
+    
     <Window.Styles>
         <Style Selector="TextBlock">
             <Setter Property="FontFamily" Value="Segoe UI"/>
@@ -38,19 +38,23 @@
         <StackPanel Grid.Column="1" 
                     HorizontalAlignment="Center" 
                     VerticalAlignment="Top"
-                    Margin="0  20  700 0">
+                    Margin="20">
             
+            <!-- Заголовок -->
             <TextBlock Text="Ваш профиль" 
                        FontSize="32" 
                        FontWeight="Bold"
-                       Foreground="White"/>
-            <Panel Margin="0 40 ">
+                       Foreground="White"
+                       HorizontalAlignment="Center"
+                       Margin="0,0,0,40"/>
+
+            <StackPanel HorizontalAlignment="Center">
                 <Border Width="150" Height="150"
                         CornerRadius="100"
-                        Margin="0 0 320 40"
+                        Margin="0 0 0 20"
                         ClipToBounds="True">
                     <Image Width="150" Height="150" 
-                           Source="../Assets/default_avatart.jpg" 
+                           Source="{Binding avatar}" 
                            Stretch="UniformToFill"/>
                 </Border>
 
@@ -59,21 +63,28 @@
                            FontSize="28"
                            FontWeight="SemiBold"
                            HorizontalAlignment="Center"/>
-    
-                <TextBlock Margin="100 70 0 0"
-                           FontSize="20" 
-                           HorizontalAlignment="Center">
-                    <Run Text="Почта: "/>
-                    <Run Text="{Binding email}"/>
-                </TextBlock>
-    
-                <TextBlock Margin="140 100 0 0"
-                           FontSize="20" 
-                           HorizontalAlignment="Center">
-                    <Run Text="Телефон: "/>
-                    <Run Text="{Binding phone}"/>
-                </TextBlock>
-            </Panel>
+            </StackPanel>
+
+            <TextBlock Margin="0,0,0,10" 
+                       FontSize="20" 
+                       HorizontalAlignment="Center">
+                <Run Text="Почта: "/>
+                <Run Text="{Binding email}"/>
+            </TextBlock>
+
+            <TextBlock Margin="0,0,0,10" 
+                       FontSize="20" 
+                       HorizontalAlignment="Center">
+                <Run Text="Телефон: "/>
+                <Run Text="{Binding phone}"/>
+            </TextBlock>
+
+            <TextBlock Margin="0,0,0,10" 
+                       FontSize="20" 
+                       HorizontalAlignment="Center">
+                <Run Text="Вы: "/>
+                <Run Text="{Binding role_name}"/>
+            </TextBlock>
         </StackPanel>
     </Grid>
 </Window>
