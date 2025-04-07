@@ -1,11 +1,10 @@
 using Avalonia;
 using Avalonia.Controls;
-using Avalonia.Input;
 using Avalonia.Markup.Xaml;
 
-namespace UnicronPlatform.Views;
+namespace UnicronPlatform.Views.Student.Pages;
 
-public partial class ProfilePage : Window
+public partial class ProfilePage : UserControl
 {
     public ProfilePage()
     {

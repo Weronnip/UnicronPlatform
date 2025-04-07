@@ -1,0 +1,70 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="clr-namespace:UnicronPlatform.ViewModels"
+             xmlns:views="clr-namespace:UnicronPlatform.Views"
+             mc:Ignorable="d" d:DesignWidth="1440" d:DesignHeight="784"
+             x:DataType="vm:ProfilePageViewModel"
+             x:Class="UnicronPlatform.Views.Student.Pages.ProfilePage">
+    <Grid>
+        <ExperimentalAcrylicBorder Grid.Column="1" IsHitTestVisible="False">
+            <ExperimentalAcrylicBorder.Material>
+                <ExperimentalAcrylicMaterial
+                    BackgroundSource="Digger"
+                    TintColor="Black"
+                    TintOpacity="1"
+                    MaterialOpacity="0.6"/>
+            </ExperimentalAcrylicBorder.Material>
+        </ExperimentalAcrylicBorder>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <views:Sidebar Grid.Column="0" Margin="0"/>
+
+        <StackPanel Grid.Column="1" HorizontalAlignment="Center" Margin="20">
+            <StackPanel HorizontalAlignment="Center">
+                <Border Width="150" Height="150"
+                        CornerRadius="100"
+                        Margin="0 0 0 20"
+                        ClipToBounds="True">
+                    <Image Width="150" Height="150"
+                           Source="../../../Assets/default_avatart.jpg"
+                           Stretch="UniformToFill"/>
+                </Border>
+                <TextBlock Text="{Binding full_name}"
+                           Margin="0 20"
+                           FontSize="28"
+                           FontWeight="SemiBold"
+                           Foreground="#d8ffbf"
+                           HorizontalAlignment="Center"/>
+            </StackPanel>
+
+            <TextBlock Margin="0,0,0,10"
+                       FontSize="20"
+                       Foreground="#d8ffbf"
+                       HorizontalAlignment="Center">
+                <Run Text="Почта: "/>
+                <Run Text="{Binding email}"/>
+            </TextBlock>
+
+            <TextBlock Margin="0,0,0,10"
+                       FontSize="20"
+                       Foreground="#d8ffbf"
+                       HorizontalAlignment="Center">
+                <Run Text="Телефон: "/>
+                <Run Text="{Binding phone}"/>
+            </TextBlock>
+
+            <TextBlock Margin="0,0,0,10"
+                       FontSize="20"
+                       Foreground="#d8ffbf"
+                       HorizontalAlignment="Center">
+                <Run Text="Вы: "/>
+                <Run Text="{Binding role_name}"/>
+            </TextBlock>
+        </StackPanel>
+    </Grid>
+</UserControl>

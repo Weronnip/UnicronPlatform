@@ -1,4 +1,6 @@
 using System;
+using System.Reactive;
+using System.Reactive.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using ReactiveUI;
@@ -26,12 +28,19 @@ namespace UnicronPlatform.ViewModels
             set => this.RaiseAndSetIfChanged(ref _role_name, value);
         }
 
+        public ReactiveCommand<Unit, Unit> GoToSettings { get; }
         public ProfilePageViewModel(IScreen hostScreen, Users users, AppDbContext dbContext)
         {
             HostScreen = hostScreen ?? new DummyScreen();
             _user = users ?? throw new ArgumentNullException(nameof(users));
 
             LoadRoleNameAsync(dbContext);
+
+            GoToSettings = ReactiveCommand.CreateFromTask(async () =>
+            {
+                var settingVM = new SettingsPageViewModel(HostScreen, _user);
+                await HostScreen.Router.Navigate.Execute(settingVM);
+            });
         }
 
         private async void LoadRoleNameAsync(AppDbContext dbContext)
@@ -55,16 +64,18 @@ namespace UnicronPlatform.ViewModels
                 role_name = "Роль не найдена";
             }
         }
-
-
-
+        
         public string avatar => string.IsNullOrEmpty(user.avatar) 
-            ? "avares://UnicronPlatform/Assets/default_avatart.jpg"
+            ? "../../Assets/default_avatart.jpg"
             : user.avatar;
-
         public string full_name => $"{user.first_name} {user.last_name}";
         public string email => user.email;
         public string phone => user.phone;
+
+        public void LoadImageUser()
+        {
+            // let 
+        }
 
         public class DummyScreen : IScreen
         {

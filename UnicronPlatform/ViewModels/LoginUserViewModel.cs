@@ -48,9 +48,9 @@ namespace UnicronPlatform.ViewModels
 
                 if (Avalonia.Application.Current.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
                 {
-                    var profilePage = new ProfilePage
+                    var profilePage = new HomePage(_dbContext, user)
                     {
-                        DataContext = new ProfilePageViewModel(null, user, _dbContext)
+                        WindowState = WindowState.Maximized
                     };
                     profilePage.WindowState = WindowState.Maximized;
                     profilePage.Show();
