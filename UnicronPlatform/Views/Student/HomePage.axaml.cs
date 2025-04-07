@@ -10,7 +10,7 @@ using UnicronPlatform.Views.Student.Pages;
 
 namespace UnicronPlatform.Views;
 
-public partial class HomePage : Window
+public partial class HomePage : Window, IScreen
 {
     private readonly AppDbContext _dbContext;
     private readonly Users _currentUser;
