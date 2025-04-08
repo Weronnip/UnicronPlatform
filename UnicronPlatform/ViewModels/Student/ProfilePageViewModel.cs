@@ -71,11 +71,7 @@ namespace UnicronPlatform.ViewModels
         public string full_name => $"{user.first_name} {user.last_name}";
         public string email => user.email;
         public string phone => user.phone;
-
-        public void LoadImageUser()
-        {
-            // let 
-        }
+        
 
         public class DummyScreen : IScreen
         {
