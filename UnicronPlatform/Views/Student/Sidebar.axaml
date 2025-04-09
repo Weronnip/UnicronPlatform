@@ -2,27 +2,33 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:vm="clr-namespace:UnicronPlatform.ViewModels"
              x:Class="UnicronPlatform.Views.Sidebar"
-             x:DataType="vm:ProfilePageViewModel">
+             x:DataType="vm:ShellViewModel">
     <StackPanel Background="#2D2D30" Width="200" VerticalAlignment="Stretch">
         <TextBlock Text="Меню" FontSize="20" Margin="10" Foreground="White"/>
-        <Button Margin="10" Padding="10" Background="Transparent" Foreground="White">
+        
+        <Button Margin="10" Padding="10" 
+                Command="{Binding GoToProfile}"
+                Background="Transparent" Foreground="White">
             <StackPanel Orientation="Horizontal" Spacing="5">
                 <PathIcon Data="{StaticResource home_regular}" Foreground="White" />
                 <TextBlock Text="Профиль" VerticalAlignment="Center" Foreground="White"/>
             </StackPanel>
         </Button>
+        
         <Button Margin="10" Padding="10" Background="Transparent" Foreground="White">
             <StackPanel Orientation="Horizontal" Spacing="5">
                 <PathIcon Data="{StaticResource notebook_regular}" Foreground="White" />
                 <TextBlock Text="Курсы" VerticalAlignment="Center" Foreground="White"/>
             </StackPanel>
         </Button>
+        
         <Button Margin="10" Padding="10" Background="Transparent" Foreground="White">
             <StackPanel Orientation="Horizontal" Spacing="5">
                 <PathIcon Data="{StaticResource data_histogram_regular}" Foreground="White" />
                 <TextBlock Text="Мой прогресс" VerticalAlignment="Center" Foreground="White"/>
             </StackPanel>
         </Button>
+        
         <Button Margin="10" Padding="10" 
                 Background="Transparent"
                 Command="{Binding GoToSettings}"
@@ -33,6 +39,7 @@
                            Foreground="White"/>
             </StackPanel>
         </Button>
+        
         <Button Margin="10" Padding="10" Background="Transparent" Foreground="White">
             <StackPanel Orientation="Horizontal" Spacing="5">
                 <PathIcon Data="{StaticResource chevron_left_regular}" Foreground="White" />

@@ -1,3 +1,4 @@
+// File: ViewModels/ProfilePageViewModel.cs
 using System;
 using System.Reactive;
 using System.Reactive.Linq;
@@ -12,7 +13,7 @@ namespace UnicronPlatform.ViewModels
     public class ProfilePageViewModel : ReactiveObject, IRoutableViewModel
     {
         public string UrlPathSegment => "profile";
-        public IScreen HostScreen { get; set; }
+        public IScreen HostScreen { get; }
 
         private Users _user;
         public Users user
@@ -27,20 +28,12 @@ namespace UnicronPlatform.ViewModels
             get => _role_name;
             set => this.RaiseAndSetIfChanged(ref _role_name, value);
         }
-
-        public ReactiveCommand<Unit, Unit> GoToSettings { get; }
-        public ProfilePageViewModel(IScreen hostScreen, Users users, AppDbContext dbContext)
+        public ProfilePageViewModel(IScreen hostScreen, Users user, AppDbContext dbContext)
         {
-            HostScreen = hostScreen ?? new DummyScreen();
-            _user = users ?? throw new ArgumentNullException(nameof(users));
+            HostScreen = hostScreen ?? throw new ArgumentNullException(nameof(hostScreen));
+            _user = user ?? throw new ArgumentNullException(nameof(user));
 
             LoadRoleNameAsync(dbContext);
-
-            GoToSettings = ReactiveCommand.CreateFromTask(async () =>
-            {
-                var settingVM = new SettingsPageViewModel(HostScreen, _user);
-                await HostScreen.Router.Navigate.Execute(settingVM);
-            });
         }
 
         private async void LoadRoleNameAsync(AppDbContext dbContext)
@@ -55,14 +48,7 @@ namespace UnicronPlatform.ViewModels
                 .Include(u => u.Role)
                 .FirstOrDefaultAsync(u => u.user_id == user.user_id);
 
-            if (result != null && result.Role != null)
-            {
-                role_name = result.Role.name_role;
-            }
-            else
-            {
-                role_name = "Роль не найдена";
-            }
+            role_name = (result?.Role?.name_role) ?? "Роль не найдена";
         }
         
         public string avatar => string.IsNullOrEmpty(user.avatar) 
@@ -71,11 +57,5 @@ namespace UnicronPlatform.ViewModels
         public string full_name => $"{user.first_name} {user.last_name}";
         public string email => user.email;
         public string phone => user.phone;
-        
-
-        public class DummyScreen : IScreen
-        {
-            public RoutingState Router { get; } = new RoutingState();
-        }
     }
 }

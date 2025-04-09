@@ -1,33 +1,24 @@
-using Avalonia;
-using Avalonia.Controls;
-using Avalonia.Input;
+using Avalonia.ReactiveUI;
 using ReactiveUI;
 using UnicronPlatform.Data;
 using UnicronPlatform.Models;
 using UnicronPlatform.ViewModels;
-using UnicronPlatform.Views.Student.Pages;
 
-namespace UnicronPlatform.Views;
-
-public partial class HomePage : Window
+namespace UnicronPlatform.Views
 {
-    private readonly AppDbContext _dbContext;
-    private readonly Users _currentUser;
-    public RoutingState Router { get; } = new();
-    
-
-    public HomePage(AppDbContext dbContext, Users currentUser)
+    public partial class HomePage : ReactiveWindow<ShellViewModel>
     {
-        InitializeComponent();
-        
-        _dbContext = dbContext;
-        _currentUser = currentUser;
-
-        var profileView = new ProfilePage
+        public HomePage(AppDbContext dbContext, Users currentUser)
         {
-            DataContext = new ProfilePageViewModel(new ProfilePageViewModel.DummyScreen(), _currentUser, _dbContext)
-        };
+            InitializeComponent();
 
-        this.Content = profileView;
+            var shellVm = new ShellViewModel(dbContext, currentUser);
+            ViewModel = shellVm;
+
+            this.WhenActivated(d =>
+            {
+                // можно логировать или подписывать события здесь
+            });
+        }
     }
 }

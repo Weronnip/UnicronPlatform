@@ -8,63 +8,71 @@
              x:DataType="vm:ProfilePageViewModel"
              x:Class="UnicronPlatform.Views.Student.Pages.ProfilePage">
     <Grid>
-        <ExperimentalAcrylicBorder Grid.Column="1" IsHitTestVisible="False">
-            <ExperimentalAcrylicBorder.Material>
-                <ExperimentalAcrylicMaterial
-                    BackgroundSource="Digger"
-                    TintColor="Black"
-                    TintOpacity="1"
-                    MaterialOpacity="0.6"/>
-            </ExperimentalAcrylicBorder.Material>
-        </ExperimentalAcrylicBorder>
+        <!-- Сначала определяем колонки -->
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="200"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
+        <!-- Первый столбец – Sidebar -->
         <views:Sidebar Grid.Column="0" Margin="0"/>
 
-        <StackPanel Grid.Column="1" HorizontalAlignment="Center" Margin="20">
-            <StackPanel HorizontalAlignment="Center">
-                <Border Width="150" Height="150"
-                        CornerRadius="100"
-                        Margin="0 0 0 20"
-                        ClipToBounds="True">
-                    <Image Width="150" Height="150"
-                           Source="../../../Assets/default_avatart.jpg"
-                           Stretch="UniformToFill"/>
-                </Border>
-                <TextBlock Text="{Binding full_name}"
-                           Margin="0 20"
-                           FontSize="28"
-                           FontWeight="SemiBold"
+        <!-- Второй столбец – фоновый слой и содержимое -->
+        <Grid Grid.Column="1">
+            <!-- Фоновый элемент -->
+            <ExperimentalAcrylicBorder IsHitTestVisible="False">
+                <ExperimentalAcrylicBorder.Material>
+                    <ExperimentalAcrylicMaterial
+                        BackgroundSource="Digger"
+                        TintColor="Black"
+                        TintOpacity="1"
+                        MaterialOpacity="0.6"/>
+                </ExperimentalAcrylicBorder.Material>
+            </ExperimentalAcrylicBorder>
+            
+            <!-- Содержимое страницы -->
+            <StackPanel HorizontalAlignment="Center" Margin="20">
+                <StackPanel HorizontalAlignment="Center">
+                    <Border Width="150" Height="150"
+                            CornerRadius="100"
+                            Margin="0 0 0 20"
+                            ClipToBounds="True">
+                        <Image Width="150" Height="150"
+                               Source="../../../Assets/default_avatart.jpg"
+                               Stretch="UniformToFill"/>
+                    </Border>
+                    <TextBlock Text="{Binding full_name}"
+                               Margin="0 20"
+                               FontSize="28"
+                               FontWeight="SemiBold"
+                               Foreground="#d8ffbf"
+                               HorizontalAlignment="Center"/>
+                </StackPanel>
+
+                <TextBlock Margin="0,0,0,10"
+                           FontSize="20"
                            Foreground="#d8ffbf"
-                           HorizontalAlignment="Center"/>
+                           HorizontalAlignment="Center">
+                    <Run Text="Почта: "/>
+                    <Run Text="{Binding email}"/>
+                </TextBlock>
+
+                <TextBlock Margin="0,0,0,10"
+                           FontSize="20"
+                           Foreground="#d8ffbf"
+                           HorizontalAlignment="Center">
+                    <Run Text="Телефон: "/>
+                    <Run Text="{Binding phone}"/>
+                </TextBlock>
+
+                <TextBlock Margin="0,0,0,10"
+                           FontSize="20"
+                           Foreground="#d8ffbf"
+                           HorizontalAlignment="Center">
+                    <Run Text="Вы: "/>
+                    <Run Text="{Binding role_name}"/>
+                </TextBlock>
             </StackPanel>
-
-            <TextBlock Margin="0,0,0,10"
-                       FontSize="20"
-                       Foreground="#d8ffbf"
-                       HorizontalAlignment="Center">
-                <Run Text="Почта: "/>
-                <Run Text="{Binding email}"/>
-            </TextBlock>
-
-            <TextBlock Margin="0,0,0,10"
-                       FontSize="20"
-                       Foreground="#d8ffbf"
-                       HorizontalAlignment="Center">
-                <Run Text="Телефон: "/>
-                <Run Text="{Binding phone}"/>
-            </TextBlock>
-
-            <TextBlock Margin="0,0,0,10"
-                       FontSize="20"
-                       Foreground="#d8ffbf"
-                       HorizontalAlignment="Center">
-                <Run Text="Вы: "/>
-                <Run Text="{Binding role_name}"/>
-            </TextBlock>
-        </StackPanel>
+        </Grid>
     </Grid>
 </UserControl>
