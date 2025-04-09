@@ -55,18 +55,18 @@
                            Stretch="UniformToFill"/>
                 </Border>
 
-                <TextBlock Text="Алексей Куриганов" 
+                <TextBlock Text="{Binding full_name}" 
                            Margin="0 20"
                            FontSize="22"
                            FontWeight="SemiBold"
                            HorizontalAlignment="Center"/>
     
-                <TextBlock Text="demo1fort@gmail.com" 
+                <TextBlock Text="{Binding email}" 
                            Margin="0 50" 
                            FontSize="18" 
                            HorizontalAlignment="Center"/>
     
-                <TextBlock Text="79969351076" 
+                <TextBlock Text="{Binding phone}" 
                            Margin="0 80" 
                            FontSize="18" 
                            HorizontalAlignment="Center"/>
