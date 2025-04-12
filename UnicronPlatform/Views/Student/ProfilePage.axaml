@@ -37,14 +37,14 @@
                         Margin="0 0 370 0"
                         ClipToBounds="True">
                     <Image Width="150" Height="150" 
-                           Source="../../Assets/Pixelated Cyber Workspace.jpeg" 
+                           Source="../../Assets/avatar.jpg" 
                            Stretch="UniformToFill"/>
                 </Border>
                 
                 <StackPanel HorizontalAlignment="Center" 
-                            Width="600" Height="100"
+                            Width="400" Height="100"
                             Margin="0 50 0 0">
-                    <TextBlock Text="{Binding full_name}"
+                    <TextBlock Text="Ваши данные: "
                                Margin="0"
                                FontSize="22"
                                FontWeight="SemiBold"
@@ -52,12 +52,12 @@
     
                     <TextBlock Text="{Binding email, StringFormat='Почта: {0}'}" 
                                Margin="0 " 
-                               FontSize="18" 
+                               FontSize="16" 
                                HorizontalAlignment="Center"/>
     
                     <TextBlock Text="{Binding phone, StringFormat='Телефон: {0}'}" 
                                Margin="0" 
-                               FontSize="18" 
+                               FontSize="16" 
                                HorizontalAlignment="Center"/>
                 </StackPanel>
                 

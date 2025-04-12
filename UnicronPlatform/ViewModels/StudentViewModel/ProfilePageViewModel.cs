@@ -7,7 +7,7 @@ namespace UnicronPlatform.ViewModels
 {
     public class ProfilePageViewModel : ReactiveObject, IRoutableViewModel
     {
-        public string UrlPathSegment => "Профиль";
+        public string UrlPathSegment => full_name;
         public IScreen? HostScreen { get; }
 
         private Users _user;
@@ -25,7 +25,7 @@ namespace UnicronPlatform.ViewModels
         }
 
         public string avatar => string.IsNullOrEmpty(user.avatar)
-            ? "avares://UnicronPlatform/Assets/avatar.png"
+            ? "avares://UnicronPlatform/Assets/avatar.jpg"
             : user.avatar;
 
         public string full_name => $"{user.first_name} {user.last_name}";

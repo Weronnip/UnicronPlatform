@@ -4,6 +4,7 @@ using System.Reactive;
 using System.Reactive.Linq;
 using System.Threading.Tasks;
 using ReactiveUI;
+using UnicronPlatform.Data;
 using UnicronPlatform.Models;
 using UnicronPlatform.Views.Student;
 
@@ -12,6 +13,7 @@ namespace UnicronPlatform.ViewModels
     public class HomePageViewModel : ReactiveObject, IScreen
     {
         private Users _user;
+        
         public Users User
         {
             get => _user;
