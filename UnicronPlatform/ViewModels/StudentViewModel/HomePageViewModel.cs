@@ -17,11 +17,10 @@ namespace UnicronPlatform.ViewModels
             get => _user;
             set => this.RaiseAndSetIfChanged(ref _user, value);
         }
-        
-        // Состояние маршрутизации
         public RoutingState Router { get; } = new RoutingState();
         
         public ReactiveCommand<Unit, IRoutableViewModel> GoToProfile { get; }
+        public ReactiveCommand<Unit, IRoutableViewModel> GoToSettings { get; }
 
         public IRoutableViewModel? CurrentViewModel =>
             Router.NavigationStack.Count > 0 ? Router.NavigationStack.Last() : null;
@@ -44,6 +43,13 @@ namespace UnicronPlatform.ViewModels
             GoToProfile = ReactiveCommand.CreateFromTask<Unit, IRoutableViewModel>(async _ =>
             {
                 var vm = new ProfilePageViewModel(this, User);
+                await Router.Navigate.Execute(vm);
+                return (IRoutableViewModel)vm;
+            });
+
+            GoToSettings = ReactiveCommand.CreateFromTask<Unit, IRoutableViewModel>(async _ =>
+            {
+                var vm = new SettingPageViewModel(this, User);
                 await Router.Navigate.Execute(vm);
                 return (IRoutableViewModel)vm;
             });

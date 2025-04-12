@@ -26,7 +26,9 @@
                 <TextBlock Text="Мой прогресс" VerticalAlignment="Center" Foreground="White"/>
             </StackPanel>
         </Button>
-        <Button Margin="10" Padding="10" Background="Transparent" Foreground="White">
+        <Button Margin="10" Padding="10" 
+                Background="Transparent" Foreground="White"
+                Command="{Binding GoToSettings}">
             <StackPanel Orientation="Horizontal" Spacing="5">
                 <PathIcon Data="{StaticResource settings_regular}" Foreground="White" />
                 <TextBlock Text="Настройки" VerticalAlignment="Center" Foreground="White"/>

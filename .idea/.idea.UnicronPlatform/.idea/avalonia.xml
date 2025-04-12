@@ -14,6 +14,7 @@
         <entry key="UnicronPlatform/Views/Student/MyProgress.axaml" value="UnicronPlatform/UnicronPlatform.csproj" />
         <entry key="UnicronPlatform/Views/Student/ProfilePage.axaml" value="UnicronPlatform/UnicronPlatform.csproj" />
         <entry key="UnicronPlatform/Views/Student/ProfilePageView.axaml" value="UnicronPlatform/UnicronPlatform.csproj" />
+        <entry key="UnicronPlatform/Views/Student/SettingPage.axaml" value="UnicronPlatform/UnicronPlatform.csproj" />
         <entry key="UnicronPlatform/Views/Student/SettingsPage.axaml" value="UnicronPlatform/UnicronPlatform.csproj" />
         <entry key="UnicronPlatform/Views/Student/Sidebar.axaml" value="UnicronPlatform/UnicronPlatform.csproj" />
       </map>

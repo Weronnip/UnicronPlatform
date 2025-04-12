@@ -23,7 +23,6 @@ namespace UnicronPlatform
             if (string.IsNullOrWhiteSpace(viewModelName))
                 return new TextBlock { Text = "Invalid view model" };
 
-            // Заменяем "ViewModels" на "Views" и "ViewModel" на "View"
             var viewName = viewModelName.Replace("UnicronPlatform.ViewModels", "UnicronPlatform.Views.Student")
                 .Replace("ViewModel", "");
 
