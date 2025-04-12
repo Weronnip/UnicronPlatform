@@ -5,6 +5,7 @@ using System.Reactive.Linq;
 using System.Threading.Tasks;
 using ReactiveUI;
 using UnicronPlatform.Models;
+using UnicronPlatform.Views.Student;
 
 namespace UnicronPlatform.ViewModels
 {
@@ -20,9 +21,7 @@ namespace UnicronPlatform.ViewModels
         // Состояние маршрутизации
         public RoutingState Router { get; } = new RoutingState();
         
-        // Команды для навигации
         public ReactiveCommand<Unit, IRoutableViewModel> GoToProfile { get; }
-        public ReactiveCommand<Unit, IRoutableViewModel> GoBack => Router.NavigateBack;
 
         public IRoutableViewModel? CurrentViewModel =>
             Router.NavigationStack.Count > 0 ? Router.NavigationStack.Last() : null;

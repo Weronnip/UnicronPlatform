@@ -1,5 +1,6 @@
 using System;
 using ReactiveUI;
+using Splat;
 using UnicronPlatform.Models;
 
 namespace UnicronPlatform.ViewModels
@@ -7,7 +8,7 @@ namespace UnicronPlatform.ViewModels
     public class ProfilePageViewModel : ReactiveObject, IRoutableViewModel
     {
         public string UrlPathSegment => "profile";
-        public IScreen HostScreen { get; }
+        public IScreen? HostScreen { get; }
 
         private Users _user;
         public Users user
@@ -18,7 +19,7 @@ namespace UnicronPlatform.ViewModels
 
         public ProfilePageViewModel(IScreen hostScreen, Users user)
         {
-            HostScreen = hostScreen;
+            HostScreen = hostScreen ?? Locator.Current.GetService<IScreen>();
             this.user = user;
         }
 

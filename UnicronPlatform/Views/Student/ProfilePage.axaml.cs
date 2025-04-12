@@ -13,6 +13,5 @@ public partial class ProfilePage : ReactiveUserControl<ProfilePageViewModel>
     {
         InitializeComponent();
         this.WhenActivated(disposable => { });
-        AvaloniaXamlLoader.Load(this);
     }
 }
