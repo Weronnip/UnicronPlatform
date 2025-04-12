@@ -38,15 +38,19 @@
     </ItemGroup>
 
     <ItemGroup>
+<<<<<<< HEAD
       <Compile Update="Views\Student\HomePage.axaml.cs">
         <DependentUpon>ProfilePage.axaml</DependentUpon>
         <SubType>Code</SubType>
       </Compile>
+=======
+>>>>>>> new_dev
       <Compile Update="Views\Student\Sidebar.axaml.cs">
         <DependentUpon>Sidebar.axaml</DependentUpon>
         <SubType>Code</SubType>
       </Compile>
     </ItemGroup>
+<<<<<<< HEAD
 
     <ItemGroup>
       <Folder Include="ViewModels\Administrator\" />
@@ -58,4 +62,6 @@
       <Folder Include="Views\ManageCourse\" />
       <Folder Include="Views\Support\" />
     </ItemGroup>
+=======
+>>>>>>> new_dev
 </Project>

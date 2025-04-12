@@ -1,10 +1,14 @@
 using System;
 using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
+using Avalonia.Controls.Templates;
 using Avalonia.Markup.Xaml;
 using Microsoft.Extensions.DependencyInjection;
+using ReactiveUI;
+using Splat;
 using UnicronPlatform.ViewModels;
 using UnicronPlatform.Views;
+using UnicronPlatform.Views.Student;
 
 namespace UnicronPlatform
 {
@@ -24,6 +28,9 @@ namespace UnicronPlatform
                     DataContext = Services.GetRequiredService<MainWindowViewModel>()
                 };
             }
+            Locator.CurrentMutable.Register(() => new ProfilePage(), typeof(IViewFor<ProfilePageViewModel>));
+            Locator.CurrentMutable.Register(() => new SettingPage(), typeof(IViewFor<SettingPageViewModel>));
+
             base.OnFrameworkInitializationCompleted();
         }
     }

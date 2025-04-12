@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 using System;
 using Avalonia;
 using Avalonia.Controls;
@@ -30,5 +31,18 @@ public partial class HomePage : Window, IScreen
         // Стартуем с ProfilePage
         var profileViewModel = new ProfilePageViewModel(homePageViewModel, _currentUser, _dbContext);
         Router.Navigate.Execute(profileViewModel).Subscribe();
+=======
+using Avalonia;
+using Avalonia.Controls;
+using Avalonia.Markup.Xaml;
+
+namespace UnicronPlatform.Views.Student;
+
+public partial class HomePage : Window
+{
+    public HomePage()
+    {
+        InitializeComponent();
+>>>>>>> new_dev
     }
 }

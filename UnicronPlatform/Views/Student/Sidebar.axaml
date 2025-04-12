@@ -2,10 +2,17 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:vm="clr-namespace:UnicronPlatform.ViewModels"
              x:Class="UnicronPlatform.Views.Sidebar"
+<<<<<<< HEAD
              x:DataType="vm:ProfilePageViewModel">
+=======
+             x:DataType="vm:HomePageViewModel">
+>>>>>>> new_dev
     <StackPanel Background="#2D2D30" Width="200" VerticalAlignment="Stretch">
-        <TextBlock Text="Меню" FontSize="20" Margin="10" Foreground="White"/>
-        <Button Margin="10" Padding="10" Background="Transparent" Foreground="White">
+        <TextBlock Text="Навигация" FontSize="20" TextAlignment="Center" Margin="10" Foreground="White"/>
+        <Button Margin="10" Padding="10"
+                Command="{Binding GoToProfile}"
+                Background="Transparent" 
+                Foreground="White">
             <StackPanel Orientation="Horizontal" Spacing="5">
                 <PathIcon Data="{StaticResource home_regular}" Foreground="White" />
                 <TextBlock Text="Профиль" VerticalAlignment="Center" Foreground="White"/>
@@ -24,9 +31,14 @@
             </StackPanel>
         </Button>
         <Button Margin="10" Padding="10" 
+<<<<<<< HEAD
                 Background="Transparent"
                 Command="{Binding GoToSettings}"
                 Foreground="White">
+=======
+                Background="Transparent" Foreground="White"
+                Command="{Binding GoToSettings}">
+>>>>>>> new_dev
             <StackPanel Orientation="Horizontal" Spacing="5">
                 <PathIcon Data="{StaticResource settings_regular}" Foreground="White" />
                 <TextBlock Text="Настройки" VerticalAlignment="Center"

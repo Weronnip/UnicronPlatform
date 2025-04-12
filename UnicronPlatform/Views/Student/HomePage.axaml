@@ -1,6 +1,7 @@
 <Window xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+<<<<<<< HEAD
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:views="clr-namespace:UnicronPlatform.Views"
         xmlns:rxui="clr-namespace:Avalonia.ReactiveUI;assembly=Avalonia.ReactiveUI"
@@ -12,12 +13,24 @@
         d:DesignHeight="784"
         WindowState="Maximized">
 
+=======
+        xmlns:views="clr-namespace:UnicronPlatform.Views"
+        xmlns:vm="clr-namespace:UnicronPlatform.ViewModels"
+        x:Class="UnicronPlatform.Views.Student.HomePage"
+        Title="Unicron Platform"
+        d:DesignWidth="1440"
+        d:DesignHeight="784"
+        WindowState="Maximized"
+        x:DataType="vm:HomePageViewModel">
+    
+>>>>>>> new_dev
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="200"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
+<<<<<<< HEAD
         <!-- Боковое меню -->
         <views:Sidebar Grid.Column="0"/>
 
@@ -25,6 +38,12 @@
                                 HorizontalAlignment="Stretch"
                                 VerticalAlignment="Stretch"
                                 DataContext="{Binding}" />
+=======
+        <views:Sidebar Grid.Column="0"/>
+        <ContentControl Grid.Column="1"
+                        Content="{Binding CurrentViewModel, FallbackValue=null}"
+                        ContentTemplate="{StaticResource Locator}" />
+>>>>>>> new_dev
 
     </Grid>
 </Window>

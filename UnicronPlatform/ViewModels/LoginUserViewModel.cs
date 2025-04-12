@@ -8,6 +8,7 @@ using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
 using UnicronPlatform.Models;
 using UnicronPlatform.Views;
+using UnicronPlatform.Views.Student;
 
 namespace UnicronPlatform.ViewModels
 {
@@ -46,18 +47,24 @@ namespace UnicronPlatform.ViewModels
             {
                 Console.WriteLine($"Успешный вход: {user.first_name} {user.last_name}");
 
-                if (Avalonia.Application.Current.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
+                if (Avalonia.Application.Current?.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
                 {
+<<<<<<< HEAD
                     var profilePage = new HomePage(_dbContext, user)
                     {
                         WindowState = WindowState.Maximized
+=======
+                    var homePage = new HomePage()
+                    {
+                        DataContext = new HomePageViewModel(user)
+>>>>>>> new_dev
                     };
-                    profilePage.WindowState = WindowState.Maximized;
-                    profilePage.Show();
+                    homePage.WindowState = WindowState.Maximized;
+                    homePage.Show();
 
                     foreach (var window in desktop.Windows.ToList())
                     {
-                        if (window != profilePage)
+                        if (window != homePage)
                             window.Close();
                     }
                 }
