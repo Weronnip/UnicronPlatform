@@ -62,48 +62,47 @@
                 </StackPanel>
                 
                 <Border Background="#C8EAC6"
-        CornerRadius="36"
-        Width="360" Height="190"
-        Margin="700 0 0 0">
-    <Grid>
-        <Grid Margin="20 20 20 0" VerticalAlignment="Top">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="Auto" />
-            </Grid.ColumnDefinitions>
-            <TextBlock Text="Ваш баланс:"
-                       FontSize="22"
-                       Foreground="Black"
-                       VerticalAlignment="Center"/>
-            <TextBlock Text="{Binding balance}"
-                       FontSize="22"
-                       Foreground="Black"
-                       Grid.Column="1"
-                       Margin="10 0 0 0"
-                       VerticalAlignment="Center"/>
-        </Grid>
+                    CornerRadius="36"
+                    Width="360" Height="190"
+                    Margin="700 0 0 0">
+                    <Grid>
+                        <Grid Margin="20 20 20 0" VerticalAlignment="Top">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Text="Ваш баланс:"
+                                       FontSize="22"
+                                       Foreground="Black"
+                                       VerticalAlignment="Center"/>
+                            <TextBlock Text="{Binding balance}"
+                                       FontSize="22"
+                                       Foreground="Black"
+                                       Grid.Column="1"
+                                       Margin="10 0 0 0"
+                                       VerticalAlignment="Center"/>
+                        </Grid>
 
-        <Border Background="#50544F"
-                CornerRadius="36"
-                Width="360" Height="120"
-                VerticalAlignment="Bottom"
-                Margin="0 0 0 0">
-                    <StackPanel Orientation="Horizontal"
-                                HorizontalAlignment="Center"
-                                VerticalAlignment="Center"
-                                Spacing="12">
-                        
-                        <PathIcon Data="{StaticResource payment_regular}" Foreground="White" />
-                        <TextBlock Text="Пополнить баланс"
-                                   FontSize="20"
-                                   Foreground="White"
-                                   VerticalAlignment="Center"/>
-                    </StackPanel>
+                        <Border Background="#50544F"
+                                CornerRadius="36"
+                                Width="360" Height="120"
+                                VerticalAlignment="Bottom"
+                                Margin="0 0 0 0">
+                                    <StackPanel Orientation="Horizontal"
+                                                HorizontalAlignment="Center"
+                                                VerticalAlignment="Center"
+                                                Spacing="12">
+                                        
+                                        <PathIcon Data="{StaticResource payment_regular}" 
+                                                  Foreground="White" />
+                                        <TextBlock Text="Пополнить баланс"
+                                                   FontSize="20"
+                                                   Foreground="White"
+                                                   VerticalAlignment="Center"/>
+                                    </StackPanel>
+                        </Border>
+                    </Grid>
                 </Border>
-            </Grid>
-        </Border>
-
-
             </Panel>
         </StackPanel>
     </Grid>

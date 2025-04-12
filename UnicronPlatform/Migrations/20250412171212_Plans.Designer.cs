@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using UnicronPlatform.Data;
 
@@ -10,9 +11,11 @@ using UnicronPlatform.Data;
 namespace UnicronPlatform.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250412171212_Plans")]
+    partial class Plans
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -265,8 +268,8 @@ namespace UnicronPlatform.Migrations
                         .HasColumnType("longtext")
                         .HasColumnName("description");
 
-                    b.Property<int>("duration")
-                        .HasColumnType("int")
+                    b.Property<DateTime>("duration")
+                        .HasColumnType("datetime(6)")
                         .HasColumnName("duration");
 
                     b.Property<string>("name")

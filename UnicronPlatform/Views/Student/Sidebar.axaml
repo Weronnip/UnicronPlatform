@@ -14,10 +14,12 @@
                 <TextBlock Text="Профиль" VerticalAlignment="Center" Foreground="White"/>
             </StackPanel>
         </Button>
-        <Button Margin="10" Padding="10" Background="Transparent" Foreground="White">
+        <Button Margin="10" Padding="10" 
+                Command="{Binding GoToService}"
+                Background="Transparent" Foreground="White">
             <StackPanel Orientation="Horizontal" Spacing="5">
-                <PathIcon Data="{StaticResource notebook_regular}" Foreground="White" />
-                <TextBlock Text="Курсы" VerticalAlignment="Center" Foreground="White"/>
+                <PathIcon Data="{StaticResource app_folder_regular}" Foreground="White" />
+                <TextBlock Text="Услуги" VerticalAlignment="Center" Foreground="White"/>
             </StackPanel>
         </Button>
         <Button Margin="10" Padding="10" Background="Transparent" Foreground="White">

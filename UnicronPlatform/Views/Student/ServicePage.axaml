@@ -1,0 +1,39 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:vm="clr-namespace:UnicronPlatform.ViewModels"
+             d:DesignWidth="1240"
+             d:DesignHeight="784"
+             x:Class="UnicronPlatform.Views.Student.ServicePage"
+             x:DataType="vm:ServicePageViewModel">
+    <Grid>
+        <ExperimentalAcrylicBorder Grid.Column="0" IsHitTestVisible="False">
+            <ExperimentalAcrylicBorder.Material>
+                <ExperimentalAcrylicMaterial
+                    BackgroundSource="Digger"
+                    TintColor="Black"
+                    TintOpacity="1"
+                    MaterialOpacity="0.6"/>
+            </ExperimentalAcrylicBorder.Material>
+        </ExperimentalAcrylicBorder>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        
+        <StackPanel Grid.Column="0" HorizontalAlignment="Center" Margin="0 10">
+            <TextBlock Text="{Binding UrlPathSegment}" 
+                       FontSize="22" 
+                       FontWeight="Bold"
+                       Foreground="White" />
+            
+            <Border Background="Aquamarine" 
+                    Width="1220" Height="350">
+                <Grid HorizontalAlignment="Center" Margin="0 10">
+                    <TextBlock Text="Подписки" FontSize="22" />
+                    
+                </Grid>
+            </Border>
+        </StackPanel>
+    </Grid>
+</UserControl>

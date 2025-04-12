@@ -30,7 +30,7 @@ namespace UnicronPlatform
             }
             Locator.CurrentMutable.Register(() => new ProfilePage(), typeof(IViewFor<ProfilePageViewModel>));
             Locator.CurrentMutable.Register(() => new SettingPage(), typeof(IViewFor<SettingPageViewModel>));
-
+            Locator.CurrentMutable.Register(() => new ServicePage(), typeof(IViewFor<ServicePageViewModel>));
             base.OnFrameworkInitializationCompleted();
         }
     }

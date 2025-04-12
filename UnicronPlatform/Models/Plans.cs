@@ -1,3 +1,4 @@
+using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -18,7 +19,7 @@ namespace UnicronPlatform.Models
         public decimal? price { get; set; }
 
         [Column("duration")]
-        public int? duration { get; set; }
+        public int duration { get; set; }
 
         [Column("description")]
         public string? description { get; set; }

@@ -43,4 +43,10 @@
         <SubType>Code</SubType>
       </Compile>
     </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Views\Administrator\" />
+      <Folder Include="Views\ManageCourse\" />
+      <Folder Include="Views\Support\" />
+    </ItemGroup>
 </Project>
