@@ -16,10 +16,7 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <!-- Боковое меню -->
         <views:Sidebar Grid.Column="0"/>
-        
-        <!-- Контент -->
         <ContentControl Grid.Column="1"
                         Content="{Binding CurrentViewModel, FallbackValue=null}"
                         ContentTemplate="{StaticResource Locator}" />

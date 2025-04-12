@@ -7,7 +7,7 @@ namespace UnicronPlatform.ViewModels
 {
     public class ProfilePageViewModel : ReactiveObject, IRoutableViewModel
     {
-        public string UrlPathSegment => "profile";
+        public string UrlPathSegment => "Профиль";
         public IScreen? HostScreen { get; }
 
         private Users _user;
