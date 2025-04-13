@@ -88,18 +88,18 @@
                                 Width="360" Height="120"
                                 VerticalAlignment="Bottom"
                                 Margin="0 0 0 0">
-                                    <StackPanel Orientation="Horizontal"
-                                                HorizontalAlignment="Center"
-                                                VerticalAlignment="Center"
-                                                Spacing="12">
+                            <StackPanel Orientation="Horizontal"
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Center"
+                                        Spacing="12">
                                         
-                                        <PathIcon Data="{StaticResource payment_regular}" 
-                                                  Foreground="White" />
-                                        <TextBlock Text="Пополнить баланс"
-                                                   FontSize="20"
-                                                   Foreground="White"
-                                                   VerticalAlignment="Center"/>
-                                    </StackPanel>
+                                <PathIcon Data="{StaticResource payment_regular}" 
+                                          Foreground="White" />
+                                <TextBlock Text="Пополнить баланс"
+                                           FontSize="20"
+                                           Foreground="White"
+                                           VerticalAlignment="Center"/>
+                            </StackPanel>
                         </Border>
                     </Grid>
                 </Border>
