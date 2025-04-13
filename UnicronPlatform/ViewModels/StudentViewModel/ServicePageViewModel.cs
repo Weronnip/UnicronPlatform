@@ -59,6 +59,7 @@ namespace UnicronPlatform.ViewModels
     }
 
     public class PlanDto
+    // public string test.name 
     {
         public string Name { get; set; }
         public string Description { get; set; }

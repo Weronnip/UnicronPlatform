@@ -37,7 +37,7 @@
                         Margin="0 0 370 0"
                         ClipToBounds="True">
                     <Image Width="150" Height="150" 
-                           Source="../../Assets/avatar.jpg" 
+                           Source="{Binding avatar}" 
                            Stretch="UniformToFill"/>
                 </Border>
                 

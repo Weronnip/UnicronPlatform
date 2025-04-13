@@ -25,7 +25,7 @@ namespace UnicronPlatform.ViewModels
         }
 
         public string avatar => string.IsNullOrEmpty(user.avatar)
-            ? "avares://UnicronPlatform/Assets/avatar.jpg"
+            ? "../../Assets/avatar.jpg"
             : user.avatar;
 
         public string full_name => $"{user.first_name} {user.last_name}";
