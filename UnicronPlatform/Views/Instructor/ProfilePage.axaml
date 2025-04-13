@@ -1,8 +1,123 @@
 <UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-             x:Class="UnicronPlatform.Views.Instructor.ProfilePage">
-    Welcome to Avalonia!
+             xmlns:vm="clr-namespace:UnicronPlatform.ViewModels"
+             d:DesignWidth="1240"
+             d:DesignHeight="784"
+             x:Class="UnicronPlatform.Views.Instructor.ProfilePage"
+             x:DataType="vm:ProfilePageViewModel">
+    <Grid>
+        <ExperimentalAcrylicBorder Grid.Column="0" IsHitTestVisible="False">
+            <ExperimentalAcrylicBorder.Material>
+                <ExperimentalAcrylicMaterial
+                    BackgroundSource="Digger"
+                    TintColor="Black"
+                    TintOpacity="1"
+                    MaterialOpacity="0.6"/>
+            </ExperimentalAcrylicBorder.Material>
+        </ExperimentalAcrylicBorder>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+
+        <StackPanel Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="10">
+            
+            <TextBlock Text="{Binding UrlPathSegment}" 
+                       FontSize="22" 
+                       FontWeight="Bold"
+                       Foreground="White" 
+                       HorizontalAlignment="Left" 
+                       Margin="0 15 0 0"/>
+
+            <Panel Margin="0 50 300 0">
+                <Border Width="150" Height="150"
+                        CornerRadius="100"
+                        Margin="0 0 370 0"
+                        ClipToBounds="True">
+                    <Image Width="150" Height="150" 
+                           Source="../../Assets/avatar.jpg" 
+                           Stretch="UniformToFill"/>
+                </Border>
+                
+                <StackPanel HorizontalAlignment="Center" 
+                            Width="400" Height="100"
+                            Margin="0 50 0 0">
+                    <TextBlock Text="Ваши данные: "
+                               Margin="0"
+                               FontSize="22"
+                               FontWeight="SemiBold"
+                               HorizontalAlignment="Center"/>
+    
+                    <TextBlock Text="{Binding email, StringFormat='Почта: {0}'}" 
+                               Margin="0 " 
+                               FontSize="16" 
+                               HorizontalAlignment="Center"/>
+    
+                    <TextBlock Text="{Binding phone, StringFormat='Телефон: {0}'}" 
+                               Margin="0" 
+                               FontSize="16" 
+                               HorizontalAlignment="Center"/>
+                    <TextBlock Text="Вы: Преподователь" 
+                               Margin="0" 
+                               FontSize="16" 
+                               HorizontalAlignment="Center"/>
+                </StackPanel>
+                
+                <Border Background="#C8EAC6"
+                    CornerRadius="36"
+                    Width="360" Height="190"
+                    Margin="700 0 0 0">
+                    <Grid>
+                        <Grid Margin="20 20 20 0" VerticalAlignment="Top">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Text="Ваш баланс:"
+                                       FontSize="22"
+                                       Foreground="Black"
+                                       VerticalAlignment="Center"/>
+                            <TextBlock Text="{Binding balance}"
+                                       FontSize="22"
+                                       Foreground="Black"
+                                       Grid.Column="1"
+                                       Margin="10 0 0 0"
+                                       VerticalAlignment="Center"/>
+                        </Grid>
+
+                        <Border Background="#50544F"
+                                CornerRadius="36"
+                                Width="360" Height="120"
+                                VerticalAlignment="Bottom"
+                                Margin="0 0 0 0">
+                            <StackPanel Orientation="Vertical"
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Center"
+                                        Spacing="12">
+                                        
+                                <TextBlock FontSize="20"
+                                           Foreground="White"
+                                           VerticalAlignment="Center">
+                                    <PathIcon Data="{StaticResource payment_regular}" 
+                                              Foreground="White" />
+                                    Пополнить баланс
+                                </TextBlock>
+                                
+                                <TextBlock FontSize="20"
+                                           Foreground="White"
+                                           VerticalAlignment="Center">
+                                    <PathIcon Data="{StaticResource payment_regular}" 
+                                              Foreground="White" />
+                                    Вывод средств
+                                </TextBlock>
+                                
+                            </StackPanel>
+                        </Border>
+                    </Grid>
+                </Border>
+            </Panel>
+        </StackPanel>
+    </Grid>
 </UserControl>
