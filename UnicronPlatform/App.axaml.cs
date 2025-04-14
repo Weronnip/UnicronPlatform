@@ -8,7 +8,9 @@ using ReactiveUI;
 using Splat;
 using UnicronPlatform.ViewModels;
 using UnicronPlatform.Views;
+using UnicronPlatform.Views.Instructor;
 using UnicronPlatform.Views.Student;
+using SettingPage = UnicronPlatform.Views.Student.SettingPage;
 
 namespace UnicronPlatform
 {
@@ -28,9 +30,13 @@ namespace UnicronPlatform
                     DataContext = Services.GetRequiredService<MainWindowViewModel>()
                 };
             }
+            // Студенты
             Locator.CurrentMutable.Register(() => new ProfilePage(), typeof(IViewFor<ProfilePageViewModel>));
             Locator.CurrentMutable.Register(() => new SettingPage(), typeof(IViewFor<SettingPageViewModel>));
             Locator.CurrentMutable.Register(() => new ServicePage(), typeof(IViewFor<ServicePageViewModel>));
+            
+            // Преподаватели
+            Locator.CurrentMutable.Register(() => new IProfilePage(), typeof(IViewFor<IProfilePageViewModel>));
             base.OnFrameworkInitializationCompleted();
         }
     }

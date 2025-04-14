@@ -8,6 +8,7 @@ using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
 using UnicronPlatform.Models;
 using UnicronPlatform.Views;
+using UnicronPlatform.Views.Instructor;
 using UnicronPlatform.Views.Student;
 
 namespace UnicronPlatform.ViewModels
@@ -45,20 +46,41 @@ namespace UnicronPlatform.ViewModels
 
             if (user != null)
             {
-                Console.WriteLine($"Успешный вход: {user.first_name} {user.last_name}");
-
                 if (Avalonia.Application.Current?.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
                 {
-                    var homePage = new HomePage()
+                    Window homeWindow;
+
+                    var roleID = _dbContext.Role
+                        .Where(r => r.role_id == user.role_id)
+                        .Select(r => r.role_id)
+                        .FirstOrDefault();
+
+                    switch (roleID)
                     {
-                        DataContext = new HomePageViewModel(user)
-                    };
-                    homePage.WindowState = WindowState.Maximized;
-                    homePage.Show();
+                        case 1:
+                            homeWindow = new HomePage
+                            {
+                                DataContext = new HomePageViewModel(user)
+                            };
+                            break;
+                        
+                        case 2:
+                            homeWindow = new HomePageInstructor
+                            {
+                                DataContext = new IHomePageViewModel(user)
+                            };
+                            break;
+                        default:
+                            homeWindow = new MainWindow();
+                            break;
+                    }
+
+                    homeWindow.WindowState = WindowState.Maximized;
+                    homeWindow.Show();
 
                     foreach (var window in desktop.Windows.ToList())
                     {
-                        if (window != homePage)
+                        if (window != homeWindow)
                             window.Close();
                     }
                 }
@@ -68,5 +90,7 @@ namespace UnicronPlatform.ViewModels
                 Console.WriteLine("Неверный email или пароль.");
             }
         }
+
+
     }
 }

@@ -46,8 +46,8 @@ namespace UnicronPlatform.ViewModels
             set => this.RaiseAndSetIfChanged(ref _phone, value);
         }
 
-        private DateTime? _birthday;
-        public DateTime? Birthday
+        private DateTimeOffset? _birthday;
+        public DateTimeOffset? Birthday
         {
             get => _birthday;
             set => this.RaiseAndSetIfChanged(ref _birthday, value);

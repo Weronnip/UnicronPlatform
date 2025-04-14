@@ -1,6 +1,6 @@
 <UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             x:Class="UnicronPlatform.Views.Instructor.Sidebar">
+             x:Class="UnicronPlatform.Views.Instructor.ISidebar">
     <StackPanel Background="#2D2D30" Width="200" VerticalAlignment="Stretch">
         <TextBlock Text="Навигация" FontSize="20" TextAlignment="Center" Margin="10" Foreground="White"/>
         <Button Margin="10" Padding="10"

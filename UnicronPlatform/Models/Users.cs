@@ -33,7 +33,7 @@ namespace UnicronPlatform.Models
         public string phone { get; set; }
 
         [Column("birth_date")]
-        public DateTime? birth_date { get; set; }
+        public DateTimeOffset? birth_date { get; set; }
 
         [Column("role_id")]
         public int? role_id { get; set; }

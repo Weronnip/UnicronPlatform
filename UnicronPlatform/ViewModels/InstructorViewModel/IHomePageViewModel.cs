@@ -50,7 +50,7 @@ namespace UnicronPlatform.ViewModels
 
             GoToProfile = ReactiveCommand.CreateFromTask<Unit, IRoutableViewModel>(async _ =>
             {
-                var vm = new ProfilePageViewModel(this, User);
+                var vm = new IProfilePageViewModel(this, User);
                 await Router.Navigate.Execute(vm);
                 return (IRoutableViewModel)vm;
             });

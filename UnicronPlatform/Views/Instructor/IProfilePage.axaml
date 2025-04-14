@@ -4,8 +4,8 @@
              xmlns:vm="clr-namespace:UnicronPlatform.ViewModels"
              d:DesignWidth="1240"
              d:DesignHeight="784"
-             x:Class="UnicronPlatform.Views.Instructor.ProfilePage"
-             x:DataType="vm:ProfilePageViewModel">
+             x:Class="UnicronPlatform.Views.Instructor.IProfilePage"
+             x:DataType="vm:IProfilePageViewModel">
     <Grid>
         <ExperimentalAcrylicBorder Grid.Column="0" IsHitTestVisible="False">
             <ExperimentalAcrylicBorder.Material>

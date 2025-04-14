@@ -13,7 +13,6 @@ namespace UnicronPlatform.Views
             InitializeComponent();
             this.WhenActivated(disposables =>
             {
-                // Регистрируем обработчик диалогов
                 ViewModel!.ShowDialog.RegisterHandler(DoShowDialog)
                     .DisposeWith(disposables);
             });
