@@ -40,8 +40,8 @@ namespace UnicronPlatform.ViewModels
             set => this.RaiseAndSetIfChanged(ref _bio, value);
         }
         
-        private DateTime _experience;
-        public DateTime experience
+        private DateTimeOffset? _experience;
+        public DateTimeOffset? experience
         {
             get => _experience;
             set => this.RaiseAndSetIfChanged(ref _experience, value);
@@ -106,7 +106,7 @@ namespace UnicronPlatform.ViewModels
                 }
             });
 
-            CurrentView = this;
+            CurrentView = new RegistrationStudent();
         }
         
         private async Task ExecuteRegisterStudentAsync()

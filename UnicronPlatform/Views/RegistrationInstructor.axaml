@@ -3,7 +3,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:vm="clr-namespace:UnicronPlatform.ViewModels"
-             mc:Ignorable="d" d:DesignWidth="450" d:DesignHeight="465"
+             mc:Ignorable="d" d:DesignWidth="450" d:DesignHeight="520"
              x:Class="UnicronPlatform.Views.RegistrationInstructor"
              x:DataType="vm:RegistrationUserViewModel">
   <Grid>
@@ -31,27 +31,25 @@
           <RowDefinition Height="Auto"/>
           <RowDefinition Height="Auto"/>
           <RowDefinition />
+          <RowDefinition />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
           <ColumnDefinition Width="Auto"/>
           <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <!-- Имя -->
         <TextBlock Grid.Row="0" Grid.Column="0" 
                    Text="Имя:" Margin="5"
                    Foreground="White" VerticalAlignment="Center"/>
         <TextBox Grid.Row="0" Grid.Column="1" 
                  Margin="5" Text="{Binding first_name, Mode=TwoWay}" />
 
-        <!-- Фамилия -->
         <TextBlock Grid.Row="1" Grid.Column="0" 
                    Text="Фамилия:" Margin="5"
                    Foreground="White" VerticalAlignment="Center"/>
         <TextBox Grid.Row="1" Grid.Column="1" 
                  Margin="5" Text="{Binding last_name, Mode=TwoWay}" />
 
-        <!-- Почта -->
         <TextBlock Grid.Row="2" Grid.Column="0" 
                    Text="Почта:" Margin="5"
                    Foreground="White" VerticalAlignment="Center"/>
@@ -95,6 +93,13 @@
                 Foreground="#575757" Background="#d8ffbf"
                 CornerRadius="10" HorizontalAlignment="Center"
                 Command="{Binding RegisterInstructorCommand}"/>
+        <Button Grid.Row="9" Grid.Column="0" Grid.ColumnSpan="2" 
+                Content="Создать учебный аккаунт" 
+                Margin="10" Padding="100 5"
+                Foreground="#575757" Background="#d8ffbf"
+                CornerRadius="10" HorizontalAlignment="Center"
+                Command="{Binding SelectAccountTypeCommand}"
+                CommandParameter="Student"/>
       </Grid>
     </StackPanel>
   </Grid>

@@ -2,11 +2,11 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:vm="clr-namespace:UnicronPlatform.ViewModels"
+        xmlns:vm="using:UnicronPlatform.ViewModels"
         mc:Ignorable="d"
         x:Class="UnicronPlatform.Views.Registration"
         x:DataType="vm:RegistrationUserViewModel"
-        Width="400" Height="600"
+        Width="450" Height="520"
         TransparencyLevelHint="AcrylicBlur"
         ExtendClientAreaToDecorationsHint="True"
         Title="Unicron Platform">
@@ -20,19 +20,6 @@
                     MaterialOpacity="0.65" />
             </ExperimentalAcrylicBorder.Material>
         </ExperimentalAcrylicBorder>
-        <StackPanel Margin="20">
-            <TextBlock Margin="0 15" HorizontalAlignment="Center"
-                       Text="Выберите тип регистрации"
-                       FontSize="18" Foreground="#d8ffbf"/>
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                <Button Content="Студент" 
-                        Command="{Binding SelectAccountTypeCommand}" 
-                        CommandParameter="Student" Margin="5"/>
-                <Button Content="Преподаватель" 
-                        Command="{Binding SelectAccountTypeCommand}" 
-                        CommandParameter="Instructor" Margin="5"/>
-            </StackPanel>
-        </StackPanel>
         <ContentControl Content="{Binding CurrentView}"/>
     </Grid>
 </Window>

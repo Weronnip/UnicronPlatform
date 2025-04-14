@@ -30,7 +30,7 @@ namespace UnicronPlatform.Models
         public string? bio { get; set; }
 
         [Column("experience")]
-        public DateTime? experience { get; set; }
+        public DateTimeOffset? experience { get; set; }
 
         [Column("specialization")]
         public string? specialization { get; set; }
