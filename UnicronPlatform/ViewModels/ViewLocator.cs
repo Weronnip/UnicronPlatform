@@ -23,20 +23,33 @@ namespace UnicronPlatform
             if (string.IsNullOrWhiteSpace(viewModelName))
                 return new TextBlock { Text = "Invalid view model" };
 
-            var viewName = viewModelName
-                .Replace("UnicronPlatform.ViewModels", "UnicronPlatform.Views.Student") 
-                // .Replace("UnicronPlatform.ViewModels", "UnicronPlatform.Views.Instructor")
+            var baseViewName = viewModelName
+                .Replace("UnicronPlatform.ViewModels.", "")
                 .Replace("ViewModel", "");
 
-            
-            var viewType = Assembly.GetExecutingAssembly().GetTypes().FirstOrDefault(x => x.FullName == viewName);
-            if (viewType == null)
+            string[] viewNamespaces = {
+                "UnicronPlatform.Views.Student",
+                "UnicronPlatform.Views.Instructor"
+            };
+
+            Type? viewType = null;
+
+            foreach (var ns in viewNamespaces)
             {
-                return new TextBlock { Text = $"Could not find view for {viewName}" };
+                var fullViewName = $"{ns}.{baseViewName}";
+                viewType = Assembly.GetExecutingAssembly().GetTypes()
+                    .FirstOrDefault(x => x.FullName == fullViewName);
+                if (viewType != null)
+                    break;
             }
 
-            return Activator.CreateInstance(viewType) as Control 
-                   ?? new TextBlock { Text = $"Could not create view for {viewName}" };
+            if (viewType == null)
+            {
+                return new TextBlock { Text = $"Could not find view for: {baseViewName}" };
+            }
+
+            return Activator.CreateInstance(viewType) as Control
+                   ?? new TextBlock { Text = $"Could not create view for {viewType.FullName}" };
         }
 
         public bool SupportsRecycling => false;

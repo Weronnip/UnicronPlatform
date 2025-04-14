@@ -3,9 +3,12 @@ using System.Linq;
 using System.Reactive;
 using System.Reactive.Linq;
 using System.Threading.Tasks;
+using Avalonia.Controls;
+using Avalonia.Controls.ApplicationLifetimes;
 using ReactiveUI;
 using UnicronPlatform.Data;
 using UnicronPlatform.Models;
+using UnicronPlatform.Views;
 using UnicronPlatform.Views.Student;
 
 namespace UnicronPlatform.ViewModels
@@ -31,6 +34,12 @@ namespace UnicronPlatform.ViewModels
         public RoutingState Router { get; } = new RoutingState();
         
         public ReactiveCommand<Unit, IRoutableViewModel> GoToProfile { get; }
+        public ReactiveCommand<Unit, IRoutableViewModel> GoToSettings { get; }
+        public ReactiveCommand<Unit, IRoutableViewModel> GoToShop { get; }
+        public ReactiveCommand<Unit, IRoutableViewModel> GoToMyCourse { get; }
+        public ReactiveCommand<Unit, IRoutableViewModel> GoToAnalytics { get; }
+        public ReactiveCommand<Unit, IRoutableViewModel> GoToSuppots { get; }
+        public ReactiveCommand<Unit, Unit> LogoutCommand { get; }
 
         public IRoutableViewModel? CurrentViewModel =>
             Router.NavigationStack.Count > 0 ? Router.NavigationStack.Last() : null;
@@ -55,13 +64,13 @@ namespace UnicronPlatform.ViewModels
                 return (IRoutableViewModel)vm;
             });
 
-            // GoToSettings = ReactiveCommand.CreateFromTask<Unit, IRoutableViewModel>(async _ =>
-            // {
-            //     var vm = new SettingPageViewModel(this, User);
-            //     await Router.Navigate.Execute(vm);
-            //     return (IRoutableViewModel)vm;
-            // });
-            //
+            GoToSettings = ReactiveCommand.CreateFromTask<Unit, IRoutableViewModel>(async _ =>
+            {
+                var vm = new SettingPageViewModel(this, User);
+                await Router.Navigate.Execute(vm);
+                return (IRoutableViewModel)vm;
+            });
+            
             // GoToService = ReactiveCommand.CreateFromTask<Unit, IRoutableViewModel>(async _ =>
             // {
             //     var vm = new ServicePageViewModel(this, Plan);
@@ -69,7 +78,25 @@ namespace UnicronPlatform.ViewModels
             //     return (IRoutableViewModel)vm;
             // });
 
-            Console.WriteLine($"Initial CurrentViewModel: {CurrentViewModel?.GetType().Name ?? "null"}");
+            LogoutCommand = ReactiveCommand.Create(ExecuteLogout);
+        }
+
+        private void ExecuteLogout()
+        {
+            if (Avalonia.Application.Current?.ApplicationLifetime is
+                Avalonia.Controls.ApplicationLifetimes.IClassicDesktopStyleApplicationLifetime desktop)
+            {
+                var logoutWindow = desktop.MainWindow;
+                foreach (var window in desktop.Windows.ToList())
+                {
+                    window.Close();
+                }
+
+                var loginWindow = new MainWindow();
+                loginWindow.Show();
+
+                loginWindow.WindowState = WindowState.Maximized;
+            }
         }
     }
 }

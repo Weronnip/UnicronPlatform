@@ -9,9 +9,8 @@
         Background="Transparent"
         Title="Unicron Platform"
         Icon="/Assets/avalonia-logo.ico"
-        d:DesignWidth="1440"
-        d:DesignHeight="784"
-        WindowState="Maximized">
+        d:DesignWidth="800"
+        d:DesignHeight="400">
     
     <Design.DataContext>
         <vm:MainWindowViewModel/>
