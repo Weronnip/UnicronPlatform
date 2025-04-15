@@ -27,7 +27,8 @@ namespace UnicronPlatform
                 .Replace("UnicronPlatform.ViewModels.", "")
                 .Replace("ViewModel", "");
 
-            string[] viewNamespaces = {
+            string[] viewNamespaces = 
+            {
                 "UnicronPlatform.Views.Student",
                 "UnicronPlatform.Views.Instructor"
             };

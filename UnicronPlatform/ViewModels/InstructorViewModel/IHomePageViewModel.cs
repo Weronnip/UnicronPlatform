@@ -36,7 +36,7 @@ namespace UnicronPlatform.ViewModels
         public ReactiveCommand<Unit, IRoutableViewModel> GoToProfile { get; }
         public ReactiveCommand<Unit, IRoutableViewModel> GoToSettings { get; }
         public ReactiveCommand<Unit, IRoutableViewModel> GoToShop { get; }
-        public ReactiveCommand<Unit, IRoutableViewModel> GoToMyCourse { get; }
+        public ReactiveCommand<Unit, IRoutableViewModel> GoToManagementCourse { get; }
         public ReactiveCommand<Unit, IRoutableViewModel> GoToAnalytics { get; }
         public ReactiveCommand<Unit, IRoutableViewModel> GoToSuppots { get; }
         public ReactiveCommand<Unit, Unit> LogoutCommand { get; }
@@ -71,12 +71,12 @@ namespace UnicronPlatform.ViewModels
                 return (IRoutableViewModel)vm;
             });
             
-            // GoToService = ReactiveCommand.CreateFromTask<Unit, IRoutableViewModel>(async _ =>
-            // {
-            //     var vm = new ServicePageViewModel(this, Plan);
-            //     await Router.Navigate.Execute(vm);
-            //     return (IRoutableViewModel)vm;
-            // });
+            GoToManagementCourse = ReactiveCommand.CreateFromTask<Unit, IRoutableViewModel>(async _ =>
+            {
+                var vm = new ManagementCoursePageViewModel(this);
+                await Router.Navigate.Execute(vm);
+                return (IRoutableViewModel)vm;
+            });
 
             LogoutCommand = ReactiveCommand.Create(ExecuteLogout);
         }

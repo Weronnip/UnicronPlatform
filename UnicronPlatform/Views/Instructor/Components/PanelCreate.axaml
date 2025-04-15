@@ -2,9 +2,11 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:viewModels="clr-namespace:UnicronPlatform.ViewModels"
              x:Class="UnicronPlatform.Views.Instructor.Components.PanelCreate"
-             x:DataType="viewModels:IHomePageViewModel">
+             x:DataType="viewModels:ManagementCoursePageViewModel">
     <StackPanel Background="#2D2D30" Width="1240" VerticalAlignment="Center" HorizontalAlignment="Right">
-        <TextBlock Text="Панель управления" FontSize="20" TextAlignment="Center" Margin="10" Foreground="White"/>
+        <TextBlock Text="{Binding UrlPathSegment}" 
+                   FontSize="20" TextAlignment="Center" 
+                   Margin="10" Foreground="White"/>
         
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
             <Button Margin="5" Padding="10 10 30 10"
@@ -14,6 +16,7 @@
                     <TextBlock Text="Создать" VerticalAlignment="Center" Foreground="White"/>
                 </StackPanel>
             </Button>
+            
             <Button Margin="5" Padding="10 10 30 10"
                     Background="Transparent" Foreground="White">
                 <StackPanel Orientation="Horizontal" Spacing="5">
@@ -21,6 +24,7 @@
                     <TextBlock Text="Мои курсы" VerticalAlignment="Center" Foreground="White"/>
                 </StackPanel>
             </Button>
+            
             <Button Margin="5" Padding="10 10 30 10"
                     Background="Transparent" Foreground="White">
                 <StackPanel Orientation="Horizontal" Spacing="5">
@@ -28,6 +32,7 @@
                     <TextBlock Text="Аналитика курса" VerticalAlignment="Center" Foreground="White"/>
                 </StackPanel>
             </Button>
+            
             <Button Margin="5" Padding="10 10 30 10"
                     Background="Transparent" Foreground="White">
                 <StackPanel Orientation="Horizontal" Spacing="5">
@@ -35,6 +40,7 @@
                     <TextBlock Text="История" VerticalAlignment="Center" Foreground="White"/>
                 </StackPanel>
             </Button>
+            
             <Button Margin="5" Padding="10 10 30 10"
                     Background="Transparent" Foreground="White">
                 <StackPanel Orientation="Horizontal" Spacing="5">

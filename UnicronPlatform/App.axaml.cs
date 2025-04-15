@@ -37,6 +37,7 @@ namespace UnicronPlatform
             
             // Преподаватели
             Locator.CurrentMutable.Register(() => new IProfilePage(), typeof(IViewFor<IProfilePageViewModel>));
+            Locator.CurrentMutable.Register(() => new ManagementCoursePage(), typeof(ManagementCoursePage));
             base.OnFrameworkInitializationCompleted();
         }
     }

@@ -7,16 +7,18 @@
         <TextBlock Text="Навигация" FontSize="20" TextAlignment="Center" Margin="10" Foreground="White"/>
         <Button Margin="10" Padding="10"
                 Background="Transparent" 
-                Foreground="White"><!-- Command="{Binding GoToProfile}" -->
+                Foreground="White"
+                Command="{Binding GoToProfile}">
             <StackPanel Orientation="Horizontal" Spacing="5">
                 <PathIcon Data="{StaticResource home_regular}" Foreground="White" />
                 <TextBlock Text="Профиль" VerticalAlignment="Center" Foreground="White"/>
             </StackPanel>
         </Button>
         <Button Margin="10" Padding="10"
-                Background="Transparent" Foreground="White"><!-- Command="{Binding GoToService}" -->
+                Background="Transparent" Foreground="White"
+                Command="{Binding GoToManagementCourse}">
             <StackPanel Orientation="Horizontal" Spacing="5">
-                <PathIcon Data="{StaticResource app_folder_regular}" Foreground="White" />
+                <PathIcon Data="{StaticResource apps_regular}" Foreground="White" />
                 <TextBlock Text="Мои курсы" VerticalAlignment="Center" Foreground="White"/>
             </StackPanel>
         </Button>
