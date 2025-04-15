@@ -3,9 +3,11 @@ using System.Linq;
 using System.Reactive;
 using System.Reactive.Linq;
 using System.Threading.Tasks;
+using Avalonia.Controls;
 using ReactiveUI;
 using UnicronPlatform.Data;
 using UnicronPlatform.Models;
+using UnicronPlatform.Views;
 using UnicronPlatform.Views.Student;
 
 namespace UnicronPlatform.ViewModels
@@ -40,6 +42,8 @@ namespace UnicronPlatform.ViewModels
         public ReactiveCommand<Unit, IRoutableViewModel> GoToProfile { get; }
         public ReactiveCommand<Unit, IRoutableViewModel> GoToSettings { get; }
         public ReactiveCommand<Unit, IRoutableViewModel> GoToService { get; }
+        public ReactiveCommand<Unit, Unit> LogoutCommand { get; }
+
 
         public IRoutableViewModel? CurrentViewModel =>
             Router.NavigationStack.Count > 0 ? Router.NavigationStack.Last() : null;
@@ -80,7 +84,27 @@ namespace UnicronPlatform.ViewModels
                 return (IRoutableViewModel)vm;
             });
 
+            LogoutCommand = ReactiveCommand.Create(ExecuteLogout);
+
             Console.WriteLine($"Initial CurrentViewModel: {CurrentViewModel?.GetType().Name ?? "null"}");
+        }
+        
+        private void ExecuteLogout()
+        {
+            if (Avalonia.Application.Current?.ApplicationLifetime is
+                Avalonia.Controls.ApplicationLifetimes.IClassicDesktopStyleApplicationLifetime desktop)
+            {
+                var logoutWindow = desktop.MainWindow;
+                foreach (var window in desktop.Windows.ToList())
+                {
+                    window.Close();
+                }
+
+                var loginWindow = new MainWindow();
+                loginWindow.Show();
+
+                loginWindow.WindowState = WindowState.Maximized;
+            }
         }
     }
 }

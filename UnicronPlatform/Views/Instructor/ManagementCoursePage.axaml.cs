@@ -4,9 +4,9 @@ using Avalonia.Markup.Xaml;
 
 namespace UnicronPlatform.Views.Instructor;
 
-public partial class MyCoursePage : UserControl
+public partial class ManagementCoursePage : UserControl
 {
-    public MyCoursePage()
+    public ManagementCoursePage()
     {
         InitializeComponent();
     }

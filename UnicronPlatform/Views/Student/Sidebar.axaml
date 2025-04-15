@@ -28,6 +28,12 @@
                 <TextBlock Text="Мой прогресс" VerticalAlignment="Center" Foreground="White"/>
             </StackPanel>
         </Button>
+        <Button Margin="10" Padding="10" Background="Transparent" Foreground="White">
+            <StackPanel Orientation="Horizontal" Spacing="5">
+                <PathIcon Data="{StaticResource  person_support_regular}" Foreground="White" />
+                <TextBlock Text="Поддержка" VerticalAlignment="Center" Foreground="White"/>
+            </StackPanel>
+        </Button>
         <Button Margin="10" Padding="10" 
                 Background="Transparent" Foreground="White"
                 Command="{Binding GoToSettings}">

@@ -1,0 +1,47 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:viewModels="clr-namespace:UnicronPlatform.ViewModels"
+             x:Class="UnicronPlatform.Views.Instructor.Components.PanelCreate"
+             x:DataType="viewModels:IHomePageViewModel">
+    <StackPanel Background="#2D2D30" Width="1240" VerticalAlignment="Center" HorizontalAlignment="Right">
+        <TextBlock Text="Панель управления" FontSize="20" TextAlignment="Center" Margin="10" Foreground="White"/>
+        
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+            <Button Margin="5" Padding="10 10 30 10"
+                    Background="Transparent" Foreground="White">
+                <StackPanel Orientation="Horizontal" Spacing="5">
+                    <PathIcon Data="{StaticResource add_square_regular}" Foreground="White" />
+                    <TextBlock Text="Создать" VerticalAlignment="Center" Foreground="White"/>
+                </StackPanel>
+            </Button>
+            <Button Margin="5" Padding="10 10 30 10"
+                    Background="Transparent" Foreground="White">
+                <StackPanel Orientation="Horizontal" Spacing="5">
+                    <PathIcon Data="{StaticResource app_folder_regular}" Foreground="White" />
+                    <TextBlock Text="Мои курсы" VerticalAlignment="Center" Foreground="White"/>
+                </StackPanel>
+            </Button>
+            <Button Margin="5" Padding="10 10 30 10"
+                    Background="Transparent" Foreground="White">
+                <StackPanel Orientation="Horizontal" Spacing="5">
+                    <PathIcon Data="{StaticResource data_histogram_regular}" Foreground="White" />
+                    <TextBlock Text="Аналитика курса" VerticalAlignment="Center" Foreground="White"/>
+                </StackPanel>
+            </Button>
+            <Button Margin="5" Padding="10 10 30 10"
+                    Background="Transparent" Foreground="White">
+                <StackPanel Orientation="Horizontal" Spacing="5">
+                    <PathIcon Data="{StaticResource history_regular}" Foreground="White" />
+                    <TextBlock Text="История" VerticalAlignment="Center" Foreground="White"/>
+                </StackPanel>
+            </Button>
+            <Button Margin="5" Padding="10 10 30 10"
+                    Background="Transparent" Foreground="White">
+                <StackPanel Orientation="Horizontal" Spacing="5">
+                    <PathIcon Data="{StaticResource drafts_regular}" Foreground="White" />
+                    <TextBlock Text="Редактировать курс" VerticalAlignment="Center" Foreground="White"/>
+                </StackPanel>
+            </Button>
+        </StackPanel>
+    </StackPanel>
+</UserControl>
