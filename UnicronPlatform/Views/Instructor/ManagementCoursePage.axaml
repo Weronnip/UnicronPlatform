@@ -27,6 +27,7 @@
         
         <StackPanel Grid.Row="0">
             <components:PanelCreate Grid.Row="0" />
+            <components:CreateCourse />
         </StackPanel>
     </Grid>
 </UserControl>

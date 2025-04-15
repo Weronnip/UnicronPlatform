@@ -8,10 +8,9 @@ namespace UnicronPlatform.ViewModels
         public string? UrlPathSegment => "Панель управления";
         public IScreen? HostScreen { get; }
 
-        public ManagementCoursePageViewModel(IScreen hostScreen)
+        public ManagementCoursePageViewModel(IHomePageViewModel hostScreen)
         {
             HostScreen = hostScreen ?? Locator.Current.GetService<IScreen>();
-
         }
     }
 }

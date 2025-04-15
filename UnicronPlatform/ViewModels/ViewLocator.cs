@@ -30,7 +30,8 @@ namespace UnicronPlatform
             string[] viewNamespaces = 
             {
                 "UnicronPlatform.Views.Student",
-                "UnicronPlatform.Views.Instructor"
+                "UnicronPlatform.Views.Instructor",
+                "UnicronPlatform.Views.Instructor.Components",
             };
 
             Type? viewType = null;
