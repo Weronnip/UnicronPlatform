@@ -5,47 +5,82 @@
              d:DesignHeight="784"
              x:Class="UnicronPlatform.Views.Instructor.Components.CreateCourse">
     <Grid>
-        <ExperimentalAcrylicBorder Grid.Column="0" IsHitTestVisible="False">
+        <ExperimentalAcrylicBorder IsHitTestVisible="False">
             <ExperimentalAcrylicBorder.Material>
                 <ExperimentalAcrylicMaterial
                     BackgroundSource="Digger"
                     TintColor="Black"
-                    TintOpacity="1"
+                    TintOpacity="0.8"
                     MaterialOpacity="0.6"/>
             </ExperimentalAcrylicBorder.Material>
         </ExperimentalAcrylicBorder>
         
-        <StackPanel Margin="20">
-            <TextBlock Text="Новый курс" Foreground="white" 
-                       FontSize="20" HorizontalAlignment="Center"/>
-            
-            <Grid HorizontalAlignment="Center">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="Auto"/>
-                </Grid.ColumnDefinitions>
-                <TextBlock Foreground="white" Width="200" FontSize="20"
-                    Text="Название курса:" Margin="0 30 0 0" />
-                <TextBox Grid.Row="0" Grid.Column="1" Width="200" 
-                         Margin="0,25,0,20" Watermark="Введите название курса"
-                />
+        <Border Margin="40" Background="#33000000" CornerRadius="20" Padding="40">
+            <StackPanel>
+                <TextBlock Text="Новый курс" 
+                           Foreground="White" 
+                           FontSize="28" 
+                           HorizontalAlignment="Center"
+                           Margin="0,0,0,20"/>
+                           
+                <TextBlock Text="Заголовок:" 
+                           Foreground="White" 
+                           FontSize="16" 
+                           Margin="0,10,0,5"/>
+                <TextBox Width="400"
+                         Background="#22000000"
+                         Foreground="White"
+                         Watermark="Введите заголовок курса"
+                         Margin="0,0,0,15"/>
+                         
+                <TextBlock Text="Описание:" 
+                           Foreground="White" 
+                           FontSize="16" 
+                           Margin="0,10,0,5"/>
+                <TextBox Width="400"
+                         Height="100"
+                         AcceptsReturn="True"
+                         TextWrapping="Wrap"
+                         Background="#22000000"
+                         Foreground="White"
+                         Watermark="Введите описание курса"
+                         Margin="0,0,0,10"/>
                 
-                <TextBlock Grid.Row="1" Grid.Column="1" Foreground="white" Width="200" FontSize="20"
-                           Text="Описание курса:" Margin="0 50 0 20" />
-                <TextBox Grid.Row="1" Grid.Column="1" Width="200" 
-                         Margin="0,45,0, 30" Watermark="Введите описание курса"
-                />
-            </Grid>
-        </StackPanel>
+                <TextBlock Text="Цена:" 
+                           Foreground="White" 
+                           FontSize="16" 
+                           Margin="0,10,0,5"/>
+                <TextBox Width="400"
+                         Background="#22000000"
+                         Foreground="White"
+                         Watermark="Введите цену курса"
+                         Margin="0,0,0,10"/>
+                         
+                <TextBlock Text="Количество уроков:" 
+                           Foreground="White" 
+                           FontSize="16" 
+                           Margin="0,10,0,5"/>
+                <NumericUpDown Minimum="1" FormatString="0" Width="400"
+                         Background="#22000000"
+                         Foreground="White"
+                         Watermark="Введите количество уроков"
+                         Margin="0,0,0,10"/>
+                         
+                <TextBlock Text="Всего контрольных точек:" 
+                           Foreground="White" 
+                           FontSize="16" 
+                           Margin="0,10,0,5"/>
+                <NumericUpDown Width="400"
+                               Background="#22000000"
+                               Foreground="White"
+                               Watermark="Введите количество контрольных точек"
+                               Margin="0,0,0,20"/>
+                
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                    <Button Content="Отмена" Margin="0,10,10,0" Padding="10,5"/>
+                    <Button Content="Создать" Margin="0,10,0,0" Padding="10,5"/>
+                </StackPanel>
+            </StackPanel>
+        </Border>
     </Grid>
 </UserControl>
