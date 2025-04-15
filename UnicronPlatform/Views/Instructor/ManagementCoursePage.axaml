@@ -2,9 +2,11 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:components="clr-namespace:UnicronPlatform.Views.Instructor.Components"
+             xmlns:vm="clr-namespace:UnicronPlatform.ViewModels"
              d:DesignWidth="1240"
              d:DesignHeight="784"
-             x:Class="UnicronPlatform.Views.Instructor.ManagementCoursePage">
+             x:Class="UnicronPlatform.Views.Instructor.ManagementCoursePage"
+             x:DataType="vm:ManagementCoursePageViewModel">
     <Grid>
         <ExperimentalAcrylicBorder Grid.Column="0" IsHitTestVisible="False">
             <ExperimentalAcrylicBorder.Material>
@@ -27,7 +29,9 @@
         
         <StackPanel Grid.Row="0">
             <components:PanelCreate Grid.Row="0" />
-            <components:CreateCourse />
+            <ContentControl Grid.Row="0" Grid.Column="1"
+                            Content="{Binding CurrentContent}" />
+
         </StackPanel>
     </Grid>
 </UserControl>

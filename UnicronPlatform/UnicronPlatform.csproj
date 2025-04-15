@@ -46,6 +46,7 @@
 
     <ItemGroup>
       <Folder Include="ViewModels\AdministratorPageViewModel\" />
+      <Folder Include="ViewModels\InstructorViewModel\Components\" />
       <Folder Include="ViewModels\ManageCourseViewModel\" />
       <Folder Include="ViewModels\Support\" />
       <Folder Include="Views\Administrator\" />

@@ -1,13 +1,14 @@
 using ReactiveUI;
+using Splat;
 using UnicronPlatform.Data;
 using UnicronPlatform.Models;
 
 namespace UnicronPlatform.ViewModels
 {
-    public class CreateCourse :ReactiveObject, IRoutableViewModel
+    public class CreateCoursePageViewModel : ReactiveObject, IRoutableViewModel
     {
         public string? UrlPathSegment => "Новый курс";
-        public IScreen HostScreen { get; }
+        public IScreen? HostScreen { get; }
 
         private readonly AppDbContext _context;
         private Courses _courses;
@@ -45,6 +46,11 @@ namespace UnicronPlatform.ViewModels
         {
             get => _control_point;
             set => this.RaiseAndSetIfChanged(ref _control_point, value);
+        }
+
+        public CreateCoursePageViewModel(IScreen hostScreen)
+        {
+            HostScreen = hostScreen ?? Locator.Current.GetService<IScreen>();
         }
     }
 }

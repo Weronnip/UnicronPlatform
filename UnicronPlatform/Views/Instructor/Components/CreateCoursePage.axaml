@@ -1,9 +1,11 @@
 <UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:vm="clr-namespace:UnicronPlatform.ViewModels"
              d:DesignWidth="1240"
              d:DesignHeight="784"
-             x:Class="UnicronPlatform.Views.Instructor.Components.CreateCourse">
+             x:Class="UnicronPlatform.Views.Instructor.Components.CreateCoursePage"
+             x:DataType="vm:CreateCoursePageViewModel">
     <Grid>
         <ExperimentalAcrylicBorder IsHitTestVisible="False">
             <ExperimentalAcrylicBorder.Material>
@@ -30,6 +32,7 @@
                 <TextBox Width="400"
                          Background="#22000000"
                          Foreground="White"
+                         Text="{Binding title}"
                          Watermark="Введите заголовок курса"
                          Margin="0,0,0,15"/>
                          
@@ -43,6 +46,7 @@
                          TextWrapping="Wrap"
                          Background="#22000000"
                          Foreground="White"
+                         Text="{Binding description}"
                          Watermark="Введите описание курса"
                          Margin="0,0,0,10"/>
                 
@@ -54,6 +58,7 @@
                          Background="#22000000"
                          Foreground="White"
                          Watermark="Введите цену курса"
+                         Text="{Binding price}"
                          Margin="0,0,0,10"/>
                          
                 <TextBlock Text="Количество уроков:" 
@@ -63,6 +68,7 @@
                 <NumericUpDown Minimum="1" FormatString="0" Width="400"
                          Background="#22000000"
                          Foreground="White"
+                         Text="{Binding total_lessons}"
                          Watermark="Введите количество уроков"
                          Margin="0,0,0,10"/>
                          
@@ -73,6 +79,7 @@
                 <NumericUpDown Width="400"
                                Background="#22000000"
                                Foreground="White"
+                               Text="{Binding control_point}"
                                Watermark="Введите количество контрольных точек"
                                Margin="0,0,0,20"/>
                 

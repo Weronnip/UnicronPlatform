@@ -11,6 +11,7 @@ namespace UnicronPlatform.Views
         public MainWindow()
         {
             InitializeComponent();
+            ViewModel ??= new MainWindowViewModel();
             this.WhenActivated(disposables =>
             {
                 ViewModel!.ShowDialog.RegisterHandler(DoShowDialog)
