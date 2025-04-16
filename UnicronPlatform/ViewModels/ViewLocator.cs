@@ -31,8 +31,6 @@ namespace UnicronPlatform
             [
                 "UnicronPlatform.Views.Student",
                 "UnicronPlatform.Views.Instructor",
-                "UnicronPlatform.Views.Instructor.Components",
-                "UnicronPlatform.Views.Instructor.Page"
             ];
 
             Type? viewType = null;
@@ -41,9 +39,6 @@ namespace UnicronPlatform
             {
                 var fullViewName = $"{ns}.{baseViewName}";
                 Console.WriteLine($"Trying: {fullViewName}\n");
-                Console.WriteLine($"Resolved view model: {viewModelName}");
-                Console.WriteLine($"Trying base view name: {baseViewName}");
-                Console.WriteLine($"Trying full view name: {fullViewName}\n");
                 viewType = Assembly.GetExecutingAssembly().GetTypes()
                     .FirstOrDefault(x => x.FullName == fullViewName);
                 if (viewType != null)

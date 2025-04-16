@@ -1,8 +1,8 @@
 <UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:components="clr-namespace:UnicronPlatform.Views.Instructor.Components"
              xmlns:vm="clr-namespace:UnicronPlatform.ViewModels"
+             xmlns:components1="clr-namespace:UnicronPlatform.Views.Instructor.Components"
              d:DesignWidth="1240"
              d:DesignHeight="784"
              x:Class="UnicronPlatform.Views.Instructor.ManagementCoursePage"
@@ -28,9 +28,9 @@
         </Grid.ColumnDefinitions>
         
         <StackPanel Grid.Row="0">
-            <components:PanelCreate Grid.Row="0" />
+            <components1:PanelCreate Grid.Row="0" />
             <ContentControl Grid.Row="0" Grid.Column="1"
-                            Content="{Binding CurrentContent}" />
+                            Content="{Binding CurrentViewModel}" />
         </StackPanel>
     </Grid>
 </UserControl>

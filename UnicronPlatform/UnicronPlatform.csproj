@@ -42,6 +42,30 @@
         <DependentUpon>Sidebar.axaml</DependentUpon>
         <SubType>Code</SubType>
       </Compile>
+      <Compile Update="Views\Instructor\PanelCreate.axaml.cs">
+        <DependentUpon>PanelCreate.axaml</DependentUpon>
+        <SubType>Code</SubType>
+      </Compile>
+      <Compile Update="Views\Instructor\AnalyticsPage.axaml.cs">
+        <DependentUpon>AnalyticsPage.axaml</DependentUpon>
+        <SubType>Code</SubType>
+      </Compile>
+      <Compile Update="Views\Instructor\CreateCoursePage.axaml.cs">
+        <DependentUpon>CreateCoursePage.axaml</DependentUpon>
+        <SubType>Code</SubType>
+      </Compile>
+      <Compile Update="Views\Instructor\EditPage.axaml.cs">
+        <DependentUpon>EditPage.axaml</DependentUpon>
+        <SubType>Code</SubType>
+      </Compile>
+      <Compile Update="Views\Instructor\HistoryPage.axaml.cs">
+        <DependentUpon>HistoryPage.axaml</DependentUpon>
+        <SubType>Code</SubType>
+      </Compile>
+      <Compile Update="Views\Instructor\MyCoursePage.axaml.cs">
+        <DependentUpon>MyCoursePage.axaml</DependentUpon>
+        <SubType>Code</SubType>
+      </Compile>
     </ItemGroup>
 
     <ItemGroup>
@@ -51,13 +75,5 @@
       <Folder Include="Views\Administrator\" />
       <Folder Include="Views\ManageCourse\" />
       <Folder Include="Views\Support\" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <AdditionalFiles Include="Views\Instructor\Page\AnalyticsPage.axaml" />
-      <AdditionalFiles Include="Views\Instructor\Page\CreateCoursePage.axaml" />
-      <AdditionalFiles Include="Views\Instructor\Page\EditPage.axaml" />
-      <AdditionalFiles Include="Views\Instructor\Page\HistoryPage.axaml" />
-      <AdditionalFiles Include="Views\Instructor\Page\MyCoursePage.axaml" />
     </ItemGroup>
 </Project>

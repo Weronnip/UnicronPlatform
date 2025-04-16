@@ -1,17 +1,17 @@
-using Avalonia;
 using Avalonia.Controls;
-using Avalonia.Markup.Xaml;
 using Avalonia.ReactiveUI;
 using ReactiveUI;
 using UnicronPlatform.ViewModels;
+using System;
 
-namespace UnicronPlatform.Views.Instructor;
-
-public partial class ManagementCoursePage : ReactiveUserControl<ManagementCoursePageViewModel>
+namespace UnicronPlatform.Views.Instructor
 {
-    public ManagementCoursePage()
+    public partial class ManagementCoursePage : ReactiveUserControl<ManagementCoursePageViewModel>
     {
-        InitializeComponent();
-        this.WhenActivated(disposable => { });
+        public ManagementCoursePage()
+        {
+            InitializeComponent();
+            this.WhenActivated(disposables => { });
+        }
     }
 }

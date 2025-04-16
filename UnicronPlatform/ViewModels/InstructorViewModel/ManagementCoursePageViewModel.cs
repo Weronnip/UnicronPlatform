@@ -2,26 +2,24 @@ using System;
 using System.Linq;
 using System.Reactive;
 using System.Reactive.Linq;
+using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore; // Для метода FirstOrDefaultAsync()
 using ReactiveUI;
-using Splat;
 using UnicronPlatform.Data;
 using UnicronPlatform.Models;
-using UnicronPlatform.ViewModels;
 
 namespace UnicronPlatform.ViewModels
 {
     public class ManagementCoursePageViewModel : ReactiveObject, IRoutableViewModel, IScreen
-
     {
+        // URL-адрес для навигации
         public string? UrlPathSegment => "Панель управления";
+
+        // Родительский экран для навигации (обычно устанавливается при старте приложения)
         public IScreen? HostScreen { get; }
-        private readonly AppDbContext _context;
-        
-        public  ReactiveCommand<Unit, IRoutableViewModel> GoToCreateCourse { get; }
-        public  ReactiveCommand<Unit, IRoutableViewModel> GoToMyCourse { get; }
-        public  ReactiveCommand<Unit, IRoutableViewModel> GoToAnalyticCourse { get; }
-        public  ReactiveCommand<Unit, IRoutableViewModel> GoToHistoryCourse { get; }
-        public  ReactiveCommand<Unit, IRoutableViewModel> GoToEditCourse { get; }
+
+        // Контейнер навигации
+        public RoutingState Router { get; } = new RoutingState();
 
         private Courses _courses;
         public Courses Courses
@@ -29,36 +27,52 @@ namespace UnicronPlatform.ViewModels
             get => _courses;
             set => this.RaiseAndSetIfChanged(ref _courses, value);
         }
-        private ReactiveObject _currentContent;
-        public ReactiveObject CurrentContent
-        {
-            get => _currentContent;
-            set => this.RaiseAndSetIfChanged(ref _currentContent, value);
-        }
-        
+
         public IRoutableViewModel? CurrentViewModel =>
             Router.NavigationStack.Count > 0 ? Router.NavigationStack.Last() : null;
-        
+
+        public ReactiveCommand<Unit, IRoutableViewModel> GoToMyCourse { get; }
+
         public ManagementCoursePageViewModel(IScreen hostScreen)
         {
+            HostScreen = hostScreen;
+
             this.WhenAnyValue(x => x.Router.NavigationStack.Count)
                 .Subscribe(_ => this.RaisePropertyChanged(nameof(CurrentViewModel)));
 
-            var initialViewModel = new MyCoursePageViewModel(this, Courses);
-            Router.Navigate.Execute(initialViewModel)
-                .Subscribe(
-                    _ => Console.WriteLine("Initial navigation to ManagementCoursePageViewModel succeeded."),
-                    ex => Console.WriteLine("Navigation error: " + ex.Message)
-                );
-            
+            LoadCourseDataAsync();
+
             GoToMyCourse = ReactiveCommand.CreateFromTask<Unit, IRoutableViewModel>(async _ =>
             {
                 var vm = new MyCoursePageViewModel(this, Courses);
                 await Router.Navigate.Execute(vm);
-                return (IRoutableViewModel)vm;
+                return vm;
             });
         }
 
-        public RoutingState Router { get; }
+        /// <summary>
+        /// Асинхронная загрузка данных из базы.
+        /// </summary>
+        private async void LoadCourseDataAsync()
+        {
+            try
+            {
+                var options = new DbContextOptionsBuilder<AppDbContext>()
+                    .UseMySql("server=localhost;port=3306;database=MyFDB;user=root;password=demo1fort;",
+                        ServerVersion.AutoDetect("server=localhost;port=3306;database=MyFDB;user=root;password=demo1fort;"))
+                    .Options;
+                using (var db = new AppDbContext(options))
+                {
+                    Courses = await db.Courses.FirstOrDefaultAsync();
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error loading courses: " + ex);
+                Courses = new Courses { title = "Нет данных", description = "Нет данных" };
+            }
+            var initialViewModel = new MyCoursePageViewModel(this, Courses);
+            await Router.Navigate.Execute(initialViewModel);
+        }
     }
 }
