@@ -10,6 +10,7 @@ using UnicronPlatform.ViewModels;
 using UnicronPlatform.Views;
 using UnicronPlatform.Views.Instructor;
 using UnicronPlatform.Views.Instructor.Components;
+using UnicronPlatform.Views.Instructor.Page;
 using UnicronPlatform.Views.Student;
 using SettingPage = UnicronPlatform.Views.Student.SettingPage;
 
@@ -38,8 +39,11 @@ namespace UnicronPlatform
             
             // Преподаватели
             Locator.CurrentMutable.Register(() => new IProfilePage(), typeof(IViewFor<IProfilePageViewModel>));
-            Locator.CurrentMutable.Register(() => new ManagementCoursePage(), typeof(ManagementCoursePageViewModel));
-            Locator.CurrentMutable.Register(() => new CreateCoursePage(), typeof(CreateCoursePageViewModel));
+            Locator.CurrentMutable.Register(() => new ManagementCoursePage(), 
+                typeof(IViewFor<ManagementCoursePageViewModel>));
+            Locator.CurrentMutable.Register(() => new CreateCoursePage(), 
+                typeof(IViewFor<CreateCoursePageViewModel>));
+            Locator.CurrentMutable.Register(() => new MyCoursePage(), typeof(IViewFor<MyCoursePageViewModel>));
             base.OnFrameworkInitializationCompleted();
         }
     }

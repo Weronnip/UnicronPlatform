@@ -21,7 +21,6 @@ namespace UnicronPlatform.ViewModels
             set => this.RaiseAndSetIfChanged(ref _plan, value);
         }
 
-        // Коллекция для хранения списка планов из БД
         private ObservableCollection<PlanDto> _plansList;
         public ObservableCollection<PlanDto> PlansList
         {
@@ -59,7 +58,6 @@ namespace UnicronPlatform.ViewModels
     }
 
     public class PlanDto
-    // public string test.name 
     {
         public string Name { get; set; }
         public string Description { get; set; }

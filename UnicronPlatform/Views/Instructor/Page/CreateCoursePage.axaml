@@ -4,7 +4,7 @@
              xmlns:vm="clr-namespace:UnicronPlatform.ViewModels"
              d:DesignWidth="1240"
              d:DesignHeight="784"
-             x:Class="UnicronPlatform.Views.Instructor.Components.CreateCoursePage"
+             x:Class="UnicronPlatform.Views.Instructor.Page.CreateCoursePage"
              x:DataType="vm:CreateCoursePageViewModel">
     <Grid>
         <ExperimentalAcrylicBorder IsHitTestVisible="False">

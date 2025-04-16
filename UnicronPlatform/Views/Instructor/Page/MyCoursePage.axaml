@@ -1,0 +1,74 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="clr-namespace:UnicronPlatform.ViewModels"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="600"
+             x:Class="UnicronPlatform.Views.Instructor.Page.MyCoursePage"
+             x:DataType="vm:MyCoursePageViewModel">
+    <Grid>
+        <ExperimentalAcrylicBorder IsHitTestVisible="False">
+            <ExperimentalAcrylicBorder.Material>
+                <ExperimentalAcrylicMaterial
+                    BackgroundSource="Digger"
+                    TintColor="Black"
+                    TintOpacity="0.8"
+                    MaterialOpacity="0.6"/>
+            </ExperimentalAcrylicBorder.Material>
+        </ExperimentalAcrylicBorder>
+        
+        <StackPanel Margin="20">
+            <TextBlock TextAlignment="Center" Text="{Binding UrlPathSegment}"/>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                
+                <Border Background="#33000000" 
+                        CornerRadius="20" Padding="30 10">
+                    <StackPanel Width="300" Height="90" >
+                        <TextBlock Text="Тестовый программный" 
+                                   TextAlignment="Left" Foreground="White" VerticalAlignment="Center"/>
+                        <TextBlock Margin="0 20" Text="Какое то описание и тд тп и вся там то там"
+                                   TextAlignment="Left" Foreground="White" VerticalAlignment="Center"/>
+                    </StackPanel>
+                </Border>
+                <Border Grid.Row="0" Margin="40 0" Grid.Column="1" Background="#33000000" 
+                        CornerRadius="20" Padding="30 10">
+                    <StackPanel Width="300" Height="90" >
+                        <TextBlock Text="{Binding title_course}" 
+                                   TextAlignment="Left" Foreground="White" VerticalAlignment="Center"/>
+                        <TextBlock Text="{Binding description_course}"
+                                   TextAlignment="Left" Foreground="White" VerticalAlignment="Center"/>
+                    </StackPanel>
+                </Border>
+                <Border Grid.Row="1" Grid.Column="2" Background="#33000000" 
+                        CornerRadius="20" Padding="30 10">
+                    <StackPanel Width="300" Height="90" >
+                        <TextBlock Text="{Binding title_course}" 
+                                   TextAlignment="Left" Foreground="White" VerticalAlignment="Center"/>
+                        <TextBlock Text="{Binding description_course}"
+                                   TextAlignment="Left" Foreground="White" VerticalAlignment="Center"/>
+                    </StackPanel>
+                </Border>
+            </Grid>
+        </StackPanel>
+    </Grid>
+</UserControl>

@@ -31,7 +31,6 @@
             <components:PanelCreate Grid.Row="0" />
             <ContentControl Grid.Row="0" Grid.Column="1"
                             Content="{Binding CurrentContent}" />
-
         </StackPanel>
     </Grid>
 </UserControl>
