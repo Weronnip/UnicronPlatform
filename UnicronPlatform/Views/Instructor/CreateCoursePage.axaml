@@ -3,7 +3,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:vm="clr-namespace:UnicronPlatform.ViewModels"
              d:DesignWidth="1240"
-             d:DesignHeight="784"
+             d:DesignHeight="680"
              x:Class="UnicronPlatform.Views.Instructor.CreateCoursePage"
              x:DataType="vm:CreateCoursePageViewModel">
     <Grid>
@@ -17,7 +17,7 @@
             </ExperimentalAcrylicBorder.Material>
         </ExperimentalAcrylicBorder>
         
-        <Border Margin="40" Background="#33000000" CornerRadius="20" Padding="40">
+        <Border Margin="30" Background="#33000000" CornerRadius="20" Padding="30">
             <StackPanel>
                 <TextBlock Text="Новый курс" 
                            Foreground="White" 
@@ -54,24 +54,23 @@
                            Foreground="White" 
                            FontSize="16" 
                            Margin="0,10,0,5"/>
-                <TextBox Width="400"
-                         Background="#22000000"
-                         Foreground="White"
-                         Watermark="Введите цену курса"
-                         Text="{Binding price}"
-                         Margin="0,0,0,10"/>
+                <NumericUpDown Width="400"
+                               Background="#22000000"
+                               Foreground="White"
+                               Watermark="Введите цену курса"
+                               Text="{Binding price}"
+                               Margin="0,0,0,10"/>
                          
                 <TextBlock Text="Количество уроков:" 
                            Foreground="White" 
                            FontSize="16" 
                            Margin="0,10,0,5"/>
-                <NumericUpDown Minimum="1" FormatString="0" Width="400"
-                         Background="#22000000"
-                         Foreground="White"
-                         Value="0"
-                         Text="{Binding total_lessons}"
-                         Watermark="Введите количество уроков"
-                         Margin="0,0,0,10"/>
+                <NumericUpDown Width="400"
+                               FormatString="0"
+                               Background="#22000000"
+                               Foreground="White"
+                               Value="{Binding total_lessons}" 
+                               Margin="0,0,0,10"/>
                          
                 <TextBlock Text="Всего контрольных точек:" 
                            Foreground="White" 
@@ -81,14 +80,13 @@
                                FormatString="0"
                                Background="#22000000"
                                Foreground="White"
-                               Value="0"
-                               Text="{Binding control_point}"
-                               Watermark="Введите количество контрольных точек"
+                               Value="{Binding control_point}" 
                                Margin="0,0,0,20"/>
                 
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                     <Button Content="Отмена" Margin="0,10,10,0" Padding="10,5"/>
-                    <Button Content="Создать" Margin="0,10,0,0" Padding="10,5"/>
+                    <Button Content="Создать" Margin="0,10,0,0" 
+                            Padding="10,5" Command="{Binding CreateCourseCommand}"/>
                 </StackPanel>
             </StackPanel>
         </Border>

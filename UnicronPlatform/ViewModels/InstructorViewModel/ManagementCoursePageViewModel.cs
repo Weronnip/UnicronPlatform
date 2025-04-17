@@ -3,7 +3,7 @@ using System.Linq;
 using System.Reactive;
 using System.Reactive.Linq;
 using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore; // Для метода FirstOrDefaultAsync()
+using Microsoft.EntityFrameworkCore;
 using ReactiveUI;
 using UnicronPlatform.Data;
 using UnicronPlatform.Models;
@@ -12,15 +12,10 @@ namespace UnicronPlatform.ViewModels
 {
     public class ManagementCoursePageViewModel : ReactiveObject, IRoutableViewModel, IScreen
     {
-        // URL-адрес для навигации
         public string? UrlPathSegment => "Панель управления";
-
-        // Родительский экран для навигации (обычно устанавливается при старте приложения)
         public IScreen? HostScreen { get; }
-
-        // Контейнер навигации
         public RoutingState Router { get; } = new RoutingState();
-
+        private readonly AppDbContext _context;
         private Courses _courses;
         public Courses Courses
         {
@@ -38,7 +33,6 @@ namespace UnicronPlatform.ViewModels
         public ManagementCoursePageViewModel(IScreen hostScreen)
         {
             HostScreen = hostScreen;
-
             this.WhenAnyValue(x => x.Router.NavigationStack.Count)
                 .Subscribe(_ => this.RaisePropertyChanged(nameof(CurrentViewModel)));
 
@@ -53,7 +47,7 @@ namespace UnicronPlatform.ViewModels
 
             GoToCreateCourse = ReactiveCommand.CreateFromTask<Unit, IRoutableViewModel>(async _ =>
             {
-                var vm = new CreateCoursePageViewModel(this);
+                var vm = new CreateCoursePageViewModel(this, _context);
                 await Router.Navigate.Execute(vm);
                 return vm;
             });
