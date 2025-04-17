@@ -32,6 +32,8 @@ namespace UnicronPlatform.ViewModels
             Router.NavigationStack.Count > 0 ? Router.NavigationStack.Last() : null;
 
         public ReactiveCommand<Unit, IRoutableViewModel> GoToMyCourse { get; }
+        public ReactiveCommand<Unit, IRoutableViewModel> GoToCreateCourse { get; }
+
 
         public ManagementCoursePageViewModel(IScreen hostScreen)
         {
@@ -45,6 +47,13 @@ namespace UnicronPlatform.ViewModels
             GoToMyCourse = ReactiveCommand.CreateFromTask<Unit, IRoutableViewModel>(async _ =>
             {
                 var vm = new MyCoursePageViewModel(this, Courses);
+                await Router.Navigate.Execute(vm);
+                return vm;
+            });
+
+            GoToCreateCourse = ReactiveCommand.CreateFromTask<Unit, IRoutableViewModel>(async _ =>
+            {
+                var vm = new CreateCoursePageViewModel(this);
                 await Router.Navigate.Execute(vm);
                 return vm;
             });

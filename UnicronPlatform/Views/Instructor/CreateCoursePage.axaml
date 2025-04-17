@@ -4,7 +4,7 @@
              xmlns:vm="clr-namespace:UnicronPlatform.ViewModels"
              d:DesignWidth="1240"
              d:DesignHeight="784"
-             x:Class="UnicronPlatform.Views.Instructor.Page.CreateCoursePage"
+             x:Class="UnicronPlatform.Views.Instructor.CreateCoursePage"
              x:DataType="vm:CreateCoursePageViewModel">
     <Grid>
         <ExperimentalAcrylicBorder IsHitTestVisible="False">
@@ -68,6 +68,7 @@
                 <NumericUpDown Minimum="1" FormatString="0" Width="400"
                          Background="#22000000"
                          Foreground="White"
+                         Value="0"
                          Text="{Binding total_lessons}"
                          Watermark="Введите количество уроков"
                          Margin="0,0,0,10"/>
@@ -77,8 +78,10 @@
                            FontSize="16" 
                            Margin="0,10,0,5"/>
                 <NumericUpDown Width="400"
+                               FormatString="0"
                                Background="#22000000"
                                Foreground="White"
+                               Value="0"
                                Text="{Binding control_point}"
                                Watermark="Введите количество контрольных точек"
                                Margin="0,0,0,20"/>

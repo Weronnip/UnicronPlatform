@@ -50,7 +50,7 @@ namespace UnicronPlatform.ViewModels
 
         public CreateCoursePageViewModel(IScreen hostScreen)
         {
-            HostScreen = hostScreen ?? Locator.Current.GetService<IScreen>();
+            HostScreen = hostScreen;
         }
     }
 }

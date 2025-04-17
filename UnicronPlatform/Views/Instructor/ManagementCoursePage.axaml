@@ -3,6 +3,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:vm="clr-namespace:UnicronPlatform.ViewModels"
              xmlns:components1="clr-namespace:UnicronPlatform.Views.Instructor.Components"
+             xmlns:unicronPlatform="clr-namespace:UnicronPlatform"
              d:DesignWidth="1240"
              d:DesignHeight="784"
              x:Class="UnicronPlatform.Views.Instructor.ManagementCoursePage"
@@ -30,7 +31,12 @@
         <StackPanel Grid.Row="0">
             <components1:PanelCreate Grid.Row="0" />
             <ContentControl Grid.Row="0" Grid.Column="1"
-                            Content="{Binding CurrentViewModel}" />
+                            Content="{Binding CurrentViewModel}">
+                <ContentControl.DataTemplates>
+                    <unicronPlatform:ViewLocator />
+                </ContentControl.DataTemplates>
+            </ContentControl>
+
         </StackPanel>
     </Grid>
 </UserControl>

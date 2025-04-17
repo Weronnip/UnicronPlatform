@@ -5,12 +5,9 @@ namespace UnicronPlatform.ViewModels
 {
     public class MyCoursePageViewModel : ReactiveObject, IRoutableViewModel
     {
-        // URL для данной страницы
         public string? UrlPathSegment => "Мои курсы";
 
         public IScreen? HostScreen { get; }
-
-        // Храним курс, переданный из родительской VM
         public Courses Courses { get; }
 
         public MyCoursePageViewModel(IScreen hostScreen, Courses courses)
