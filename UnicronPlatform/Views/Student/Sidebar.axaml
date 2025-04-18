@@ -18,8 +18,8 @@
                 Command="{Binding GoToService}"
                 Background="Transparent" Foreground="White">
             <StackPanel Orientation="Horizontal" Spacing="5">
-                <PathIcon Data="{StaticResource app_folder_regular}" Foreground="White" />
-                <TextBlock Text="Услуги" VerticalAlignment="Center" Foreground="White"/>
+                <PathIcon Data="{StaticResource store_microsoft_regular}" Foreground="White" />
+                <TextBlock Text="Магазин" VerticalAlignment="Center" Foreground="White"/>
             </StackPanel>
         </Button>
         <Button Margin="10" Padding="10" Background="Transparent" Foreground="White">

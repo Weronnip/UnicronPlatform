@@ -11,7 +11,7 @@ namespace UnicronPlatform.ViewModels
 {
     public class ServicePageViewModel : ReactiveObject, IRoutableViewModel
     {
-        public string UrlPathSegment => "Услуги";
+        public string UrlPathSegment => "Магазин";
         public IScreen? HostScreen { get; }
 
         private Plans _plan;
@@ -28,6 +28,14 @@ namespace UnicronPlatform.ViewModels
             set => this.RaiseAndSetIfChanged(ref _plansList, value);
         }
 
+        // private Courses courses; 
+        //
+        // private ObservableCollection<CoursesDto> _coursesList;
+        // public ObservableCollection<CoursesDto> CoursesList
+        // {
+        //     get => _coursesList;
+        //     set => this.RaiseAndSetIfChanged(ref _coursesList, value);
+        // }
         public ServicePageViewModel(IScreen hostScreen, Plans plan)
         {
             HostScreen = hostScreen ?? Locator.Current.GetService<IScreen>();
@@ -54,6 +62,28 @@ namespace UnicronPlatform.ViewModels
                     });
                 }
             }
+            
+            // using (var context = new AppDbContext(options))
+            // {
+            //     var courses = context.Courses.ToList();
+            //     var author_name = context.Instructor
+            //         .Select(i => new 
+            //         {
+            //             FirstName = i.first_name,
+            //             LastName = i.last_name
+            //         })
+            //         .ToListAsync();
+            //     foreach (Courses c in courses)
+            //     {
+            //         CoursesList.Add(new CoursesDto
+            //         {
+            //             Title = c.title,
+            //             Description = c.description,
+            //             Price = c.price,
+            //             Author = author_name.ToString()
+            //         });
+            //     }
+            // }
         }
     }
 
@@ -64,4 +94,13 @@ namespace UnicronPlatform.ViewModels
         public string Price { get; set; }
         public string Duration { get; set; }
     }
+    
+    // public class CoursesDto
+    // {
+    //     public string Title { get; set; }
+    //     public string Description { get; set; }
+    //     public decimal? Price { get; set; }
+    //     public string Author { get; set; }
+    // }
+    
 }
