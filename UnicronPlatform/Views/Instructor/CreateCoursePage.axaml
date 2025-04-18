@@ -6,89 +6,119 @@
              d:DesignHeight="680"
              x:Class="UnicronPlatform.Views.Instructor.CreateCoursePage"
              x:DataType="vm:CreateCoursePageViewModel">
-    <Grid>
-        <ExperimentalAcrylicBorder IsHitTestVisible="False">
-            <ExperimentalAcrylicBorder.Material>
-                <ExperimentalAcrylicMaterial
-                    BackgroundSource="Digger"
-                    TintColor="Black"
-                    TintOpacity="0.8"
-                    MaterialOpacity="0.6"/>
-            </ExperimentalAcrylicBorder.Material>
-        </ExperimentalAcrylicBorder>
-        
-        <Border Margin="30" Background="#33000000" CornerRadius="20" Padding="30">
-            <StackPanel>
-                <TextBlock Text="Новый курс" 
-                           Foreground="White" 
-                           FontSize="28" 
-                           HorizontalAlignment="Center"
-                           Margin="0,0,0,20"/>
-                           
-                <TextBlock Text="Заголовок:" 
-                           Foreground="White" 
-                           FontSize="16" 
-                           Margin="0,10,0,5"/>
-                <TextBox Width="400"
+
+  <Grid>
+    <ExperimentalAcrylicBorder IsHitTestVisible="False">
+      <ExperimentalAcrylicBorder.Material>
+        <ExperimentalAcrylicMaterial
+          BackgroundSource="Digger"
+          TintColor="Black"
+          TintOpacity="0.8"
+          MaterialOpacity="0.6"/>
+      </ExperimentalAcrylicBorder.Material>
+    </ExperimentalAcrylicBorder>
+
+    <Border Margin="30"
+            Background="#33000000"
+            CornerRadius="20"
+            Padding="30">
+      <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <StackPanel>
+
+          <TextBlock Text="Новый курс"
+                     Foreground="White"
+                     FontSize="28"
+                     HorizontalAlignment="Center"
+                     Margin="0,0,0,20"/>
+
+          <TextBlock Text="Заголовок:"
+                     Foreground="White"
+                     FontSize="16"
+                     Margin="0,10,0,5"/>
+          <TextBox Width="400"
+                   Background="#22000000"
+                   Foreground="White"
+                   Text="{Binding title}"
+                   Watermark="Введите заголовок курса"
+                   Margin="0,0,0,15"/>
+
+          <TextBlock Text="Описание:"
+                     Foreground="White"
+                     FontSize="16"
+                     Margin="0,10,0,5"/>
+          <TextBox Width="400"
+                   Height="100"
+                   AcceptsReturn="True"
+                   TextWrapping="Wrap"
+                   Background="#22000000"
+                   Foreground="White"
+                   Text="{Binding description}"
+                   Watermark="Введите описание курса"
+                   Margin="0,0,0,15"/>
+
+          <TextBlock Text="Цена:"
+                     Foreground="White"
+                     FontSize="16"
+                     Margin="0,10,0,5"/>
+          <NumericUpDown Width="400"
                          Background="#22000000"
                          Foreground="White"
-                         Text="{Binding title}"
-                         Watermark="Введите заголовок курса"
+                         Value="{Binding price}"
+                         Watermark="Введите цену курса"
                          Margin="0,0,0,15"/>
-                         
-                <TextBlock Text="Описание:" 
-                           Foreground="White" 
-                           FontSize="16" 
-                           Margin="0,10,0,5"/>
-                <TextBox Width="400"
-                         Height="100"
-                         AcceptsReturn="True"
-                         TextWrapping="Wrap"
+
+          <TextBlock Text="Количество уроков:"
+                     Foreground="White"
+                     FontSize="16"
+                     Margin="0,10,0,5"/>
+          <NumericUpDown Width="400"
+                         FormatString="0"
                          Background="#22000000"
                          Foreground="White"
-                         Text="{Binding description}"
-                         Watermark="Введите описание курса"
-                         Margin="0,0,0,10"/>
-                
-                <TextBlock Text="Цена:" 
-                           Foreground="White" 
-                           FontSize="16" 
-                           Margin="0,10,0,5"/>
-                <NumericUpDown Width="400"
-                               Background="#22000000"
-                               Foreground="White"
-                               Watermark="Введите цену курса"
-                               Text="{Binding price}"
-                               Margin="0,0,0,10"/>
-                         
-                <TextBlock Text="Количество уроков:" 
-                           Foreground="White" 
-                           FontSize="16" 
-                           Margin="0,10,0,5"/>
-                <NumericUpDown Width="400"
-                               FormatString="0"
-                               Background="#22000000"
-                               Foreground="White"
-                               Value="{Binding total_lessons}" 
-                               Margin="0,0,0,10"/>
-                         
-                <TextBlock Text="Всего контрольных точек:" 
-                           Foreground="White" 
-                           FontSize="16" 
-                           Margin="0,10,0,5"/>
-                <NumericUpDown Width="400"
-                               FormatString="0"
-                               Background="#22000000"
-                               Foreground="White"
-                               Value="{Binding control_point}" 
-                               Margin="0,0,0,20"/>
-                
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                    <Button Content="Отмена" Margin="0,10,10,0" Padding="10,5"/>
-                    <Button Content="Создать" Margin="0,10,0,0" 
-                            Padding="10,5" Command="{Binding CreateCourseCommand}"/>
-                </StackPanel>
-            </StackPanel>
-        </Border>
-    </Grid>
+                         Value="{Binding total_lessons}"
+                         Margin="0,0,0,15"/>
+
+          <!-- Контрольные точки -->
+          <TextBlock Text="Всего контрольных точек:"
+                     Foreground="White"
+                     FontSize="16"
+                     Margin="0,10,0,5"/>
+          <NumericUpDown Width="400"
+                         FormatString="0"
+                         Background="#22000000"
+                         Foreground="White"
+                         Value="{Binding control_point}"
+                         Margin="0,0,0,25"/>
+
+          <TextBlock Text="Категория:"
+                     Foreground="White"
+                     FontSize="16"
+                     Margin="0,10,0,5"/>
+          <ComboBox Width="400"
+                    Background="#22000000"
+                    Foreground="White"
+                    ItemsSource="{Binding Categories}"
+                    SelectedItem="{Binding SelectedCategory}"
+                    DisplayMemberBinding="{Binding name}"
+                    PlaceholderText="Выберите категорию"
+                    Margin="0,0,0,25"/>
+
+          <StackPanel Orientation="Horizontal"
+                      HorizontalAlignment="Right">
+            <Button Content="Отмена"
+                    Padding="10,5"
+                    Margin="0,10,10,0"
+                    Command="{Binding HostScreen.Router.NavigateBack}" />
+
+            <Button Content="Создать"
+                    Padding="10,5"
+                    Margin="0,10,0,0"
+                    Command="{Binding CreateCourseCommand}"
+                    IsEnabled="{Binding CanCreate}" />
+          </StackPanel>
+
+        </StackPanel>
+      </ScrollViewer>
+    </Border>
+  </Grid>
 </UserControl>

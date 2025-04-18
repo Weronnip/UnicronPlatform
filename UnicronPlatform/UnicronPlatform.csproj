@@ -66,6 +66,10 @@
         <DependentUpon>MyCoursePage.axaml</DependentUpon>
         <SubType>Code</SubType>
       </Compile>
+      <Compile Update="Views\NotificationWindow.axaml.cs">
+        <DependentUpon>NotificationWindow.axaml</DependentUpon>
+        <SubType>Code</SubType>
+      </Compile>
     </ItemGroup>
 
     <ItemGroup>

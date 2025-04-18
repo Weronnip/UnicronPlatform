@@ -83,19 +83,21 @@ namespace UnicronPlatform.ViewModels
 
         private void ExecuteLogout()
         {
-            if (Avalonia.Application.Current?.ApplicationLifetime is
-                Avalonia.Controls.ApplicationLifetimes.IClassicDesktopStyleApplicationLifetime desktop)
+            if (Avalonia.Application.Current?.ApplicationLifetime 
+                is Avalonia.Controls.ApplicationLifetimes.IClassicDesktopStyleApplicationLifetime desktop)
             {
-                var logoutWindow = desktop.MainWindow;
-                foreach (var window in desktop.Windows.ToList())
+                var mainWindow = new MainWindow();
+        
+                desktop.MainWindow = mainWindow;
+        
+                mainWindow.Show();
+                mainWindow.WindowState = WindowState.Normal;
+        
+                var homeWindow = desktop.Windows.OfType<HomePage>().FirstOrDefault();
+                if(homeWindow != null)
                 {
-                    window.Close();
+                    homeWindow.Close();
                 }
-
-                var loginWindow = new MainWindow();
-                loginWindow.Show();
-
-                loginWindow.WindowState = WindowState.Maximized;
             }
         }
     }
