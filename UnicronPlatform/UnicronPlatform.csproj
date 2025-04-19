@@ -75,7 +75,6 @@
     <ItemGroup>
       <Folder Include="ViewModels\AdministratorPageViewModel\" />
       <Folder Include="ViewModels\ManageCourseViewModel\" />
-      <Folder Include="ViewModels\Support\" />
       <Folder Include="Views\Administrator\" />
       <Folder Include="Views\ManageCourse\" />
       <Folder Include="Views\Support\" />

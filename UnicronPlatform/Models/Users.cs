@@ -40,6 +40,7 @@ namespace UnicronPlatform.Models
 
         [Column("avatar")]
         public string? avatar { get; set; }
+        // public byte[] avatar { get; set; }
 
         [Column("balance")]
         public decimal? balance { get; set; }

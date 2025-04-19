@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using UnicronPlatform.Data;
 
@@ -10,9 +11,11 @@ using UnicronPlatform.Data;
 namespace UnicronPlatform.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250419142407_newtb")]
+    partial class newtb
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -87,11 +90,6 @@ namespace UnicronPlatform.Migrations
                         .IsRequired()
                         .HasColumnType("longtext")
                         .HasColumnName("description");
-
-                    b.Property<byte[]>("image_course")
-                        .IsRequired()
-                        .HasColumnType("longblob")
-                        .HasColumnName("image_course");
 
                     b.Property<int?>("instructor_id")
                         .HasColumnType("int")

@@ -13,7 +13,10 @@ namespace UnicronPlatform.Data
         public DbSet<Courses> Courses { get; set; }
         public DbSet<Instructor> Instructor { get; set; }
         public DbSet<Lessons> Lessons { get; set; }
-        public DbSet<LessonLink> LessonLink { get; set; }
+        public DbSet<Chats> Chats { get; set; }
+        public DbSet<Messages> Messages { get; set; }
+        public DbSet<Supports> Supports { get; set; }
+        public DbSet<Payments> Payments { get; set; }
         public DbSet<Enrollments> Enrollments { get; set; }
         public DbSet<UserProgress> UserProgress { get; set; }
         public DbSet<Plans> Plans { get; set; }

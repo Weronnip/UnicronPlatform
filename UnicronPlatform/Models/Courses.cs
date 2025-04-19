@@ -25,6 +25,9 @@ namespace UnicronPlatform.Models
         [Required]
         [Column("description")]
         public string description { get; set; }
+        
+        [Column("image_course")]
+        public byte[] image_course { get; set; }
 
         [Column("price")]
         public decimal? price { get; set; }
