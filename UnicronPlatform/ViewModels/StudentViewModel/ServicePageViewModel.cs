@@ -38,8 +38,7 @@ namespace UnicronPlatform.ViewModels
             set => this.RaiseAndSetIfChanged(ref _coursesList, value);
         }
 
-        // 🔢 Пагинация
-        private const int pageSize = 3;
+        private const int pageSize = 2;
         private int _currentPage = 1;
         public int CurrentPage
         {
