@@ -74,12 +74,15 @@
                                                Margin="0,10,0,0"
                                                TextWrapping="Wrap"/>
 
-                                    <Button Content="{Binding Price, StringFormat='Купить {0}'}" 
+                                    <Button Content="{Binding Price, StringFormat='Купить {0}'}"
+                                            Command="{Binding BuyPlanCommand, 
+                                            RelativeSource={RelativeSource AncestorType=vm:ServicePageViewModel}}"
                                             Padding="20 10"
                                             Margin="0 10"
                                             CornerRadius="10"
                                             HorizontalAlignment="Center"
                                             Background="#50544F" Foreground="#C8EAC6"/>
+
                                 </StackPanel>
                             </Border>
                         </DataTemplate>
@@ -145,12 +148,13 @@
                                                    Margin="0,8,0,2"/>
 
                                         <Button Content="{Binding Price, StringFormat='Купить {0}'}"
-                                                Padding="12 6"
-                                                Margin="0,8,0,2"
-                                                HorizontalAlignment="Left"
-                                                Background="#50544F"
-                                                Foreground="#C8EAC6"
-                                                CornerRadius="6"/>
+                                                Command="{Binding BuyCourseCommand, 
+                                            RelativeSource={RelativeSource AncestorType=vm:ServicePageViewModel}}"
+                                                Padding="20 10"
+                                                Margin="0 10"
+                                                CornerRadius="10"
+                                                HorizontalAlignment="Center"
+                                                Background="#50544F" Foreground="#C8EAC6"/>
                                     </StackPanel>
                                 </Grid>
                             </Border>

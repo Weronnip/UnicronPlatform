@@ -2,11 +2,13 @@ using System;
 using System.Linq;
 using System.Collections.ObjectModel;
 using System.Reactive;
+using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using ReactiveUI;
 using Splat;
 using UnicronPlatform.Data;
 using UnicronPlatform.Models;
+using UnicronPlatform.Views;
 
 namespace UnicronPlatform.ViewModels
 {
@@ -15,30 +17,13 @@ namespace UnicronPlatform.ViewModels
         public string UrlPathSegment => "Магазин";
         public IScreen? HostScreen { get; }
 
-        private Plans _plan;
-        private Plans plan
-        {
-            get => _plan;
-            set => this.RaiseAndSetIfChanged(ref _plan, value);
-        }
+        private readonly string _connectionString =
+            "server=localhost;port=3306;database=MyFDB;user=root;password=demo1fort;";
 
-        private ObservableCollection<PlanDto> _plansList;
-        public ObservableCollection<PlanDto> PlansList
-        {
-            get => _plansList;
-            set => this.RaiseAndSetIfChanged(ref _plansList, value);
-        }
+        public ObservableCollection<PlanDto> PlansList { get; } = new();
+        public ObservableCollection<CoursesDto> CoursesList { get; } = new();
 
-        private Courses courses;
-
-        private ObservableCollection<CoursesDto> _coursesList = new();
-        public ObservableCollection<CoursesDto> CoursesList
-        {
-            get => _coursesList;
-            set => this.RaiseAndSetIfChanged(ref _coursesList, value);
-        }
-
-        private const int pageSize = 2;
+        private const int PageSize = 2;
         private int _currentPage = 1;
         public int CurrentPage
         {
@@ -49,112 +34,141 @@ namespace UnicronPlatform.ViewModels
                 LoadCourses();
             }
         }
-
-        private int _totalPages;
-        public int TotalPages
-        {
-            get => _totalPages;
-            set => this.RaiseAndSetIfChanged(ref _totalPages, value);
-        }
+        public int TotalPages { get; private set; }
 
         public ReactiveCommand<Unit, Unit> NextPageCommand { get; }
         public ReactiveCommand<Unit, Unit> PreviousPageCommand { get; }
+        public ReactiveCommand<CoursesDto, Unit> BuyCourseCommand { get; }
+        public ReactiveCommand<PlanDto, Unit> BuyPlanCommand { get; }
 
-        private readonly string connectionString = "server=localhost;port=3306;database=MyFDB;user=root;password=demo1fort;";
-
-        public ServicePageViewModel(IScreen hostScreen, Plans plan, Courses course)
+        public ServicePageViewModel(IScreen hostScreen)
         {
             HostScreen = hostScreen ?? Locator.Current.GetService<IScreen>();
-            this.plan = plan;
-            this.courses = course;
 
-            PlansList = new ObservableCollection<PlanDto>();
-
-            var options = new DbContextOptionsBuilder<AppDbContext>()
-                .UseMySql(connectionString, ServerVersion.AutoDetect(connectionString))
-                .Options;
-
-            using (var context = new AppDbContext(options))
+            using var ctx = CreateContext();
+            var plans = ctx.Plans.ToList();
+            foreach (var p in plans)
             {
-                var plans = context.Plans.ToList();
-                foreach (var p in plans)
+                PlansList.Add(new PlanDto
                 {
-                    PlansList.Add(new PlanDto
-                    {
-                        Name = p.name,
-                        Description = p.description,
-                        Price = $"{p.price?.ToString("F2") ?? "0.00"}$",
-                        Duration = $"{p.duration} Месяц"
-                    });
-                }
-
-                var totalCourses = context.Courses.Count();
-                TotalPages = (int)Math.Ceiling((double)totalCourses / pageSize);
+                    Plan_id = p.plan_id,
+                    Name = p.name,
+                    Description = p.description,
+                    PriceValue = p.price ?? 0m,
+                    Duration = $"{p.duration} месяц"
+                });
             }
+            var totalCourses = ctx.Courses.Count();
+            TotalPages = (int)Math.Ceiling((double)totalCourses / PageSize);
 
-            NextPageCommand = ReactiveCommand.Create(() =>
-            {
-                if (CurrentPage < TotalPages)
-                    CurrentPage++;
-            });
-
-            PreviousPageCommand = ReactiveCommand.Create(() =>
-            {
-                if (CurrentPage > 1)
-                    CurrentPage--;
-            });
+            NextPageCommand = ReactiveCommand.Create(() => { if (CurrentPage < TotalPages) CurrentPage++; });
+            PreviousPageCommand = ReactiveCommand.Create(() => { if (CurrentPage > 1) CurrentPage--; });
+            
+            BuyCourseCommand = ReactiveCommand.CreateFromTask<CoursesDto>(async c => await ProcessPurchaseAsync(c.Course_id, false, c.PriceValue));
+            BuyPlanCommand = ReactiveCommand.CreateFromTask<PlanDto>(async p => await ProcessPurchaseAsync(p.Plan_id, true, p.PriceValue));
 
             LoadCourses();
+        }
+
+        private AppDbContext CreateContext()
+        {
+            var options = new DbContextOptionsBuilder<AppDbContext>()
+                .UseMySql(_connectionString, ServerVersion.AutoDetect(_connectionString))
+                .Options;
+            return new AppDbContext(options);
         }
 
         private void LoadCourses()
         {
             CoursesList.Clear();
+            using var ctx = CreateContext();
+            var courses = ctx.Courses
+                .Include(c => c.Instructor)
+                .OrderBy(c => c.course_id)
+                .Skip((CurrentPage - 1) * PageSize)
+                .Take(PageSize)
+                .ToList();
 
-            var options = new DbContextOptionsBuilder<AppDbContext>()
-                .UseMySql(connectionString, ServerVersion.AutoDetect(connectionString))
-                .Options;
-
-            using (var context = new AppDbContext(options))
+            foreach (var c in courses)
             {
-                var courses = context.Courses
-                    .Include(c => c.Instructor)
-                    .OrderBy(c => c.course_id)
-                    .Skip((CurrentPage - 1) * pageSize)
-                    .Take(pageSize)
-                    .ToList();
+                var author = c.Instructor != null
+                    ? $"{c.Instructor.first_name} {c.Instructor.last_name}"
+                    : "Неизвестен";
 
-                foreach (var c in courses)
+                CoursesList.Add(new CoursesDto
                 {
-                    var author = c.Instructor != null
-                        ? $"{c.Instructor.first_name} {c.Instructor.last_name}"
-                        : "Неизвестен";
-
-                    CoursesList.Add(new CoursesDto
-                    {
-                        Title = c.title,
-                        Description = c.description,
-                        Price = $"{c.price?.ToString("F2") ?? "0.00"}$",
-                        Author = author
-                    });
-                }
+                    Course_id = c.course_id,
+                    Title = c.title,
+                    Description = c.description,
+                    PriceValue = c.price ?? 0m,
+                    Author = author
+                });
             }
         }
-    }
 
+        private async Task ProcessPurchaseAsync(int item_id, bool isPlan, decimal price)
+        {
+            decimal serviceFee = price * 0.25m;
+            decimal tax = price * 0.25m;
+            decimal authorShare = price - serviceFee - tax;
+
+            using var ctx = CreateContext();
+            var user = Locator.Current.GetService<Users>()
+                       ?? throw new InvalidOperationException("Current user not found in Locator");
+            var user_id = user.user_id;
+
+            if (isPlan)
+            {
+                var subscription = new Subscriptions
+                {
+                    user_id = user_id,
+                    plan_id = item_id,
+                    start_date = DateTime.Now,
+                    end_date = DateTime.Now.AddMonths(1),
+                    status = 1
+                };
+                ctx.Subscriptions.Add(subscription);
+            }
+            else
+            {
+                var payment = new Payments
+                {
+                    user_id = user_id,
+                    course_id = item_id,
+                    plan_id = 0,
+                    amount = price,
+                    service_fee = serviceFee,
+                    tax = tax,
+                    author_share = authorShare,
+                    is_plane = false,
+                    created_at = DateTime.UtcNow
+                };
+                ctx.Payments.Add(payment);
+            }
+
+            await ctx.SaveChangesAsync();
+
+            new NotificationWindow(true).Show();
+        }
+    }
+    
     public class PlanDto
     {
-        public string Name { get; set; }
-        public string Description { get; set; }
-        public string Price { get; set; }
-        public string Duration { get; set; }
+        public int Plan_id { get; set; }
+        public string Name { get; set; } = string.Empty;
+        public string Description { get; set; } = string.Empty;
+        public decimal PriceValue { get; set; }
+        public string Price => $"{PriceValue:F2}$";
+        public string Duration { get; set; } = string.Empty;
     }
 
     public class CoursesDto
     {
-        public string Title { get; set; }
-        public string Description { get; set; }
-        public string Price { get; set; }
+        public int Course_id { get; set; }
+        public string Title { get; set; } = string.Empty;
+        public string Description { get; set; } = string.Empty;
+        public decimal PriceValue { get; set; }
+        public string Price => $"{PriceValue:F2}$";
         public string? Author { get; set; }
     }
 }

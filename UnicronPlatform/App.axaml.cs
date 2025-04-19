@@ -6,6 +6,7 @@ using Avalonia.Markup.Xaml;
 using Microsoft.Extensions.DependencyInjection;
 using ReactiveUI;
 using Splat;
+using UnicronPlatform.Models;
 using UnicronPlatform.ViewModels;
 using UnicronPlatform.Views;
 using UnicronPlatform.Views.Instructor;

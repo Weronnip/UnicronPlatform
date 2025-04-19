@@ -5,6 +5,7 @@ using System.Reactive.Linq;
 using System.Threading.Tasks;
 using Avalonia.Controls;
 using ReactiveUI;
+using Splat;
 using UnicronPlatform.Data;
 using UnicronPlatform.Models;
 using UnicronPlatform.Views;
@@ -80,7 +81,7 @@ namespace UnicronPlatform.ViewModels
 
             GoToService = ReactiveCommand.CreateFromTask<Unit, IRoutableViewModel>(async _ =>
             {
-                var vm = new ServicePageViewModel(this, Plan, Course);
+                var vm = new ServicePageViewModel(this);
                 await Router.Navigate.Execute(vm);
                 return (IRoutableViewModel)vm;
             });
@@ -92,6 +93,7 @@ namespace UnicronPlatform.ViewModels
         
         private void ExecuteLogout()
         {
+            Splat.Locator.CurrentMutable.UnregisterCurrent<Users>();
             if (Avalonia.Application.Current?.ApplicationLifetime 
                 is Avalonia.Controls.ApplicationLifetimes.IClassicDesktopStyleApplicationLifetime desktop)
             {

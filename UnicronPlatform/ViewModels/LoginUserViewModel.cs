@@ -6,6 +6,7 @@ using UnicronPlatform.Data;
 using System.Linq;
 using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
+using Splat;
 using UnicronPlatform.Models;
 using UnicronPlatform.Views;
 using UnicronPlatform.Views.Instructor;
@@ -46,6 +47,7 @@ namespace UnicronPlatform.ViewModels
 
             if (user != null)
             {
+                Splat.Locator.CurrentMutable.RegisterConstant(user);
                 if (Avalonia.Application.Current?.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
                 {
                     Window homeWindow;
