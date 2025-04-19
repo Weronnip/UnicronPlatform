@@ -34,7 +34,7 @@
             <Panel Margin="0 50 300 0">
                 <Border Width="150" Height="150"
                         CornerRadius="100"
-                        Margin="0 0 370 0"
+                        Margin="0 0 500 0"
                         ClipToBounds="True">
                     <Image Width="150" Height="150" 
                            Source="../../Assets/avatar.jpg" 
@@ -43,26 +43,26 @@
                 
                 <StackPanel HorizontalAlignment="Center" 
                             Width="400" Height="100"
-                            Margin="0 50 0 0">
+                            Margin="65 50 0 0">
                     <TextBlock Text="Ваши данные: "
                                Margin="0"
                                FontSize="22"
                                FontWeight="SemiBold"
-                               HorizontalAlignment="Center"/>
+                               HorizontalAlignment="Left"/>
     
                     <TextBlock Text="{Binding email, StringFormat='Почта: {0}'}" 
                                Margin="0 " 
                                FontSize="16" 
-                               HorizontalAlignment="Center"/>
+                               HorizontalAlignment="Left"/>
     
                     <TextBlock Text="{Binding phone, StringFormat='Телефон: {0}'}" 
                                Margin="0" 
                                FontSize="16" 
-                               HorizontalAlignment="Center"/>
-                    <TextBlock Text="Вы: Преподователь" 
+                               HorizontalAlignment="Left"/>
+                    <TextBlock Text="{Binding role_id_name, StringFormat='Вы: {0}'}" 
                                Margin="0" 
                                FontSize="16" 
-                               HorizontalAlignment="Center"/>
+                               HorizontalAlignment="Left"/>
                 </StackPanel>
                 
                 <Border Background="#C8EAC6"
@@ -108,7 +108,7 @@
                                 <TextBlock FontSize="20"
                                            Foreground="White"
                                            VerticalAlignment="Center">
-                                    <PathIcon Data="{StaticResource payment_regular}" 
+                                    <PathIcon Data="{StaticResource money_regular}" 
                                               Foreground="White" />
                                     Вывод средств
                                 </TextBlock>

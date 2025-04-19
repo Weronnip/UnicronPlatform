@@ -22,7 +22,7 @@
             Background="#33000000"
             CornerRadius="20"
             Padding="30">
-      <ScrollViewer VerticalScrollBarVisibility="Auto">
+      <ScrollViewer VerticalScrollBarVisibility="Visible">
         <StackPanel>
 
           <TextBlock Text="Новый курс"
@@ -78,7 +78,6 @@
                          Value="{Binding total_lessons}"
                          Margin="0,0,0,15"/>
 
-          <!-- Контрольные точки -->
           <TextBlock Text="Всего контрольных точек:"
                      Foreground="White"
                      FontSize="16"
@@ -104,7 +103,7 @@
                     Margin="0,0,0,25"/>
 
           <StackPanel Orientation="Horizontal"
-                      HorizontalAlignment="Right">
+                      HorizontalAlignment="Right" Margin="0 0 40 0">
             <Button Content="Отмена"
                     Padding="10,5"
                     Margin="0,10,10,0"

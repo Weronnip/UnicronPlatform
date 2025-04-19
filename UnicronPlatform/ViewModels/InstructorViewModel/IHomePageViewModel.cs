@@ -9,6 +9,7 @@ using ReactiveUI;
 using UnicronPlatform.Data;
 using UnicronPlatform.Models;
 using UnicronPlatform.Views;
+using UnicronPlatform.Views.Instructor;
 using UnicronPlatform.Views.Student;
 
 namespace UnicronPlatform.ViewModels
@@ -93,7 +94,7 @@ namespace UnicronPlatform.ViewModels
                 mainWindow.Show();
                 mainWindow.WindowState = WindowState.Normal;
         
-                var homeWindow = desktop.Windows.OfType<HomePage>().FirstOrDefault();
+                var homeWindow = desktop.Windows.OfType<HomePageInstructor>().FirstOrDefault();
                 if(homeWindow != null)
                 {
                     homeWindow.Close();

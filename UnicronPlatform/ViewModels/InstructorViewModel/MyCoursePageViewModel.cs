@@ -12,11 +12,10 @@ namespace UnicronPlatform.ViewModels
     {
         public string? UrlPathSegment => "Мои курсы";
         public IScreen? HostScreen { get; }
-
+        
         private readonly List<Courses> _allCourses;
         private readonly ObservableCollection<Courses> _pagedCourses = new();
         public ReadOnlyObservableCollection<Courses> MyCourses { get; }
-
         private int _currentPage = 1;
         private const int pageSize = 6;
 
@@ -45,7 +44,7 @@ namespace UnicronPlatform.ViewModels
 
             _allCourses = allCourses
                 .Where(c => c.instructor_id == instructor_id)
-                .ToList(); // <-- это важно, иначе Count будет дорогим
+                .ToList();
 
             MyCourses = new ReadOnlyObservableCollection<Courses>(_pagedCourses);
 

@@ -36,7 +36,7 @@ namespace UnicronPlatform.Models
         public DateTimeOffset? birth_date { get; set; }
 
         [Column("role_id")]
-        public int? role_id { get; set; }
+        public int role_id { get; set; }
 
         [Column("avatar")]
         public string? avatar { get; set; }
