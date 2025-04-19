@@ -53,6 +53,7 @@ namespace UnicronPlatform.ViewModels
         {
             User = user;
             Plan = _plan;
+            Course = _courses;
             this.WhenAnyValue(x => x.Router.NavigationStack.Count)
                 .Subscribe(_ => this.RaisePropertyChanged(nameof(CurrentViewModel)));
 
@@ -79,7 +80,7 @@ namespace UnicronPlatform.ViewModels
 
             GoToService = ReactiveCommand.CreateFromTask<Unit, IRoutableViewModel>(async _ =>
             {
-                var vm = new ServicePageViewModel(this, Plan);
+                var vm = new ServicePageViewModel(this, Plan, Course);
                 await Router.Navigate.Execute(vm);
                 return (IRoutableViewModel)vm;
             });

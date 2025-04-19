@@ -30,10 +30,10 @@ namespace UnicronPlatform.Models
         public decimal? price { get; set; }
 
         [Column("total_lessons")]
-        public int total_lessons { get; set; }
+        public int? total_lessons { get; set; }
 
         [Column("control_point")]
-        public int control_point { get; set; }
+        public int? control_point { get; set; }
 
         [Column("created_at")]
         public DateTime? created_at { get; set; }

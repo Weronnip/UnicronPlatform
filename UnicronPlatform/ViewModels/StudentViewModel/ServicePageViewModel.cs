@@ -1,6 +1,7 @@
 using System;
 using System.Linq;
 using System.Collections.ObjectModel;
+using System.Reactive;
 using Microsoft.EntityFrameworkCore;
 using ReactiveUI;
 using Splat;
@@ -28,62 +29,117 @@ namespace UnicronPlatform.ViewModels
             set => this.RaiseAndSetIfChanged(ref _plansList, value);
         }
 
-        // private Courses courses; 
-        //
-        // private ObservableCollection<CoursesDto> _coursesList;
-        // public ObservableCollection<CoursesDto> CoursesList
-        // {
-        //     get => _coursesList;
-        //     set => this.RaiseAndSetIfChanged(ref _coursesList, value);
-        // }
-        public ServicePageViewModel(IScreen hostScreen, Plans plan)
+        private Courses courses;
+
+        private ObservableCollection<CoursesDto> _coursesList = new();
+        public ObservableCollection<CoursesDto> CoursesList
+        {
+            get => _coursesList;
+            set => this.RaiseAndSetIfChanged(ref _coursesList, value);
+        }
+
+        // 🔢 Пагинация
+        private const int pageSize = 3;
+        private int _currentPage = 1;
+        public int CurrentPage
+        {
+            get => _currentPage;
+            set
+            {
+                this.RaiseAndSetIfChanged(ref _currentPage, value);
+                LoadCourses();
+            }
+        }
+
+        private int _totalPages;
+        public int TotalPages
+        {
+            get => _totalPages;
+            set => this.RaiseAndSetIfChanged(ref _totalPages, value);
+        }
+
+        public ReactiveCommand<Unit, Unit> NextPageCommand { get; }
+        public ReactiveCommand<Unit, Unit> PreviousPageCommand { get; }
+
+        private readonly string connectionString = "server=localhost;port=3306;database=MyFDB;user=root;password=demo1fort;";
+
+        public ServicePageViewModel(IScreen hostScreen, Plans plan, Courses course)
         {
             HostScreen = hostScreen ?? Locator.Current.GetService<IScreen>();
             this.plan = plan;
+            this.courses = course;
 
             PlansList = new ObservableCollection<PlanDto>();
 
             var options = new DbContextOptionsBuilder<AppDbContext>()
-                .UseMySql("server=localhost;port=3306;database=MyFDB;user=root;password=demo1fort;",
-                    ServerVersion.AutoDetect("server=localhost;port=3306;database=MyFDB;user=root;password=demo1fort;"))
+                .UseMySql(connectionString, ServerVersion.AutoDetect(connectionString))
                 .Options;
 
             using (var context = new AppDbContext(options))
             {
                 var plans = context.Plans.ToList();
-                foreach (Plans p in plans)
+                foreach (var p in plans)
                 {
                     PlansList.Add(new PlanDto
                     {
                         Name = p.name,
                         Description = p.description,
-                        Price = $"{p.price}$",
+                        Price = $"{p.price?.ToString("F2") ?? "0.00"}$",
                         Duration = $"{p.duration} Месяц"
                     });
                 }
+
+                var totalCourses = context.Courses.Count();
+                TotalPages = (int)Math.Ceiling((double)totalCourses / pageSize);
             }
-            
-            // using (var context = new AppDbContext(options))
-            // {
-            //     var courses = context.Courses.ToList();
-            //     var author_name = context.Instructor
-            //         .Select(i => new 
-            //         {
-            //             FirstName = i.first_name,
-            //             LastName = i.last_name
-            //         })
-            //         .ToListAsync();
-            //     foreach (Courses c in courses)
-            //     {
-            //         CoursesList.Add(new CoursesDto
-            //         {
-            //             Title = c.title,
-            //             Description = c.description,
-            //             Price = c.price,
-            //             Author = author_name.ToString()
-            //         });
-            //     }
-            // }
+
+            NextPageCommand = ReactiveCommand.Create(() =>
+            {
+                if (CurrentPage < TotalPages)
+                    CurrentPage++;
+            });
+
+            PreviousPageCommand = ReactiveCommand.Create(() =>
+            {
+                if (CurrentPage > 1)
+                    CurrentPage--;
+            });
+
+            LoadCourses();
+        }
+
+        private void LoadCourses()
+        {
+            CoursesList.Clear();
+
+            var options = new DbContextOptionsBuilder<AppDbContext>()
+                .UseMySql(connectionString, ServerVersion.AutoDetect(connectionString))
+                .Options;
+
+            using (var context = new AppDbContext(options))
+            {
+                var courses = context.Courses
+                    .Include(c => c.Instructor)
+                    .OrderBy(c => c.course_id)
+                    .Skip((CurrentPage - 1) * pageSize)
+                    .Take(pageSize)
+                    .ToList();
+
+                foreach (var c in courses)
+                {
+                    var author = c.Instructor != null
+                        ? $"{c.Instructor.first_name} {c.Instructor.last_name}"
+                        : "Неизвестен";
+
+                    CoursesList.Add(new CoursesDto
+                    {
+                        Title = c.title,
+                        Description = c.description,
+                        Price = $"{c.price?.ToString("F2") ?? "0.00"}$",
+                        Author = author
+                    });
+                }
+            }
         }
     }
 
@@ -94,13 +150,12 @@ namespace UnicronPlatform.ViewModels
         public string Price { get; set; }
         public string Duration { get; set; }
     }
-    
-    // public class CoursesDto
-    // {
-    //     public string Title { get; set; }
-    //     public string Description { get; set; }
-    //     public decimal? Price { get; set; }
-    //     public string Author { get; set; }
-    // }
-    
+
+    public class CoursesDto
+    {
+        public string Title { get; set; }
+        public string Description { get; set; }
+        public string Price { get; set; }
+        public string? Author { get; set; }
+    }
 }
