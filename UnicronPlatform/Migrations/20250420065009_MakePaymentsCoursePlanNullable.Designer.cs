@@ -11,8 +11,8 @@ using UnicronPlatform.Data;
 namespace UnicronPlatform.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250412172649_new_plan")]
-    partial class new_plan
+    [Migration("20250420065009_MakePaymentsCoursePlanNullable")]
+    partial class MakePaymentsCoursePlanNullable
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -43,6 +43,30 @@ namespace UnicronPlatform.Migrations
                     b.ToTable("Category");
                 });
 
+            modelBuilder.Entity("UnicronPlatform.Models.Chats", b =>
+                {
+                    b.Property<int>("chat_id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("chat_id");
+
+                    b.Property<int>("support_id")
+                        .HasColumnType("int")
+                        .HasColumnName("support_id");
+
+                    b.Property<int>("user_id")
+                        .HasColumnType("int")
+                        .HasColumnName("user_id");
+
+                    b.HasKey("chat_id");
+
+                    b.HasIndex("support_id");
+
+                    b.HasIndex("user_id");
+
+                    b.ToTable("Chats");
+                });
+
             modelBuilder.Entity("UnicronPlatform.Models.Courses", b =>
                 {
                     b.Property<int>("course_id")
@@ -54,8 +78,8 @@ namespace UnicronPlatform.Migrations
                         .HasColumnType("int")
                         .HasColumnName("category_id");
 
-                    b.Property<byte?>("control_point")
-                        .HasColumnType("tinyint unsigned")
+                    b.Property<int?>("control_point")
+                        .HasColumnType("int")
                         .HasColumnName("control_point");
 
                     b.Property<DateTime?>("created_at")
@@ -66,6 +90,10 @@ namespace UnicronPlatform.Migrations
                         .IsRequired()
                         .HasColumnType("longtext")
                         .HasColumnName("description");
+
+                    b.Property<byte[]>("image_course")
+                        .HasColumnType("longblob")
+                        .HasColumnName("image_course");
 
                     b.Property<int?>("instructor_id")
                         .HasColumnType("int")
@@ -80,8 +108,8 @@ namespace UnicronPlatform.Migrations
                         .HasColumnType("longtext")
                         .HasColumnName("title");
 
-                    b.Property<byte?>("total_lessons")
-                        .HasColumnType("tinyint unsigned")
+                    b.Property<int?>("total_lessons")
+                        .HasColumnType("int")
                         .HasColumnName("total_lessons");
 
                     b.Property<DateTime?>("updated_at")
@@ -152,7 +180,7 @@ namespace UnicronPlatform.Migrations
                         .HasColumnType("longtext")
                         .HasColumnName("email");
 
-                    b.Property<DateTime?>("experience")
+                    b.Property<DateTimeOffset?>("experience")
                         .HasColumnType("datetime(6)")
                         .HasColumnName("experience");
 
@@ -190,31 +218,17 @@ namespace UnicronPlatform.Migrations
                         .HasColumnType("datetime(6)")
                         .HasColumnName("updated_at");
 
+                    b.Property<int?>("user_id")
+                        .HasColumnType("int")
+                        .HasColumnName("user_id");
+
                     b.HasKey("instructor_id");
 
                     b.HasIndex("role_id");
 
+                    b.HasIndex("user_id");
+
                     b.ToTable("Instructor");
-                });
-
-            modelBuilder.Entity("UnicronPlatform.Models.LessonLink", b =>
-                {
-                    b.Property<int>("link_id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasColumnName("link_id");
-
-                    b.Property<string>("link_name")
-                        .HasColumnType("longtext")
-                        .HasColumnName("link_name");
-
-                    b.Property<string>("path_link")
-                        .HasColumnType("longtext")
-                        .HasColumnName("path_link");
-
-                    b.HasKey("link_id");
-
-                    b.ToTable("LessonLink");
                 });
 
             modelBuilder.Entity("UnicronPlatform.Models.Lessons", b =>
@@ -236,9 +250,15 @@ namespace UnicronPlatform.Migrations
                         .HasColumnType("longtext")
                         .HasColumnName("description");
 
-                    b.Property<int?>("link_id")
-                        .HasColumnType("int")
-                        .HasColumnName("link_id");
+                    b.Property<byte[]>("image_lesson")
+                        .IsRequired()
+                        .HasColumnType("longblob")
+                        .HasColumnName("image_lesson");
+
+                    b.Property<string>("text_lesson")
+                        .IsRequired()
+                        .HasColumnType("longtext")
+                        .HasColumnName("text_lesson");
 
                     b.Property<string>("title")
                         .HasColumnType("longtext")
@@ -248,13 +268,102 @@ namespace UnicronPlatform.Migrations
                         .HasColumnType("datetime(6)")
                         .HasColumnName("updated_at");
 
+                    b.Property<byte[]>("video_lesson")
+                        .IsRequired()
+                        .HasColumnType("longblob")
+                        .HasColumnName("video_lesson");
+
                     b.HasKey("lesson_id");
 
                     b.HasIndex("course_id");
 
-                    b.HasIndex("link_id");
-
                     b.ToTable("Lessons");
+                });
+
+            modelBuilder.Entity("UnicronPlatform.Models.Messages", b =>
+                {
+                    b.Property<int>("message_id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("message_id");
+
+                    b.Property<int>("chat_id")
+                        .HasColumnType("int")
+                        .HasColumnName("chat_id");
+
+                    b.Property<DateTime?>("created_at")
+                        .HasColumnType("datetime(6)")
+                        .HasColumnName("created_at");
+
+                    b.Property<string>("message")
+                        .IsRequired()
+                        .HasMaxLength(1000)
+                        .HasColumnType("varchar(1000)")
+                        .HasColumnName("message");
+
+                    b.Property<DateTime?>("updated_at")
+                        .HasColumnType("datetime(6)")
+                        .HasColumnName("updated_at");
+
+                    b.HasKey("message_id");
+
+                    b.HasIndex("chat_id");
+
+                    b.ToTable("Messages");
+                });
+
+            modelBuilder.Entity("UnicronPlatform.Models.Payments", b =>
+                {
+                    b.Property<int>("pay_id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("pay_id");
+
+                    b.Property<decimal>("amount")
+                        .HasColumnType("decimal(65,30)")
+                        .HasColumnName("amount");
+
+                    b.Property<decimal>("author_share")
+                        .HasColumnType("decimal(65,30)")
+                        .HasColumnName("author_share");
+
+                    b.Property<int?>("course_id")
+                        .HasColumnType("int")
+                        .HasColumnName("course_id");
+
+                    b.Property<DateTime>("created_at")
+                        .HasColumnType("datetime(6)")
+                        .HasColumnName("created_at");
+
+                    b.Property<bool>("is_plan")
+                        .HasColumnType("tinyint(1)")
+                        .HasColumnName("is_plan");
+
+                    b.Property<int?>("plan_id")
+                        .HasColumnType("int")
+                        .HasColumnName("plan_id");
+
+                    b.Property<decimal>("service_fee")
+                        .HasColumnType("decimal(65,30)")
+                        .HasColumnName("service_fee");
+
+                    b.Property<decimal>("tax")
+                        .HasColumnType("decimal(65,30)")
+                        .HasColumnName("tax");
+
+                    b.Property<int>("user_id")
+                        .HasColumnType("int")
+                        .HasColumnName("user_id");
+
+                    b.HasKey("pay_id");
+
+                    b.HasIndex("course_id");
+
+                    b.HasIndex("plan_id");
+
+                    b.HasIndex("user_id");
+
+                    b.ToTable("Payments");
                 });
 
             modelBuilder.Entity("UnicronPlatform.Models.Plans", b =>
@@ -343,6 +452,24 @@ namespace UnicronPlatform.Migrations
                     b.ToTable("Subscriptions");
                 });
 
+            modelBuilder.Entity("UnicronPlatform.Models.Supports", b =>
+                {
+                    b.Property<int>("support_id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("support_id");
+
+                    b.Property<int>("role_id")
+                        .HasColumnType("int")
+                        .HasColumnName("role_id");
+
+                    b.HasKey("support_id");
+
+                    b.HasIndex("role_id");
+
+                    b.ToTable("Supports");
+                });
+
             modelBuilder.Entity("UnicronPlatform.Models.UserProgress", b =>
                 {
                     b.Property<int>("progress_id")
@@ -385,7 +512,7 @@ namespace UnicronPlatform.Migrations
                         .HasColumnType("decimal(65,30)")
                         .HasColumnName("balance");
 
-                    b.Property<DateTime?>("birth_date")
+                    b.Property<DateTimeOffset?>("birth_date")
                         .HasColumnType("datetime(6)")
                         .HasColumnName("birth_date");
 
@@ -418,7 +545,7 @@ namespace UnicronPlatform.Migrations
                         .HasColumnType("longtext")
                         .HasColumnName("phone");
 
-                    b.Property<int?>("role_id")
+                    b.Property<int>("role_id")
                         .HasColumnType("int")
                         .HasColumnName("role_id");
 
@@ -431,6 +558,25 @@ namespace UnicronPlatform.Migrations
                     b.HasIndex("role_id");
 
                     b.ToTable("Users");
+                });
+
+            modelBuilder.Entity("UnicronPlatform.Models.Chats", b =>
+                {
+                    b.HasOne("UnicronPlatform.Models.Supports", "Supports")
+                        .WithMany()
+                        .HasForeignKey("support_id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("UnicronPlatform.Models.Users", "Users")
+                        .WithMany()
+                        .HasForeignKey("user_id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Supports");
+
+                    b.Navigation("Users");
                 });
 
             modelBuilder.Entity("UnicronPlatform.Models.Courses", b =>
@@ -469,7 +615,13 @@ namespace UnicronPlatform.Migrations
                         .WithMany("Instructor")
                         .HasForeignKey("role_id");
 
+                    b.HasOne("UnicronPlatform.Models.Users", "User")
+                        .WithMany()
+                        .HasForeignKey("user_id");
+
                     b.Navigation("Role");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("UnicronPlatform.Models.Lessons", b =>
@@ -478,13 +630,41 @@ namespace UnicronPlatform.Migrations
                         .WithMany("Lessons")
                         .HasForeignKey("course_id");
 
-                    b.HasOne("UnicronPlatform.Models.LessonLink", "LessonLink")
-                        .WithMany("Lessons")
-                        .HasForeignKey("link_id");
-
                     b.Navigation("Course");
+                });
 
-                    b.Navigation("LessonLink");
+            modelBuilder.Entity("UnicronPlatform.Models.Messages", b =>
+                {
+                    b.HasOne("UnicronPlatform.Models.Chats", "Chats")
+                        .WithMany()
+                        .HasForeignKey("chat_id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Chats");
+                });
+
+            modelBuilder.Entity("UnicronPlatform.Models.Payments", b =>
+                {
+                    b.HasOne("UnicronPlatform.Models.Courses", "Courses")
+                        .WithMany()
+                        .HasForeignKey("course_id");
+
+                    b.HasOne("UnicronPlatform.Models.Plans", "Plans")
+                        .WithMany()
+                        .HasForeignKey("plan_id");
+
+                    b.HasOne("UnicronPlatform.Models.Users", "Users")
+                        .WithMany()
+                        .HasForeignKey("user_id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Courses");
+
+                    b.Navigation("Plans");
+
+                    b.Navigation("Users");
                 });
 
             modelBuilder.Entity("UnicronPlatform.Models.Subscriptions", b =>
@@ -502,6 +682,17 @@ namespace UnicronPlatform.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("UnicronPlatform.Models.Supports", b =>
+                {
+                    b.HasOne("UnicronPlatform.Models.Role", "Role")
+                        .WithMany()
+                        .HasForeignKey("role_id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Role");
+                });
+
             modelBuilder.Entity("UnicronPlatform.Models.UserProgress", b =>
                 {
                     b.HasOne("UnicronPlatform.Models.Enrollments", "Enrollments")
@@ -515,7 +706,9 @@ namespace UnicronPlatform.Migrations
                 {
                     b.HasOne("UnicronPlatform.Models.Role", "Role")
                         .WithMany("Users")
-                        .HasForeignKey("role_id");
+                        .HasForeignKey("role_id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Role");
                 });
@@ -540,11 +733,6 @@ namespace UnicronPlatform.Migrations
             modelBuilder.Entity("UnicronPlatform.Models.Instructor", b =>
                 {
                     b.Navigation("Courses");
-                });
-
-            modelBuilder.Entity("UnicronPlatform.Models.LessonLink", b =>
-                {
-                    b.Navigation("Lessons");
                 });
 
             modelBuilder.Entity("UnicronPlatform.Models.Role", b =>

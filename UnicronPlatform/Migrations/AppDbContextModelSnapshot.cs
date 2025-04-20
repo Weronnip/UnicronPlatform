@@ -89,7 +89,6 @@ namespace UnicronPlatform.Migrations
                         .HasColumnName("description");
 
                     b.Property<byte[]>("image_course")
-                        .IsRequired()
                         .HasColumnType("longblob")
                         .HasColumnName("image_course");
 
@@ -216,9 +215,15 @@ namespace UnicronPlatform.Migrations
                         .HasColumnType("datetime(6)")
                         .HasColumnName("updated_at");
 
+                    b.Property<int?>("user_id")
+                        .HasColumnType("int")
+                        .HasColumnName("user_id");
+
                     b.HasKey("instructor_id");
 
                     b.HasIndex("role_id");
+
+                    b.HasIndex("user_id");
 
                     b.ToTable("Instructor");
                 });
@@ -311,15 +316,6 @@ namespace UnicronPlatform.Migrations
                         .HasColumnType("int")
                         .HasColumnName("pay_id");
 
-                    b.Property<int?>("Coursescourse_id")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("Plansplan_id")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("Usersuser_id")
-                        .HasColumnType("int");
-
                     b.Property<decimal>("amount")
                         .HasColumnType("decimal(65,30)")
                         .HasColumnName("amount");
@@ -328,7 +324,7 @@ namespace UnicronPlatform.Migrations
                         .HasColumnType("decimal(65,30)")
                         .HasColumnName("author_share");
 
-                    b.Property<int>("course_id")
+                    b.Property<int?>("course_id")
                         .HasColumnType("int")
                         .HasColumnName("course_id");
 
@@ -336,11 +332,11 @@ namespace UnicronPlatform.Migrations
                         .HasColumnType("datetime(6)")
                         .HasColumnName("created_at");
 
-                    b.Property<bool>("is_plane")
+                    b.Property<bool>("is_plan")
                         .HasColumnType("tinyint(1)")
-                        .HasColumnName("is_plane");
+                        .HasColumnName("is_plan");
 
-                    b.Property<int>("plan_id")
+                    b.Property<int?>("plan_id")
                         .HasColumnType("int")
                         .HasColumnName("plan_id");
 
@@ -358,11 +354,11 @@ namespace UnicronPlatform.Migrations
 
                     b.HasKey("pay_id");
 
-                    b.HasIndex("Coursescourse_id");
+                    b.HasIndex("course_id");
 
-                    b.HasIndex("Plansplan_id");
+                    b.HasIndex("plan_id");
 
-                    b.HasIndex("Usersuser_id");
+                    b.HasIndex("user_id");
 
                     b.ToTable("Payments");
                 });
@@ -616,7 +612,13 @@ namespace UnicronPlatform.Migrations
                         .WithMany("Instructor")
                         .HasForeignKey("role_id");
 
+                    b.HasOne("UnicronPlatform.Models.Users", "User")
+                        .WithMany()
+                        .HasForeignKey("user_id");
+
                     b.Navigation("Role");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("UnicronPlatform.Models.Lessons", b =>
@@ -643,15 +645,17 @@ namespace UnicronPlatform.Migrations
                 {
                     b.HasOne("UnicronPlatform.Models.Courses", "Courses")
                         .WithMany()
-                        .HasForeignKey("Coursescourse_id");
+                        .HasForeignKey("course_id");
 
                     b.HasOne("UnicronPlatform.Models.Plans", "Plans")
                         .WithMany()
-                        .HasForeignKey("Plansplan_id");
+                        .HasForeignKey("plan_id");
 
                     b.HasOne("UnicronPlatform.Models.Users", "Users")
                         .WithMany()
-                        .HasForeignKey("Usersuser_id");
+                        .HasForeignKey("user_id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Courses");
 

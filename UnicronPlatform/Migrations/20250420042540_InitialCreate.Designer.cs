@@ -11,8 +11,8 @@ using UnicronPlatform.Data;
 namespace UnicronPlatform.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250419143303_new_col_courses")]
-    partial class new_col_courses
+    [Migration("20250420042540_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -219,9 +219,15 @@ namespace UnicronPlatform.Migrations
                         .HasColumnType("datetime(6)")
                         .HasColumnName("updated_at");
 
+                    b.Property<int?>("user_id")
+                        .HasColumnType("int")
+                        .HasColumnName("user_id");
+
                     b.HasKey("instructor_id");
 
                     b.HasIndex("role_id");
+
+                    b.HasIndex("user_id");
 
                     b.ToTable("Instructor");
                 });
@@ -314,15 +320,6 @@ namespace UnicronPlatform.Migrations
                         .HasColumnType("int")
                         .HasColumnName("pay_id");
 
-                    b.Property<int?>("Coursescourse_id")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("Plansplan_id")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("Usersuser_id")
-                        .HasColumnType("int");
-
                     b.Property<decimal>("amount")
                         .HasColumnType("decimal(65,30)")
                         .HasColumnName("amount");
@@ -339,9 +336,9 @@ namespace UnicronPlatform.Migrations
                         .HasColumnType("datetime(6)")
                         .HasColumnName("created_at");
 
-                    b.Property<bool>("is_plane")
+                    b.Property<bool>("is_plan")
                         .HasColumnType("tinyint(1)")
-                        .HasColumnName("is_plane");
+                        .HasColumnName("is_plan");
 
                     b.Property<int>("plan_id")
                         .HasColumnType("int")
@@ -361,11 +358,11 @@ namespace UnicronPlatform.Migrations
 
                     b.HasKey("pay_id");
 
-                    b.HasIndex("Coursescourse_id");
+                    b.HasIndex("course_id");
 
-                    b.HasIndex("Plansplan_id");
+                    b.HasIndex("plan_id");
 
-                    b.HasIndex("Usersuser_id");
+                    b.HasIndex("user_id");
 
                     b.ToTable("Payments");
                 });
@@ -619,7 +616,13 @@ namespace UnicronPlatform.Migrations
                         .WithMany("Instructor")
                         .HasForeignKey("role_id");
 
+                    b.HasOne("UnicronPlatform.Models.Users", "User")
+                        .WithMany()
+                        .HasForeignKey("user_id");
+
                     b.Navigation("Role");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("UnicronPlatform.Models.Lessons", b =>
@@ -646,15 +649,21 @@ namespace UnicronPlatform.Migrations
                 {
                     b.HasOne("UnicronPlatform.Models.Courses", "Courses")
                         .WithMany()
-                        .HasForeignKey("Coursescourse_id");
+                        .HasForeignKey("course_id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("UnicronPlatform.Models.Plans", "Plans")
                         .WithMany()
-                        .HasForeignKey("Plansplan_id");
+                        .HasForeignKey("plan_id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("UnicronPlatform.Models.Users", "Users")
                         .WithMany()
-                        .HasForeignKey("Usersuser_id");
+                        .HasForeignKey("user_id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Courses");
 

@@ -14,6 +14,9 @@ namespace UnicronPlatform.Models
 
         [Column("role_id")]
         public int? role_id { get; set; }
+        
+        [Column("user_id")]
+        public int? user_id { get; set; }
 
         [Required]
         [Column("first_name")]
@@ -52,6 +55,9 @@ namespace UnicronPlatform.Models
         
         [ForeignKey("role_id")]
         public Role? Role { get; set; }
+        
+        [ForeignKey("user_id")]
+        public Users? User { get; set; }
         
         public List<Courses> Courses { get; set; } = new();
     }

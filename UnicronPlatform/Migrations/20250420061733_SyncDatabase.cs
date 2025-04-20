@@ -5,24 +5,32 @@
 namespace UnicronPlatform.Migrations
 {
     /// <inheritdoc />
-    public partial class new_col_courses : Migration
+    public partial class SyncDatabase : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.AddColumn<byte[]>(
+            migrationBuilder.AlterColumn<byte[]>(
                 name: "image_course",
                 table: "Courses",
                 type: "longblob",
-                nullable: false);
+                nullable: true,
+                oldClrType: typeof(byte[]),
+                oldType: "longblob");
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropColumn(
+            migrationBuilder.AlterColumn<byte[]>(
                 name: "image_course",
-                table: "Courses");
+                table: "Courses",
+                type: "longblob",
+                nullable: false,
+                defaultValue: new byte[0],
+                oldClrType: typeof(byte[]),
+                oldType: "longblob",
+                oldNullable: true);
         }
     }
 }

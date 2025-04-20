@@ -5,6 +5,7 @@ using System.Reactive;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using ReactiveUI;
+using Splat;
 using UnicronPlatform.Data;
 using UnicronPlatform.Models;
 using UnicronPlatform.Views;
@@ -18,6 +19,7 @@ namespace UnicronPlatform.ViewModels
 
         private readonly AppDbContext _context;
         private readonly int _instructor_id;
+
         public ObservableCollection<Category> Categories { get; } = new();
         private Category? _selectedCategory;
         public Category? SelectedCategory
@@ -79,16 +81,22 @@ namespace UnicronPlatform.ViewModels
 
         public ReactiveCommand<Unit, Unit> CreateCourseCommand { get; }
 
-        public CreateCoursePageViewModel(IScreen hostScreen, AppDbContext context, int currentInstructor_id)
+        public CreateCoursePageViewModel(IScreen hostScreen, AppDbContext context)
         {
             HostScreen = hostScreen;
             _context = context;
-            _instructor_id = currentInstructor_id;
+
+            var currentUser = Locator.Current.GetService<Users>()
+                ?? throw new InvalidOperationException("Пользователь не найден в Locator");
+
+            if (currentUser.role_id != 2)
+                throw new InvalidOperationException("Текущий пользователь не является преподавателем");
+
+            _instructor_id = currentUser.user_id;
 
             LoadCategories();
 
             CreateCourseCommand = ReactiveCommand.CreateFromTask(CreateCourseAsync, this.WhenAnyValue(vm => vm.CanCreate));
-
             CreateCourseCommand.ThrownExceptions.Subscribe(ex =>
             {
                 Console.WriteLine($"Ошибка при создании курса: {ex.Message}");

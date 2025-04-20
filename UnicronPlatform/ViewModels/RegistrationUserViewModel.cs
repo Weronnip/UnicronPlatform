@@ -11,6 +11,13 @@ namespace UnicronPlatform.ViewModels
     public class RegistrationUserViewModel : ViewModelBase
     {
         private readonly AppDbContext _dbContext;
+
+        private int _user_id;
+        private int user_id
+        {
+            get => _user_id;
+            set => this.RaiseAndSetIfChanged(ref _user_id, value);
+        }
         
         private string _firstName;
         public string first_name
@@ -117,9 +124,11 @@ namespace UnicronPlatform.ViewModels
                 {
                     first_name = first_name,
                     last_name = last_name,
+                    user_id = user_id,
                     email = email,
                     phone = phone,
                     role_id = 1,
+                    balance = 0,
                     password = password,
                     created_at = DateTime.Now,
                     updated_at = DateTime.Now
@@ -149,6 +158,7 @@ namespace UnicronPlatform.ViewModels
                         email = email,
                         phone = phone,
                         role_id = 2,
+                        balance = 0,
                         password = password,
                         created_at = DateTime.Now,
                         updated_at = DateTime.Now
@@ -161,6 +171,7 @@ namespace UnicronPlatform.ViewModels
                     {
                         first_name = first_name,
                         last_name = last_name,
+                        user_id = user_id,
                         email = email,
                         role_id = 2,
                         bio = bio,

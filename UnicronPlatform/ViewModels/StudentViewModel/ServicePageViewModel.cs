@@ -128,6 +128,20 @@ namespace UnicronPlatform.ViewModels
                     status = 1
                 };
                 ctx.Subscriptions.Add(subscription);
+                
+                var payment = new Payments
+                {
+                    user_id = user_id,
+                    course_id = item_id,
+                    plan_id = 0,
+                    amount = price,
+                    service_fee = serviceFee,
+                    tax = tax,
+                    author_share = authorShare,
+                    is_plan = false,
+                    created_at = DateTime.UtcNow
+                };
+                ctx.Payments.Add(payment);
             }
             else
             {
@@ -140,7 +154,7 @@ namespace UnicronPlatform.ViewModels
                     service_fee = serviceFee,
                     tax = tax,
                     author_share = authorShare,
-                    is_plane = false,
+                    is_plan = false,
                     created_at = DateTime.UtcNow
                 };
                 ctx.Payments.Add(payment);

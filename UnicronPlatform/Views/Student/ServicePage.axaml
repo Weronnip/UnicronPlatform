@@ -3,6 +3,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:vm="clr-namespace:UnicronPlatform.ViewModels"
              xmlns:local="clr-namespace:UnicronPlatform.ViewModels"
+             xmlns:student="clr-namespace:UnicronPlatform.Views.Student"
              d:DesignWidth="1240"
              d:DesignHeight="784"
              x:Class="UnicronPlatform.Views.Student.ServicePage"
@@ -75,8 +76,9 @@
                                                TextWrapping="Wrap"/>
 
                                     <Button Content="{Binding Price, StringFormat='Купить {0}'}"
-                                            Command="{Binding BuyPlanCommand, 
-                                            RelativeSource={RelativeSource AncestorType=vm:ServicePageViewModel}}"
+                                            Command="{Binding ViewModel.BuyPlanCommand,
+                                            RelativeSource={RelativeSource AncestorType=student:ServicePage}}"
+                                            CommandParameter="{Binding}"
                                             Padding="20 10"
                                             Margin="0 10"
                                             CornerRadius="10"
@@ -147,14 +149,17 @@
                                                    Foreground="White"
                                                    Margin="0,8,0,2"/>
 
-                                        <Button Content="{Binding Price, StringFormat='Купить {0}'}"
-                                                Command="{Binding BuyCourseCommand, 
-                                            RelativeSource={RelativeSource AncestorType=vm:ServicePageViewModel}}"
-                                                Padding="20 10"
-                                                Margin="0 10"
-                                                CornerRadius="10"
-                                                HorizontalAlignment="Center"
-                                                Background="#50544F" Foreground="#C8EAC6"/>
+                                        <Button 
+                                            Content="{Binding Price, StringFormat='Купить {0}'}"
+                                            Command="{Binding ViewModel.BuyCourseCommand,
+                                            RelativeSource={RelativeSource AncestorType=student:ServicePage}}"
+                                            CommandParameter="{Binding}"
+                                            Padding="20 10"
+                                            Margin="0 10"
+                                            CornerRadius="10"
+                                            HorizontalAlignment="Center"
+                                            Background="#50544F" 
+                                            Foreground="#C8EAC6"/>
                                     </StackPanel>
                                 </Grid>
                             </Border>

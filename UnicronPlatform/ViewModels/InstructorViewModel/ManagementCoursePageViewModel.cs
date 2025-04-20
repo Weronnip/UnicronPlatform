@@ -1,9 +1,11 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Mime;
 using System.Reactive;
 using System.Reactive.Linq;
 using System.Threading.Tasks;
+using Avalonia.Controls;
 using Microsoft.EntityFrameworkCore;
 using ReactiveUI;
 using UnicronPlatform.Data;
@@ -61,7 +63,7 @@ namespace UnicronPlatform.ViewModels
             GoToCreateCourse = ReactiveCommand.CreateFromTask<Unit, IRoutableViewModel>(async _ =>
             {
                 var instructor_id = _allCourses.FirstOrDefault()?.instructor_id ?? 0;
-                var vm = new CreateCoursePageViewModel(this, _context, instructor_id);
+                var vm = new CreateCoursePageViewModel(this, _context);
                 await Router.Navigate.Execute(vm);
                 return vm;
             });
@@ -83,9 +85,6 @@ namespace UnicronPlatform.ViewModels
 
                 using var db = new AppDbContext(options);
                 var coursesList = await db.Courses.ToListAsync();
-                _allCourses.Clear();
-                _allCourses.AddRange(coursesList);
-
                 _allCourses.Clear();
                 _allCourses.AddRange(coursesList);
                 var instructorId = _allCourses.FirstOrDefault()?.instructor_id ?? 0;
