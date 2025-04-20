@@ -133,6 +133,7 @@
                                                    FontWeight="Bold"
                                                    FontSize="16"
                                                    Width="300"
+                                                   xml:space="preserve"
                                                    Margin=" 0 0 40 0"
                                                    Foreground="White"/>
 

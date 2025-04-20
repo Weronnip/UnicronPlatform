@@ -1,4 +1,5 @@
 using System;
+using System.Timers;
 using ReactiveUI;
 using Splat;
 using UnicronPlatform.Models;
@@ -8,6 +9,7 @@ namespace UnicronPlatform.ViewModels
     public class ProfilePageViewModel : ReactiveObject, IRoutableViewModel
     {
         public string UrlPathSegment => full_name;
+        private Timer _timer;
         public IScreen? HostScreen { get; }
 
         private Users _user;

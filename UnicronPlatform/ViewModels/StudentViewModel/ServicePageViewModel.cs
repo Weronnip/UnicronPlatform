@@ -2,6 +2,7 @@ using System;
 using System.Linq;
 using System.Collections.ObjectModel;
 using System.Reactive;
+using System.Reactive.Concurrency;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using ReactiveUI;
@@ -25,6 +26,7 @@ namespace UnicronPlatform.ViewModels
 
         private const int PageSize = 2;
         private int _currentPage = 1;
+
         public int CurrentPage
         {
             get => _currentPage;
@@ -34,6 +36,7 @@ namespace UnicronPlatform.ViewModels
                 LoadCourses();
             }
         }
+
         public int TotalPages { get; private set; }
 
         public ReactiveCommand<Unit, Unit> NextPageCommand { get; }
@@ -58,14 +61,24 @@ namespace UnicronPlatform.ViewModels
                     Duration = $"{p.duration} месяц"
                 });
             }
+
             var totalCourses = ctx.Courses.Count();
             TotalPages = (int)Math.Ceiling((double)totalCourses / PageSize);
 
-            NextPageCommand = ReactiveCommand.Create(() => { if (CurrentPage < TotalPages) CurrentPage++; });
-            PreviousPageCommand = ReactiveCommand.Create(() => { if (CurrentPage > 1) CurrentPage--; });
-            
-            BuyCourseCommand = ReactiveCommand.CreateFromTask<CoursesDto>(async c => await ProcessPurchaseAsync(c.Course_id, false, c.PriceValue));
-            BuyPlanCommand = ReactiveCommand.CreateFromTask<PlanDto>(async p => await ProcessPurchaseAsync(p.Plan_id, true, p.PriceValue));
+            NextPageCommand = ReactiveCommand.Create(() =>
+            {
+                if (CurrentPage < TotalPages) CurrentPage++;
+            });
+            PreviousPageCommand = ReactiveCommand.Create(() =>
+            {
+                if (CurrentPage > 1) CurrentPage--;
+            });
+
+            BuyCourseCommand = ReactiveCommand.CreateFromTask<CoursesDto>(async c =>
+                await ProcessPurchaseAsync(c.Course_id, false, c.PriceValue));
+            BuyPlanCommand =
+                ReactiveCommand.CreateFromTask<PlanDto>(async p =>
+                    await ProcessPurchaseAsync(p.Plan_id, true, p.PriceValue));
 
             LoadCourses();
         }
@@ -108,64 +121,110 @@ namespace UnicronPlatform.ViewModels
 
         private async Task ProcessPurchaseAsync(int item_id, bool isPlan, decimal price)
         {
-            decimal serviceFee = price * 0.25m;
-            decimal tax = price * 0.25m;
-            decimal authorShare = price - serviceFee - tax;
-
-            using var ctx = CreateContext();
-            var user = Locator.Current.GetService<Users>()
-                       ?? throw new InvalidOperationException("Current user not found in Locator");
-            var user_id = user.user_id;
-
-            if (isPlan)
+            try
             {
-                var subscription = new Subscriptions
+                decimal serviceFee = price * 0.25m;
+                decimal tax = price * 0.25m;
+                decimal authorShare = price - serviceFee - tax;
+
+                using var ctx = CreateContext();
+
+                var user = Locator.Current.GetService<Users>()
+                           ?? throw new InvalidOperationException("User not found");
+
+                var dbUser = await ctx.Users.FindAsync(user.user_id);
+                if (dbUser == null || dbUser.balance < price)
                 {
-                    user_id = user_id,
-                    plan_id = item_id,
-                    start_date = DateTime.Now,
-                    end_date = DateTime.Now.AddMonths(1),
-                    status = 1
-                };
-                ctx.Subscriptions.Add(subscription);
-                
-                var payment = new Payments
+                    new NotificationWindow(false).Show();
+                    return;
+                }
+
+                if (isPlan)
                 {
-                    user_id = user_id,
-                    course_id = item_id,
-                    plan_id = 0,
-                    amount = price,
-                    service_fee = serviceFee,
-                    tax = tax,
-                    author_share = authorShare,
-                    is_plan = false,
-                    created_at = DateTime.UtcNow
-                };
-                ctx.Payments.Add(payment);
+                    var subscription = new Subscriptions
+                    {
+                        user_id = dbUser.user_id,
+                        plan_id = item_id,
+                        start_date = DateTime.Now,
+                        end_date = DateTime.Now.AddMonths(1),
+                        status = 1
+                    };
+                    ctx.Subscriptions.Add(subscription);
+
+                    var payment = new Payments
+                    {
+                        user_id = dbUser.user_id,
+                        course_id = 0,
+                        plan_id = item_id,
+                        amount = price,
+                        service_fee = serviceFee,
+                        tax = tax,
+                        author_share = 0,
+                        is_plan = true,
+                        created_at = DateTime.UtcNow
+                    };
+                    ctx.Payments.Add(payment);
+
+                    dbUser.balance -= price;
+                }
+                else
+                {
+                    var course = await ctx.Courses
+                        .Include(c => c.Instructor)
+                        .FirstOrDefaultAsync(c => c.course_id == item_id);
+
+                    if (course == null)
+                    {
+                        new NotificationWindow(false).Show();
+                        return;
+                    }
+
+                    var instructorUserId = await ctx.Instructor
+                        .Where(i => i.instructor_id == course.instructor_id)
+                        .Select(i => i.user_id)
+                        .FirstOrDefaultAsync();
+
+                    if (instructorUserId == 0)
+                    {
+                        new NotificationWindow(false).Show();
+                        return;
+                    }
+
+                    dbUser.balance -= price;
+
+                    var author = await ctx.Users.FindAsync(instructorUserId);
+                    if (author != null)
+                    {
+                        author.balance += authorShare;
+                    }
+
+                    var payment = new Payments
+                    {
+                        user_id = dbUser.user_id,
+                        course_id = course.course_id,
+                        plan_id = 0,
+                        amount = price,
+                        service_fee = serviceFee,
+                        tax = tax,
+                        author_share = authorShare,
+                        is_plan = false,
+                        created_at = DateTime.UtcNow
+                    };
+                    ctx.Payments.Add(payment);
+                }
+
+                await ctx.SaveChangesAsync();
+
+                new NotificationWindow(false).Show();
             }
-            else
+            catch (Exception ex)
             {
-                var payment = new Payments
-                {
-                    user_id = user_id,
-                    course_id = item_id,
-                    plan_id = 0,
-                    amount = price,
-                    service_fee = serviceFee,
-                    tax = tax,
-                    author_share = authorShare,
-                    is_plan = false,
-                    created_at = DateTime.UtcNow
-                };
-                ctx.Payments.Add(payment);
+                new NotificationWindow(false).Show();
             }
-
-            await ctx.SaveChangesAsync();
-
-            new NotificationWindow(true).Show();
         }
     }
-    
+
+
     public class PlanDto
     {
         public int Plan_id { get; set; }
@@ -185,4 +244,5 @@ namespace UnicronPlatform.ViewModels
         public string Price => $"{PriceValue:F2}$";
         public string? Author { get; set; }
     }
+    
 }

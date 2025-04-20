@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using UnicronPlatform.Data;
 
@@ -10,9 +11,11 @@ using UnicronPlatform.Data;
 namespace UnicronPlatform.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250420115101_AddUserUpdateLog")]
+    partial class AddUserUpdateLog
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -467,32 +470,6 @@ namespace UnicronPlatform.Migrations
                     b.ToTable("Supports");
                 });
 
-            modelBuilder.Entity("UnicronPlatform.Models.UserCourse", b =>
-                {
-                    b.Property<int>("user_id")
-                        .HasColumnType("int")
-                        .HasColumnName("user_id");
-
-                    b.Property<int>("course_id")
-                        .HasColumnType("int")
-                        .HasColumnName("course_id");
-
-                    b.Property<int>("pay_id")
-                        .HasColumnType("int")
-                        .HasColumnName("pay_id");
-
-                    b.HasKey("user_id", "course_id");
-
-                    b.HasIndex("course_id");
-
-                    b.HasIndex("pay_id");
-
-                    b.HasIndex("user_id", "course_id")
-                        .IsUnique();
-
-                    b.ToTable("UserCourse");
-                });
-
             modelBuilder.Entity("UnicronPlatform.Models.UserProgress", b =>
                 {
                     b.Property<int>("progress_id")
@@ -518,6 +495,26 @@ namespace UnicronPlatform.Migrations
                         .IsUnique();
 
                     b.ToTable("UserProgress");
+                });
+
+            modelBuilder.Entity("UnicronPlatform.Models.UserUpdateLog", b =>
+                {
+                    b.Property<int>("log_id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("log_id");
+
+                    b.Property<DateTime>("updated_at")
+                        .HasColumnType("datetime(6)")
+                        .HasColumnName("updated_at");
+
+                    b.Property<int>("user_id")
+                        .HasColumnType("int")
+                        .HasColumnName("user_id");
+
+                    b.HasKey("log_id");
+
+                    b.ToTable("UserUpdateLog");
                 });
 
             modelBuilder.Entity("UnicronPlatform.Models.Users", b =>
@@ -714,33 +711,6 @@ namespace UnicronPlatform.Migrations
                         .IsRequired();
 
                     b.Navigation("Role");
-                });
-
-            modelBuilder.Entity("UnicronPlatform.Models.UserCourse", b =>
-                {
-                    b.HasOne("UnicronPlatform.Models.Courses", "Courses")
-                        .WithMany()
-                        .HasForeignKey("course_id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("UnicronPlatform.Models.Payments", "Payments")
-                        .WithMany()
-                        .HasForeignKey("pay_id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("UnicronPlatform.Models.Users", "Users")
-                        .WithMany()
-                        .HasForeignKey("user_id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Courses");
-
-                    b.Navigation("Payments");
-
-                    b.Navigation("Users");
                 });
 
             modelBuilder.Entity("UnicronPlatform.Models.UserProgress", b =>
