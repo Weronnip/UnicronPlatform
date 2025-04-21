@@ -171,7 +171,7 @@ namespace UnicronPlatform.ViewModels
                     {
                         first_name = first_name,
                         last_name = last_name,
-                        user_id = user_id,
+                        user_id = newUser.user_id,
                         email = email,
                         role_id = 2,
                         bio = bio,

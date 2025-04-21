@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace UnicronPlatform.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialCreate : Migration
+    public partial class InitDB : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -259,7 +259,7 @@ namespace UnicronPlatform.Migrations
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     description = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    image_course = table.Column<byte[]>(type: "longblob", nullable: false),
+                    image_course = table.Column<byte[]>(type: "longblob", nullable: true),
                     price = table.Column<decimal>(type: "decimal(65,30)", nullable: true),
                     total_lessons = table.Column<int>(type: "int", nullable: true),
                     control_point = table.Column<int>(type: "int", nullable: true),
@@ -346,8 +346,8 @@ namespace UnicronPlatform.Migrations
                     pay_id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     user_id = table.Column<int>(type: "int", nullable: false),
-                    course_id = table.Column<int>(type: "int", nullable: false),
-                    plan_id = table.Column<int>(type: "int", nullable: false),
+                    course_id = table.Column<int>(type: "int", nullable: true),
+                    plan_id = table.Column<int>(type: "int", nullable: true),
                     amount = table.Column<decimal>(type: "decimal(65,30)", nullable: false),
                     service_fee = table.Column<decimal>(type: "decimal(65,30)", nullable: false),
                     tax = table.Column<decimal>(type: "decimal(65,30)", nullable: false),
@@ -362,14 +362,12 @@ namespace UnicronPlatform.Migrations
                         name: "FK_Payments_Courses_course_id",
                         column: x => x.course_id,
                         principalTable: "Courses",
-                        principalColumn: "course_id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "course_id");
                     table.ForeignKey(
                         name: "FK_Payments_Plans_plan_id",
                         column: x => x.plan_id,
                         principalTable: "Plans",
-                        principalColumn: "plan_id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "plan_id");
                     table.ForeignKey(
                         name: "FK_Payments_Users_user_id",
                         column: x => x.user_id,
@@ -397,6 +395,38 @@ namespace UnicronPlatform.Migrations
                         column: x => x.enrollments_id,
                         principalTable: "Enrollments",
                         principalColumn: "enrollment_id");
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.CreateTable(
+                name: "UserCourse",
+                columns: table => new
+                {
+                    user_id = table.Column<int>(type: "int", nullable: false),
+                    course_id = table.Column<int>(type: "int", nullable: false),
+                    pay_id = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_UserCourse", x => new { x.user_id, x.course_id });
+                    table.ForeignKey(
+                        name: "FK_UserCourse_Courses_course_id",
+                        column: x => x.course_id,
+                        principalTable: "Courses",
+                        principalColumn: "course_id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_UserCourse_Payments_pay_id",
+                        column: x => x.pay_id,
+                        principalTable: "Payments",
+                        principalColumn: "pay_id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_UserCourse_Users_user_id",
+                        column: x => x.user_id,
+                        principalTable: "Users",
+                        principalColumn: "user_id",
+                        onDelete: ReferentialAction.Cascade);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
@@ -481,6 +511,22 @@ namespace UnicronPlatform.Migrations
                 column: "role_id");
 
             migrationBuilder.CreateIndex(
+                name: "IX_UserCourse_course_id",
+                table: "UserCourse",
+                column: "course_id");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_UserCourse_pay_id",
+                table: "UserCourse",
+                column: "pay_id");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_UserCourse_user_id_course_id",
+                table: "UserCourse",
+                columns: new[] { "user_id", "course_id" },
+                unique: true);
+
+            migrationBuilder.CreateIndex(
                 name: "IX_UserProgress_enrollments_id",
                 table: "UserProgress",
                 column: "enrollments_id",
@@ -502,10 +548,10 @@ namespace UnicronPlatform.Migrations
                 name: "Messages");
 
             migrationBuilder.DropTable(
-                name: "Payments");
+                name: "Subscriptions");
 
             migrationBuilder.DropTable(
-                name: "Subscriptions");
+                name: "UserCourse");
 
             migrationBuilder.DropTable(
                 name: "UserProgress");
@@ -514,13 +560,16 @@ namespace UnicronPlatform.Migrations
                 name: "Chats");
 
             migrationBuilder.DropTable(
-                name: "Plans");
+                name: "Payments");
 
             migrationBuilder.DropTable(
                 name: "Enrollments");
 
             migrationBuilder.DropTable(
                 name: "Supports");
+
+            migrationBuilder.DropTable(
+                name: "Plans");
 
             migrationBuilder.DropTable(
                 name: "Courses");

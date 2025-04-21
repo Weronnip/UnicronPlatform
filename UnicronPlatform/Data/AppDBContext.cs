@@ -40,6 +40,7 @@ namespace UnicronPlatform.Data
         {
             base.OnModelCreating(modelBuilder);
 
+            modelBuilder.ApplyConfigurationsFromAssembly(typeof(AppDbContext).Assembly);
             modelBuilder.Entity<UserCourse>(entity =>
             {
                 entity.HasKey(uc => new { uc.user_id, uc.course_id });
@@ -48,19 +49,16 @@ namespace UnicronPlatform.Data
                       .IsUnique();
 
                 entity.HasOne(uc => uc.Users)
-                      .WithMany()
-                      .HasForeignKey(uc => uc.user_id)
-                      .OnDelete(DeleteBehavior.Cascade);
-
+                    .WithMany()
+                    .HasForeignKey(uc => uc.user_id);
+                
                 entity.HasOne(uc => uc.Courses)
-                      .WithMany()
-                      .HasForeignKey(uc => uc.course_id)
-                      .OnDelete(DeleteBehavior.Cascade);
+                    .WithMany()
+                    .HasForeignKey(uc => uc.course_id);
 
                 entity.HasOne(uc => uc.Payments)
-                      .WithMany()
-                      .HasForeignKey(uc => uc.pay_id)
-                      .OnDelete(DeleteBehavior.Cascade);
+                    .WithMany()
+                    .HasForeignKey(uc => uc.pay_id);
             });
         }
     }

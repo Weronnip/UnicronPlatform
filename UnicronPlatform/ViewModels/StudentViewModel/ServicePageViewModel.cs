@@ -138,7 +138,7 @@ namespace UnicronPlatform.ViewModels
                     new NotificationWindow(false).Show();
                     return;
                 }
-
+                
                 if (isPlan)
                 {
                     var subscription = new Subscriptions
@@ -211,6 +211,17 @@ namespace UnicronPlatform.ViewModels
                         created_at = DateTime.UtcNow
                     };
                     ctx.Payments.Add(payment);
+                    await ctx.SaveChangesAsync();
+
+
+                    var user_course = new UserCourse
+                    {
+                        user_id = dbUser.user_id,
+                        pay_id = payment.pay_id, 
+                        course_id = course.course_id,
+                    };
+                    
+                    ctx.UserCourses.Add(user_course);
                 }
 
                 await ctx.SaveChangesAsync();

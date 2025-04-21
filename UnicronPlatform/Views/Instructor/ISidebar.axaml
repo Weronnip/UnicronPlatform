@@ -22,26 +22,16 @@
                 <TextBlock Text="Мои курсы" VerticalAlignment="Center" Foreground="White"/>
             </StackPanel>
         </Button>
-        <Button Margin="10" Padding="10" Background="Transparent" Foreground="White">
-            <StackPanel Orientation="Horizontal" Spacing="5">
-                <PathIcon Data="{StaticResource store_microsoft_regular}" Foreground="White" />
-                <TextBlock Text="Магазин" VerticalAlignment="Center" Foreground="White"/>
-            </StackPanel>
-        </Button>
+
         <Button Margin="10" Padding="10" Background="Transparent" Foreground="White">
             <StackPanel Orientation="Horizontal" Spacing="5">
                 <PathIcon Data="{StaticResource data_histogram_regular}" Foreground="White" />
                 <TextBlock Text="Аналитика" VerticalAlignment="Center" Foreground="White"/>
             </StackPanel>
         </Button>
-        <Button Margin="10" Padding="10" Background="Transparent" Foreground="White">
-            <StackPanel Orientation="Horizontal" Spacing="5">
-                <PathIcon Data="{StaticResource  person_support_regular}" Foreground="White" />
-                <TextBlock Text="Поддержка" VerticalAlignment="Center" Foreground="White"/>
-            </StackPanel>
-        </Button>
         <Button Margin="10" Padding="10" 
-                Background="Transparent" Foreground="White"><!-- Command="{Binding GoToSettings}" -->
+                Background="Transparent" Foreground="White"
+                Command="{Binding GoToSettings}">
             <StackPanel Orientation="Horizontal" Spacing="5">
                 <PathIcon Data="{StaticResource settings_regular}" Foreground="White" />
                 <TextBlock Text="Настройки" VerticalAlignment="Center" Foreground="White"/>

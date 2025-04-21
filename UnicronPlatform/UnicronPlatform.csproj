@@ -59,10 +59,6 @@
         <DependentUpon>EditPage.axaml</DependentUpon>
         <SubType>Code</SubType>
       </Compile>
-      <Compile Update="Views\Instructor\HistoryPage.axaml.cs">
-        <DependentUpon>HistoryPage.axaml</DependentUpon>
-        <SubType>Code</SubType>
-      </Compile>
       <Compile Update="Views\Instructor\MyCoursePage.axaml.cs">
         <DependentUpon>MyCoursePage.axaml</DependentUpon>
         <SubType>Code</SubType>

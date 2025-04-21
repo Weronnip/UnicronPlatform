@@ -11,8 +11,8 @@ using UnicronPlatform.Data;
 namespace UnicronPlatform.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250420065009_MakePaymentsCoursePlanNullable")]
-    partial class MakePaymentsCoursePlanNullable
+    [Migration("20250421104531_InitDB")]
+    partial class InitDB
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -470,6 +470,32 @@ namespace UnicronPlatform.Migrations
                     b.ToTable("Supports");
                 });
 
+            modelBuilder.Entity("UnicronPlatform.Models.UserCourse", b =>
+                {
+                    b.Property<int>("user_id")
+                        .HasColumnType("int")
+                        .HasColumnName("user_id");
+
+                    b.Property<int>("course_id")
+                        .HasColumnType("int")
+                        .HasColumnName("course_id");
+
+                    b.Property<int>("pay_id")
+                        .HasColumnType("int")
+                        .HasColumnName("pay_id");
+
+                    b.HasKey("user_id", "course_id");
+
+                    b.HasIndex("course_id");
+
+                    b.HasIndex("pay_id");
+
+                    b.HasIndex("user_id", "course_id")
+                        .IsUnique();
+
+                    b.ToTable("UserCourse");
+                });
+
             modelBuilder.Entity("UnicronPlatform.Models.UserProgress", b =>
                 {
                     b.Property<int>("progress_id")
@@ -691,6 +717,33 @@ namespace UnicronPlatform.Migrations
                         .IsRequired();
 
                     b.Navigation("Role");
+                });
+
+            modelBuilder.Entity("UnicronPlatform.Models.UserCourse", b =>
+                {
+                    b.HasOne("UnicronPlatform.Models.Courses", "Courses")
+                        .WithMany()
+                        .HasForeignKey("course_id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("UnicronPlatform.Models.Payments", "Payments")
+                        .WithMany()
+                        .HasForeignKey("pay_id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("UnicronPlatform.Models.Users", "Users")
+                        .WithMany()
+                        .HasForeignKey("user_id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Courses");
+
+                    b.Navigation("Payments");
+
+                    b.Navigation("Users");
                 });
 
             modelBuilder.Entity("UnicronPlatform.Models.UserProgress", b =>
