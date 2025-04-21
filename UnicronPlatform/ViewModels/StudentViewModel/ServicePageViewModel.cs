@@ -154,7 +154,7 @@ namespace UnicronPlatform.ViewModels
                     var payment = new Payments
                     {
                         user_id = dbUser.user_id,
-                        course_id = 0,
+                        course_id = null,
                         plan_id = item_id,
                         amount = price,
                         service_fee = serviceFee,
@@ -202,7 +202,7 @@ namespace UnicronPlatform.ViewModels
                     {
                         user_id = dbUser.user_id,
                         course_id = course.course_id,
-                        plan_id = 0,
+                        plan_id = null,
                         amount = price,
                         service_fee = serviceFee,
                         tax = tax,
@@ -215,11 +215,12 @@ namespace UnicronPlatform.ViewModels
 
                 await ctx.SaveChangesAsync();
 
-                new NotificationWindow(false).Show();
+                new NotificationWindow(true).Show();
             }
             catch (Exception ex)
             {
                 new NotificationWindow(false).Show();
+                Console.WriteLine(ex);
             }
         }
     }
