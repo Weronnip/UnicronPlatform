@@ -22,7 +22,9 @@
                 <TextBlock Text="Магазин" VerticalAlignment="Center" Foreground="White"/>
             </StackPanel>
         </Button>
-        <Button Margin="10" Padding="10" Background="Transparent" Foreground="White">
+        <Button Margin="10" Padding="10" 
+                Background="Transparent" Foreground="White"
+                Command="{Binding GoToMyProgress}">
             <StackPanel Orientation="Horizontal" Spacing="5">
                 <PathIcon Data="{StaticResource data_histogram_regular}" Foreground="White" />
                 <TextBlock Text="Мой прогресс" VerticalAlignment="Center" Foreground="White"/>

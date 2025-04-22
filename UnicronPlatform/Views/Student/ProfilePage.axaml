@@ -28,37 +28,37 @@
                        FontSize="22" 
                        FontWeight="Bold"
                        Foreground="White" 
-                       HorizontalAlignment="Left" 
+                       HorizontalAlignment="Center" 
                        Margin="0 15 0 0"/>
 
             <Panel Margin="0 50 300 0">
                 <Border Width="150" Height="150"
                         CornerRadius="100"
-                        Margin="0 0 370 0"
+                        Margin="0 0 450 0"
                         ClipToBounds="True">
                     <Image Width="150" Height="150" 
-                           Source="{Binding avatar}" 
+                           Source="../../Assets/avatar.jpg" 
                            Stretch="UniformToFill"/>
                 </Border>
                 
                 <StackPanel HorizontalAlignment="Center" 
                             Width="400" Height="100"
-                            Margin="0 50 0 0">
+                            Margin="115 50 0 0">
                     <TextBlock Text="Ваши данные: "
                                Margin="0"
                                FontSize="22"
                                FontWeight="SemiBold"
-                               HorizontalAlignment="Center"/>
+                               HorizontalAlignment="Left"/>
     
-                    <TextBlock Text="{Binding email, StringFormat='Почта: {0}'}" 
+                    <TextBlock Text="{Binding Email, StringFormat='Почта: {0}'}" 
                                Margin="0 " 
                                FontSize="16" 
-                               HorizontalAlignment="Center"/>
+                               HorizontalAlignment="Left"/>
     
-                    <TextBlock Text="{Binding phone, StringFormat='Телефон: {0}'}" 
+                    <TextBlock Text="{Binding Phone, StringFormat='Телефон: {0}'}" 
                                Margin="0" 
                                FontSize="16" 
-                               HorizontalAlignment="Center"/>
+                               HorizontalAlignment="Left"/>
                 </StackPanel>
                 
                 <Border Background="#C8EAC6"
@@ -75,7 +75,7 @@
                                        FontSize="22"
                                        Foreground="Black"
                                        VerticalAlignment="Center"/>
-                            <TextBlock Text="{Binding balance}"
+                            <TextBlock Text="{Binding Balance}"
                                        FontSize="22"
                                        Foreground="Black"
                                        Grid.Column="1"
@@ -103,6 +103,73 @@
                         </Border>
                     </Grid>
                 </Border>
+                <Grid Margin="0,250,0,0">
+                  <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                  </Grid.RowDefinitions>
+
+                  <TextBlock Grid.Row="0"
+                             Text="История покупок"
+                             FontSize="22"
+                             HorizontalAlignment="Center"
+                             Foreground="White"
+                             Margin="0,0,0,10"/>
+
+                  <DataGrid Grid.Row="1"
+                               ItemsSource="{Binding CurrentPaymentsPage}"
+                               AutoGenerateColumns="False"
+                               CanUserReorderColumns="False"
+                               RowHeight="35"
+                               HeadersVisibility="Column"
+                               Margin="20,0">
+
+                    <DataGrid.Columns>
+                      <DataGridTextColumn Header="Курс"
+                                              Binding="{Binding Courses.title, FallbackValue='—'}"
+                                              Width="*"/>
+
+                      <DataGridTextColumn Header="План"
+                                              Binding="{Binding Plans.name, FallbackValue='—'}"
+                                              Width="*"/>
+
+                      <DataGridTextColumn Header="Сумма"
+                                              Binding="{Binding amount, StringFormat='{}{0:C}'}"
+                                              Width="80"/>
+
+                      <DataGridTextColumn Header="Сервис"
+                                              Binding="{Binding service_fee, StringFormat='{}{0:C}'}"
+                                              Width="80"/>
+                      <DataGridTextColumn Header="Налог"
+                                              Binding="{Binding tax, StringFormat='{}{0:C}'}"
+                                              Width="80"/>
+                      <DataGridTextColumn Header="Автору"
+                                              Binding="{Binding author_share, StringFormat='{}{0:C}'}"
+                                              Width="80"/>
+
+                      <DataGridTextColumn Header="Когда"
+                                              Binding="{Binding created_at, StringFormat='{}{0:dd.MM.yyyy HH:mm}'}"
+                                              Width="120"/>
+                    </DataGrid.Columns>
+                  </DataGrid>
+
+                  <StackPanel Grid.Row="2"
+                              Orientation="Horizontal"
+                              HorizontalAlignment="Center"
+                              Margin="0,10,0,0"
+                              Spacing="10">
+                    <Button Content="← Назад"
+                            Command="{Binding PrevPageCommand}"
+                            IsEnabled="{Binding CanGoPrev}"/>
+                    <TextBlock Text="{Binding CurrentPage}"
+                               FontSize="18"
+                               VerticalAlignment="Center"/>
+                    <Button Content="Вперёд →"
+                            Command="{Binding NextPageCommand}"
+                            IsEnabled="{Binding CanGoNext}"/>
+                  </StackPanel>
+                </Grid>
             </Panel>
         </StackPanel>
     </Grid>

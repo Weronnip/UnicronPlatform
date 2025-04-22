@@ -36,7 +36,6 @@ namespace UnicronPlatform.ViewModels
         
         public ReactiveCommand<Unit, IRoutableViewModel> GoToProfile { get; }
         public ReactiveCommand<Unit, IRoutableViewModel> GoToSettings { get; }
-        public ReactiveCommand<Unit, IRoutableViewModel> GoToShop { get; }
         public ReactiveCommand<Unit, IRoutableViewModel> GoToManagementCourse { get; }
         public ReactiveCommand<Unit, IRoutableViewModel> GoToAnalytics { get; }
         public ReactiveCommand<Unit, IRoutableViewModel> GoToSuppots { get; }

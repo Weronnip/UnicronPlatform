@@ -1,0 +1,123 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:viewModels="clr-namespace:UnicronPlatform.ViewModels"
+             d:DesignWidth="1240" d:DesignHeight="784"
+             x:Class="UnicronPlatform.Views.Student.MyProgressPage"
+             x:DataType="viewModels:MyProgressPageViewModel">
+    <Grid RowDefinitions="Auto,*,Auto"
+        ColumnDefinitions="*">
+    
+    <ExperimentalAcrylicBorder IsHitTestVisible="False">
+      <ExperimentalAcrylicBorder.Material>
+        <ExperimentalAcrylicMaterial
+          BackgroundSource="Digger"
+          TintColor="Black"
+          TintOpacity="0.8"
+          MaterialOpacity="0.6"/>
+      </ExperimentalAcrylicBorder.Material>
+    </ExperimentalAcrylicBorder>
+
+    <TextBlock Grid.Row="0"
+               TextAlignment="Center"
+               FontSize="30"
+               FontWeight="Bold"
+               Padding="10"
+               Foreground="White"
+               Margin="0,20"
+               Text="Мой прогресс" />
+
+    <ScrollViewer Grid.Row="1"
+                  Margin="20,10"
+                  VerticalScrollBarVisibility="Auto">
+      <ItemsControl ItemsSource="{Binding CurrentCoursesPage}">
+        <ItemsControl.ItemsPanel>
+          <ItemsPanelTemplate>
+            <WrapPanel Orientation="Horizontal"
+                       HorizontalAlignment="Center"
+                       ItemWidth="450"
+                       ItemHeight="300"
+                       Margin="0"/>
+          </ItemsPanelTemplate>
+        </ItemsControl.ItemsPanel>
+
+        <ItemsControl.ItemTemplate>
+          <DataTemplate>
+            <Border Background="#2B2B2B"
+                    CornerRadius="20"
+                    Padding="20"
+                    Margin="15"
+                    Width="400"
+                    Height="260">
+              <StackPanel Spacing="10">
+                <TextBlock Text="{Binding title}"
+                           Foreground="White"
+                           FontWeight="Bold"
+                           xml:space="preserve"
+                           FontSize="16"/>
+
+                <TextBlock Text="{Binding description}"
+                           Foreground="White"
+                           TextWrapping="Wrap"
+                           FontSize="14"
+                           MaxHeight="60"/>
+
+                <TextBlock Text="{Binding total_lessons, StringFormat='Уроков: {0}'}"
+                           Foreground="White"
+                           FontSize="12"/>
+
+                <TextBlock Text="{Binding control_point, StringFormat='Контрольных точек: {0}'}"
+                           Foreground="White"
+                           FontSize="12"/>
+
+                <Button HorizontalAlignment="Right"
+                        Background="#50544F" 
+                        Foreground="#C8EAC6"
+                        FontSize="14"
+                        CornerRadius="8"
+                        Padding="8,4"
+                        IsEnabled="False">
+                  <StackPanel Orientation="Horizontal" Spacing="5">
+                    <TextBlock Text="Изучаю" />
+                  </StackPanel>
+                </Button>
+              </StackPanel>
+            </Border>
+          </DataTemplate>
+        </ItemsControl.ItemTemplate>
+      </ItemsControl>
+    </ScrollViewer>
+
+    <StackPanel Grid.Row="2"
+                Orientation="Horizontal"
+                HorizontalAlignment="Center"
+                Margin="0,20"
+                Spacing="20">
+      <Button Content="← Назад"
+              Command="{Binding PrevPageCommand}"
+              IsEnabled="{Binding CanGoPrev}"
+              Background="#50544F" 
+              Foreground="#C8EAC6"
+              FontSize="16"
+              Padding="15,10"
+              CornerRadius="8"/>
+
+      <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Spacing="5">
+        <TextBlock Text="Страница" Foreground="White" FontSize="16"/>
+        <TextBlock Text="{Binding CurrentPage}" Foreground="White" FontSize="16"/>
+        <TextBlock Text="/" Foreground="White" FontSize="16"/>
+        <TextBlock Text="{Binding TotalPages}" Foreground="White" FontSize="16"/>
+      </StackPanel>
+
+      <Button Content="Вперёд →"
+              Command="{Binding NextPageCommand}"
+              IsEnabled="{Binding CanGoNext}"
+              Background="#50544F" 
+              Foreground="#C8EAC6"
+              FontSize="16"
+              Padding="15,10"
+              CornerRadius="8"/>
+    </StackPanel>
+
+  </Grid>
+</UserControl>

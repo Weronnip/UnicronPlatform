@@ -8,6 +8,7 @@ using ReactiveUI;
 using Splat;
 using UnicronPlatform.Models;
 using UnicronPlatform.ViewModels;
+using UnicronPlatform.ViewModels;
 using UnicronPlatform.Views;
 using UnicronPlatform.Views.Instructor;
 using UnicronPlatform.Views.Instructor.Components;
@@ -37,7 +38,8 @@ namespace UnicronPlatform
             Locator.CurrentMutable.Register(() => new ProfilePage(), typeof(IViewFor<ProfilePageViewModel>));
             Locator.CurrentMutable.Register(() => new SettingPage(), typeof(IViewFor<SettingPageViewModel>));
             Locator.CurrentMutable.Register(() => new ServicePage(), typeof(IViewFor<ServicePageViewModel>));
-            
+            Locator.CurrentMutable.Register(() => new MyProgressPage(), typeof(IViewFor<MyProgressPageViewModel>));
+
             // Преподаватели
             Locator.CurrentMutable.Register(() => new IProfilePage(), typeof(IViewFor<IProfilePageViewModel>));
             Locator.CurrentMutable.Register(() => new ManagementCoursePage(), 

@@ -59,10 +59,6 @@
                                Margin="0" 
                                FontSize="16" 
                                HorizontalAlignment="Left"/>
-                    <TextBlock Text="{Binding role_id_name, StringFormat='Вы: {0}'}" 
-                               Margin="0" 
-                               FontSize="16" 
-                               HorizontalAlignment="Left"/>
                 </StackPanel>
                 
                 <Border Background="#C8EAC6"

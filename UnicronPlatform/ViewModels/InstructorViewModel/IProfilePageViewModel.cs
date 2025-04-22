@@ -1,5 +1,5 @@
 using System;
-using System.Reactive;
+using System.Timers;
 using ReactiveUI;
 using Splat;
 using UnicronPlatform.Models;
@@ -9,6 +9,7 @@ namespace UnicronPlatform.ViewModels
     public class IProfilePageViewModel : ReactiveObject, IRoutableViewModel
     {
         public string UrlPathSegment => full_name;
+        private Timer _timer;
         public IScreen? HostScreen { get; }
 
         private Users _user;
@@ -18,14 +19,6 @@ namespace UnicronPlatform.ViewModels
             get => _user;
             set => this.RaiseAndSetIfChanged(ref _user, value);
         }
-        
-        private Role _role;
-
-        private Role role
-        {
-            get => _role;
-            set => this.RaiseAndSetIfChanged(ref _role, value);
-        }
 
         public IProfilePageViewModel(IScreen hostScreen, Users user)
         {
@@ -34,13 +27,12 @@ namespace UnicronPlatform.ViewModels
         }
 
         public string avatar => string.IsNullOrEmpty(user.avatar)
-            ? "avares://UnicronPlatform/Assets/avatar.jpg"
+            ? "../../Assets/avatar.jpg"
             : user.avatar;
 
         public string full_name => $"{user.first_name} {user.last_name}";
         public string email => user.email;
         public string phone => user.phone;
         public string balance => $"{(int)user.balance!}$";
-        public string role_id_name => user.role_id == role.role_id ? role.name_role : "Не указана";
     }
 }
