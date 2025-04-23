@@ -96,7 +96,9 @@ namespace UnicronPlatform.ViewModels
 
             LoadCategories();
 
-            CreateCourseCommand = ReactiveCommand.CreateFromTask(CreateCourseAsync, this.WhenAnyValue(vm => vm.CanCreate));
+            CreateCourseCommand = ReactiveCommand
+                .CreateFromTask(CreateCourseAsync, 
+                    this.WhenAnyValue(vm => vm.CanCreate));
             CreateCourseCommand.ThrownExceptions.Subscribe(ex =>
             {
                 Console.WriteLine($"Ошибка при создании курса: {ex.Message}");

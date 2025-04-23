@@ -18,7 +18,7 @@ namespace UnicronPlatform.ViewModels
         public ReadOnlyObservableCollection<Courses> MyCourses { get; }
 
         private int _currentPage = 1;
-        private const int pageSize = 6;
+        private const int pageSize = 4;
 
         public int CurrentPage
         {
@@ -47,7 +47,6 @@ namespace UnicronPlatform.ViewModels
         public MyCoursePageViewModel(IScreen hostScreen, IEnumerable<Courses> allCourses, int instructor_id)
         {
             HostScreen = hostScreen;
-
             _myCoursesRaw = allCourses
                 .Where(c => c.instructor_id == instructor_id)
                 .ToList();
