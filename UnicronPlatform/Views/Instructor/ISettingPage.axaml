@@ -1,0 +1,97 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="clr-namespace:UnicronPlatform.ViewModels"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="600"
+             x:Class="UnicronPlatform.Views.Instructor.ISettingPage"
+             x:DataType="vm:ISettingPageViewModel">
+    <Grid>
+        <ExperimentalAcrylicBorder IsHitTestVisible="False">
+            <ExperimentalAcrylicBorder.Material>
+                <ExperimentalAcrylicMaterial
+                    BackgroundSource="Digger"
+                    TintColor="Black"
+                    TintOpacity="1"
+                    MaterialOpacity="0.6"/>
+            </ExperimentalAcrylicBorder.Material>
+        </ExperimentalAcrylicBorder>
+
+        <ScrollViewer Margin="20">
+            <Grid HorizontalAlignment="Left" MaxWidth="500">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="150"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Grid.Row="0" Grid.ColumnSpan="2"
+                           Text="{Binding UrlPathSegment}"
+                           FontSize="24"
+                           FontWeight="Bold"
+                           Foreground="White"
+                           HorizontalAlignment="Center"
+                           Margin="0,0,0,20"/>
+
+                <TextBlock Grid.Row="1" Grid.Column="0" Text="Имя:" Foreground="White" FontSize="18" Margin="0,0,10,10"/>
+                <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding FirstName,Mode=TwoWay}" Width="300" Margin="0,0,0,10"/>
+
+                <TextBlock Grid.Row="2" Grid.Column="0" Text="Фамилия:" Foreground="White" FontSize="18" Margin="0,0,10,10"/>
+                <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding LastName,Mode=TwoWay}" Width="300" Margin="0,0,0,10"/>
+
+                <TextBlock Grid.Row="3" Grid.Column="0" Text="Почта:" Foreground="White" FontSize="18" Margin="0,0,10,10"/>
+                <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding Email,Mode=TwoWay}" Width="300" Margin="0,0,0,10"/>
+
+                <TextBlock Grid.Row="4" Grid.Column="0" Text="Телефон:" Foreground="White" FontSize="18" Margin="0,0,10,10"/>
+                <TextBox Grid.Row="4" Grid.Column="1" Text="{Binding Phone,Mode=TwoWay}" Width="300" Margin="0,0,0,10"/>
+
+                <TextBlock Grid.Row="5" Grid.Column="0" Text="Дата рождения:" Foreground="White" FontSize="18" Margin="0,0,10,10"/>
+                <DatePicker Grid.Row="5" Grid.Column="1" SelectedDate="{Binding Birthday,Mode=TwoWay}" Width="300" Margin="0,0,0,10"/>
+
+                <TextBlock Grid.Row="6" Grid.Column="0" Text="Аватар:" Foreground="White" FontSize="18" Margin="0,0,10,10"/>
+                <Image Grid.Row="6" Grid.Column="1" Source="{Binding Avatar}" Width="100" Height="100" Margin="0,0,0,10"/>
+
+                <TextBlock Grid.Row="7" Grid.Column="0"/>
+                <Button Grid.Row="7" Grid.Column="1" Content="Загрузить" Width="100" Margin="0,0,0,10"/>
+
+                <TextBlock Grid.Row="8" Grid.Column="0" Text="Пароль:" Foreground="White" FontSize="18" Margin="0,0,10,10"/>
+                <Button Grid.Row="8" Grid.Column="1" Content="Изменить пароль" Width="150" Margin="0,0,0,10"/>
+
+                <TextBlock Grid.Row="9" Grid.Column="0" Text="О себе:" Foreground="White" FontSize="18" Margin="0,0,10,10"/>
+                <TextBox Grid.Row="10" Grid.Column="1" Text="{Binding Bio,Mode=TwoWay}" AcceptsReturn="True" TextWrapping="Wrap" Width="300" Height="140" Margin="0,0,0,10"/>
+
+                <TextBlock Grid.Row="11" Grid.Column="0" Text="WhatsApp:" Foreground="White" FontSize="18" Margin="0,0,10,10"/>
+                <TextBox Grid.Row="11" Grid.Column="1" Text="{Binding SocialLinkWA,Mode=TwoWay}" Width="300" Margin="0,0,0,10"/>
+
+                <TextBlock Grid.Row="12" Grid.Column="0" Text="VK:" Foreground="White" FontSize="18" Margin="0,0,10,10"/>
+                <TextBox Grid.Row="12" Grid.Column="1" Text="{Binding SocialLinkVK,Mode=TwoWay}" Width="300" Margin="0,0,0,10"/>
+
+                <TextBlock Grid.Row="13" Grid.Column="0" Text="Telegram:" Foreground="White" FontSize="18" Margin="0,0,10,10"/>
+                <TextBox Grid.Row="13" Grid.Column="1" Text="{Binding SocialLinkTG,Mode=TwoWay}" Width="300" Margin="0,0,0,10"/>
+
+                <Button Grid.Row="14" Grid.ColumnSpan="2"
+                        Content="Сохранить"
+                        Command="{Binding SaveCommand}"
+                        Width="150"
+                        HorizontalAlignment="Center"
+                        Margin="0,20,0,0"/>
+            </Grid>
+        </ScrollViewer>
+    </Grid>
+</UserControl>

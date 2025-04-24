@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using Avalonia.Controls;
 using Microsoft.EntityFrameworkCore;
 using ReactiveUI;
+using Splat;
 using UnicronPlatform.Data;
 using UnicronPlatform.Models;
 
@@ -54,8 +55,15 @@ namespace UnicronPlatform.ViewModels
 
             GoToMyCourse = ReactiveCommand.CreateFromTask<Unit, IRoutableViewModel>(async _ =>
             {
-                var instructor_id = _allCourses.FirstOrDefault()?.instructor_id ?? 0;
-                var vm = new MyCoursePageViewModel(this, _allCourses, instructor_id);
+                var currentUser = Locator.Current.GetService<Users>() 
+                                  ?? throw new InvalidOperationException("Пользователь не найден в Locator");
+                
+                var instructor = await _context.Instructor
+                    .FirstOrDefaultAsync(i => i.user_id == currentUser.user_id);
+                if (instructor == null)
+                    throw new InvalidOperationException($"Инструктор для пользователя {currentUser.user_id} не найден");
+                
+                var vm = new MyCoursePageViewModel(this, _allCourses, instructor.instructor_id);
                 await Router.Navigate.Execute(vm);
                 return vm;
             });
@@ -84,18 +92,30 @@ namespace UnicronPlatform.ViewModels
                     .Options;
 
                 using var db = new AppDbContext(options);
+
                 var coursesList = await db.Courses.ToListAsync();
                 _allCourses.Clear();
                 _allCourses.AddRange(coursesList);
-                var instructorId = _allCourses.FirstOrDefault()?.instructor_id ?? 0;
-                var initialViewModel = new MyCoursePageViewModel(this, _allCourses, instructorId);
+
+                var currentUser = Locator.Current
+                                      .GetService<Users>()
+                                  ?? throw new InvalidOperationException("Пользователь не найден в Locator");
+
+                var instructor = await db.Instructor
+                    .FirstOrDefaultAsync(i => i.user_id == currentUser.user_id);
+
+                if (instructor == null)
+                    throw new InvalidOperationException($"Инструктор для пользователя {currentUser.user_id} не найден");
+
+                var instructor_id = instructor.instructor_id;
+
+                var initialViewModel = new MyCoursePageViewModel(this, _allCourses, instructor_id);
                 await Router.Navigate.Execute(initialViewModel);
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Error loading courses: " + ex);
+                Console.WriteLine("Error loading courses or instructor: " + ex);
             }
         }
-
     }
 }

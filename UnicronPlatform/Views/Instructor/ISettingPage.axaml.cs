@@ -7,9 +7,9 @@ using UnicronPlatform.ViewModels;
 
 namespace UnicronPlatform.Views.Instructor;
 
-public partial class SettingPage : ReactiveUserControl<ISettingPageViewModel>
+public partial class ISettingPage : ReactiveUserControl<ISettingPageViewModel>
 {
-    public SettingPage()
+    public ISettingPage()
     {
         InitializeComponent();
         this.WhenActivated(disposable => { });

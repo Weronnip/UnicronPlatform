@@ -47,6 +47,8 @@ namespace UnicronPlatform
             Locator.CurrentMutable.Register(() => new CreateCoursePage(), 
                 typeof(IViewFor<CreateCoursePageViewModel>));
             Locator.CurrentMutable.Register(() => new MyCoursePage(), typeof(IViewFor<MyCoursePageViewModel>));
+            Locator.CurrentMutable.Register(() => new ISettingPage(), typeof(IViewFor<ISettingPageViewModel>));
+
             base.OnFrameworkInitializationCompleted();
         }
     }

@@ -66,7 +66,7 @@ namespace UnicronPlatform.ViewModels
 
             GoToSettings = ReactiveCommand.CreateFromTask<Unit, IRoutableViewModel>(async _ =>
             {
-                var vm = new SettingPageViewModel(this, User);
+                var vm = new ISettingPageViewModel(this, User);
                 await Router.Navigate.Execute(vm);
                 return (IRoutableViewModel)vm;
             });

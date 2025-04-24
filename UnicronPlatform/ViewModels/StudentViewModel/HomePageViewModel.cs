@@ -51,7 +51,6 @@ namespace UnicronPlatform.ViewModels
         public IRoutableViewModel? CurrentViewModel =>
             Router.NavigationStack.Count > 0 ? Router.NavigationStack.Last() : null;
 
-        // Конструктор
         public HomePageViewModel(Users user)
         {
             User = user;
